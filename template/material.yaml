@@ -1,0 +1,10 @@
+# Material identity — filled at Phase 0
+name: ""            # e.g. Coffee grounds
+slug: ""            # kebab-case; matches the folder name
+created: ""         # YYYY-MM-DD
+status: active      # active | frozen
+version: v0.0
+site_url: ""        # filled when the site is deployed
+priority_methods: []  # ids from REGISTRY.md chosen for full action plans
+custom_ranking_factors: []  # optional material-specific factors beyond the standard six
+stop_conditions: []  # material-specific safety stop-conditions (bind all work)
