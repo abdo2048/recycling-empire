@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The two-reader rule (sources/README.md) — Recycling Empire</title>
+<meta name="doc-root" content="../../../">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../..//assets/style.css">
+</head>
+<body data-root="../../../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <nav class="topnav" aria-label="Primary">
+    <a class="brand" href="../../../index.html">Recycling<em>Empire</em></a>
+    <a href="../../../index.html#materials">Materials</a>
+    <a href="../../../playbook.html">Playbook</a>
+    <a href="../../../site-design.html">Site design</a>
+    <button id="searchbtn" type="button" aria-label="Search">Search <kbd>Ctrl K</kbd></button>
+  </nav>
+</header>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../index.html">Home</a></li><li><a href="../../../index.html#materials">Materials</a></li><li aria-current="page">The two-reader rule (sources/README.md)</li></ol></nav>
+<main id="main">
+<aside class="side" aria-label="Material sections"><h2>Cigarette butts</h2><nav><a href="../index.html">Overview</a><a href="../ranking.html">Ranking</a><a href="../methods/index.html">Action plans</a><a href="../methods/cards.html">Summary cards</a><a href="../registry.html">Registry</a><a href="../inventions/index.html">Inventions</a><a href="../reports/index.html">Final reports</a><a href="index.html">Sources</a><a href="../research/index.html">Research shelf</a><a href="../charter.html">Charter</a><a href="../glossary.html">Glossary</a><a href="../state.html">State</a><a href="../log.html">Log</a><a href="../migration-note.html">Migration note</a></nav></aside>
+<article class="content">
+  <p class="kicker">How the shelf works</p><h1>The two-reader rule (sources/README.md)</h1>
+  <section class="specsheet"><div class="spec"><span>INDEX.md             the list</span><b>one row per document</b></div></section>
+  <h2 id="the-rule">The rule</h2>
+<p>The original document (<code>document.pdf</code>, or <code>document.html</code> for web saves) and <code>text.md</code> are the same document in two forms, for two readers.</p>
+<ul>
+<li><strong>Humans read the original.</strong> It is the original: pagination, layout, tables, what the authors actually published.</li>
+<li><strong>AI readers use <code>text.md</code>.</strong> It exists because a PDF is hard to read and expensive for a language model, while Markdown is easy. It is a derived convenience, not a better copy.</li>
+</ul>
+<p>Never treat <code>text.md</code> as the document. If they disagree, the original wins. Figures are omitted from <code>text.md</code>; the <code>figures/</code> folder holds the extracted images.</p>
+<h2 id="which-text-came-from-where">Which text came from where</h2>
+<ul>
+<li>12 documents carry a <code>text.md</code> produced earlier by the project's own converter (the <code>*_text.md</code> files that used to sit beside the PDFs in <code>materials/gap-closing/library/</code>), plus 1 earlier project-era document with its own carried-over text.</li>
+<li>52 documents carry originals supplied by the operator, of which 51 have a <code>text.md</code>: 37 by the operator with external conversion tools (GLM / PaddleOCR-VL), 11 AI-extracted from operator-saved HTML pages (Bloomberg 2017/2022; CSP Daily News 2012; nj.com 2012; Plastics News 2012 via its Wayback capture; Surfrider FAQ 2017; the TerraCycle brigade capture 2015, the three current TerraCycle pages, and the Belmont CA City News index), 1 pdftotext from the operator's PDF (PharmJ letter), 2 operator GLM conversions (Yousef 2023 JAAP; Zhang 2026 Chemosphere review). Operator-supplied conversions are preferred when available.</li>
+<li>16 documents were added 2026-11-26 (session 7): 12 from the four-agent arena research return and live fetches (8 agent-captured HTML incl. the brigade FAQ series; the ANJR case-studies deck; the TerraCycle fact sheet; Trentonian 2012; Royal Purple 2016; DYNA-MIG 2017), 4 supplied by the operator (ESPR 2021 review, KAB 2026 National Litter Study, SOU campus report, KAB recyclable-items guide). All 16 carry AI-extracted <code>text.md</code> (pdftotext for PDFs — not yet GLM-converted) and PyMuPDF figure pulls where the PDF yields images.</li>
+<li>1 document added 2026-11-26 (session 8): <code>belmont-2026-city-news</code> — the operator-saved City News index of belmont.gov, shelved as the negative-result record that closes the M-06 Belmont CA re-verify task (no cigarette content on the page; AI-extracted text; its SOURCE.md carries the verification trail).</li>
+<li>1 document has no <code>text.md</code> on purpose: <code>inpi-bopi-2018-46</code> is a 283-page French patent gazette with 40 blank pages. It is kept as a PDF for completeness and is not worth converting.</li>
+</ul>
+<p>So: 81 documents, 80 with text, 1 PDF-only (session 7: +16 documents, all with raw AI-extracted text; session 8: +1 negative-result capture).</p>
+<h2 id="what-this-folder-is-not">What this folder is not</h2>
+<ul>
+<li><strong>Not a licence statement.</strong> The documents were collected for one research team's internal use. Being in this folder does not make a document redistributable. The site serves this folder to that team on the operator's instruction; whether a document may later be published more widely is a separate question that has not been decided here.</li>
+<li><strong>Not authoritative over the original.</strong> Extraction drops tables, equations, footnotes and layout. Anything load-bearing must be checked against the original.</li>
+<li><strong>Not a place to add new research notes.</strong> Interpretation belongs in <code>methods/</code>, <code>reports/</code> or the material's own folders.</li>
+</ul>
+<h2 id="how-the-site-uses-this-folder">How the site uses this folder</h2>
+<p>The reader site scans this folder at build time and publishes every <code>document.pdf</code> at <code>/documents/&lt;id&gt;.pdf</code>. The page <code>/documents/</code> lists the corpus with sizes and download links. Web-save rows (<code>document.html</code>) are listed in INDEX.md and served from the repository directly.</p>
+<p>The source records in <code>publication/</code> use bibliographic ids (<code>marinello-2020-review</code>), which do not always match the shelf id (<code>marinello-2019-review</code>). <code>links.json</code> is the hand-checked table that pairs them. A record with an entry there gets View PDF / Download PDF buttons on its page. Nothing is inferred from similarity; only listed pairs are linked.</p>
+<h2 id="adding-a-document">Adding a document</h2>
+<ol>
+<li>Pick a short lowercase id: <code>author-year-topic</code> (e.g. <code>shah-2023-review</code>).</li>
+<li><code>sources/&lt;id&gt;/document.pdf</code> (or <code>document.html</code> for a web save).</li>
+<li><code>sources/&lt;id&gt;/text.md</code> if you have a conversion; point any image links at <code>figures/</code>. Operator-supplied conversions are preferred.</li>
+<li>Add the row to <code>INDEX.md</code>.</li>
+</ol>
+  
+</article>
+<nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#the-rule">The rule</a>
+<a href="#which-text-came-from-where">Which text came from where</a>
+<a href="#what-this-folder-is-not">What this folder is not</a>
+<a href="#how-the-site-uses-this-folder">How the site uses this folder</a>
+<a href="#adding-a-document">Adding a document</a></nav>
+</main>
+<footer>
+  <div class="legend">
+    <span class="chip chip-source_supported">source supported</span>
+    <span class="chip chip-ai_inference">ai inference</span>
+    <span class="chip chip-ai_proposal">ai proposal</span>
+    <span class="chip chip-parameter_not_located">parameter not located</span>
+  </div>
+  <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="../../../playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
+  <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="../../../site-design.html">Design</a></p>
+</footer>
+<div class="soverlay" id="soverlay" hidden>
+  <div class="sbox">
+    <input id="sinput" type="search" placeholder="Search the knowledge base…" autocomplete="off">
+    <div id="sresults" class="sresults"></div>
+    <p class="shint">Esc to close · results come from the built index</p>
+  </div>
+</div>
+<script src="../../..//assets/site.js" defer></script>
+</body>
+</html>

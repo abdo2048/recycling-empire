@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Site design — the unified Recycling Empire site (Phase 6) — Recycling Empire</title>
+<meta name="doc-root" content="./">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href=".//assets/style.css">
+</head>
+<body data-root="./">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <nav class="topnav" aria-label="Primary">
+    <a class="brand" href="./index.html">Recycling<em>Empire</em></a>
+    <a href="./index.html#materials">Materials</a>
+    <a href="./playbook.html">Playbook</a>
+    <a href="./site-design.html">Site design</a>
+    <button id="searchbtn" type="button" aria-label="Search">Search <kbd>Ctrl K</kbd></button>
+  </nav>
+</header>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="./index.html">Home</a></li><li aria-current="page">Site design — the unified Recycling Empire site (Phase 6)</li></ol></nav>
+<main id="main">
+
+<article class="content">
+  <p class="kicker">System</p><h1>Site design — the unified Recycling Empire site (Phase 6)</h1>
+  
+  <h1 id="site-design-the-unified-recycling-empire-site-phase-6">Site design — the unified Recycling Empire site (Phase 6)</h1>
+<p>This document is the UI/UX contract for the static site that
+<a href="https://github.com/abdo2048/recycling-empire/blob/main/tools/site-builder/build.py"><code>tools/site-builder/build.py</code></a> renders from <code>materials/</code> into
+<code>docs/</code>. It is system-level (shared by every material) and follows the PLAYBOOK rules: plain
+markdown stays the source of truth; the builder only presents it.</p>
+<hr />
+<h2 id="1-design-goals">1. Design goals</h2>
+<ol>
+<li><strong>Read first.</strong> The content is long-form, citation-heavy research. The UI exists to make a
+   non-expert (the team, a reviewer, a funder) <em>finish</em> reading a method page — calm colors,
+   one readable measure, no visual noise.</li>
+<li><strong>Trust through labeling.</strong> The four evidence labels are the project's identity. They get a
+   permanent color system, a legend in the footer, and inline chips in text.</li>
+<li><strong>The stop-condition is never hidden.</strong> The metals gate (Cd/Pb/As/Hg) banner appears on the
+   home page, every material dashboard, and the ranking page. It is part of the design, not a
+   footnote.</li>
+<li><strong>Zero-JavaScript-by-default.</strong> The only JS is the search overlay and the table-of-contents
+   highlight; every page works without it. No frameworks, no build dependencies beyond Python
+   <code>markdown</code> + <code>PyYAML</code>.</li>
+<li><strong>No monospace anywhere.</strong> The user's explicit rule: mono fonts read as "developer tool",
+   not research. Code spans, IDs, temperatures and numbers are set in Inter (tabular figures
+   where alignment matters).</li>
+</ol>
+<hr />
+<h2 id="2-typography">2. Typography</h2>
+<table>
+<thead>
+<tr>
+<th>Role</th>
+<th>Font</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Display + headings (H1/H2, card titles, hero)</td>
+<td><strong>Fraunces</strong> (Google Fonts, variable, opsz 9-144)</td>
+<td>Serif with warm, editorial character; pairs naturally with Inter; gives the knowledge base a "publication" voice</td>
+</tr>
+<tr>
+<td>Body, UI, navigation, tables, chips</td>
+<td><strong>Inter</strong> (Google Fonts, 400/500/600/700)</td>
+<td>The workhorse; <code>font-feature-settings: "cv11"</code> for a readable lowercase l; <code>"tnum"</code> (tabular numerals) on tables and metadata</td>
+</tr>
+<tr>
+<td>Everything else (code, IDs, timestamps)</td>
+<td><strong>Inter</strong> — mono is banned</td>
+<td>Code spans get a subtle paper-shade background instead of a font change</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Load: one <code>display=swap</code> stylesheet, weights 400/500/600/700 only (fast).</li>
+<li>Fallbacks: <code>Inter, system-ui, -apple-system, "Segoe UI", sans-serif</code> and
+  <code>"Fraunces", Georgia, "Times New Roman", serif</code>.</li>
+<li>Scale: H1 clamp(1.9rem→2.4rem) in Fraunces 600; H2 1.35rem Fraunces 600; body 1rem/1.7;
+  long-form measure max 68ch; table text 0.92rem.</li>
+</ul>
+<h2 id="3-color-system">3. Color system</h2>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--paper</code></td>
+<td><code>#FBFAF7</code></td>
+<td>page background (warm off-white)</td>
+</tr>
+<tr>
+<td><code>--card</code></td>
+<td><code>#FFFFFF</code></td>
+<td>cards, tables, sidebar</td>
+</tr>
+<tr>
+<td><code>--ink</code></td>
+<td><code>#1F2A24</code></td>
+<td>body text (deep green-black)</td>
+</tr>
+<tr>
+<td><code>--ink-soft</code></td>
+<td><code>#5C6B62</code></td>
+<td>secondary text, captions, breadcrumbs</td>
+</tr>
+<tr>
+<td><code>--line</code></td>
+<td><code>#E5E2D9</code></td>
+<td>hairlines, table borders</td>
+</tr>
+<tr>
+<td><code>--accent</code></td>
+<td><code>#0E7C4A</code></td>
+<td>links, primary buttons, active nav (recycling green)</td>
+</tr>
+<tr>
+<td><code>--accent-ink</code></td>
+<td><code>#0A5D38</code></td>
+<td>hover / active states</td>
+</tr>
+<tr>
+<td><code>--gate-bg</code> / <code>--gate-line</code></td>
+<td><code>#FDF3E7</code> / <code>#E4B85C</code></td>
+<td>stop-condition banner (calm amber, not alarm red)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="evidence-label-chips-the-identity-colors">Evidence-label chips (the identity colors)</h3>
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Chip</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="chip chip-source_supported">source supported</span></td>
+<td>green — <code>#E3F2EA</code> bg, <code>#0E7C4A</code> text</td>
+</tr>
+<tr>
+<td><span class="chip chip-ai_inference">ai inference</span></td>
+<td>blue — <code>#E4EEFB</code> bg, <code>#1D5FBF</code> text</td>
+</tr>
+<tr>
+<td><span class="chip chip-ai_proposal">ai proposal</span></td>
+<td>amber — <code>#FCF1DF</code> bg, <code>#9A5B14</code> text</td>
+</tr>
+<tr>
+<td><span class="chip chip-parameter_not_located">parameter not located</span></td>
+<td>slate — <code>#ECEFF1</code> bg, <code>#546E7A</code> text</td>
+</tr>
+</tbody>
+</table>
+<p>Chips are pill-shaped, 0.78rem Inter 600, applied automatically by the builder wherever the
+backticked label token appears in body text, and listed as a legend in every footer.</p>
+<h3 id="status-badges">Status badges</h3>
+<p>Method status (<code>draft</code>, <code>proposed</code>, <code>pending_deep_dive</code>, <code>primary-source-read</code>,
+<code>experimentally-supported-in-source</code>) render as small bordered badges tinted from neutral to
+green as evidence strength rises.</p>
+<h2 id="4-information-architecture">4. Information architecture</h2>
+<pre><code>docs/
+  index.html                          home: hero + material cards
+  materials/cigarette-butts/
+    index.html                        material dashboard (start here)
+    ranking.html  registry.html  charter.html  glossary.html
+    methods/index.html  methods/M-01…M-08.html  methods/cards.html
+    inventions/index.html + 3 content pages
+    reports/index.html + 2 report pages
+    research/index.html + FINDINGS/manifest/transcripts (7 pages) + csv tables (3)
+    sources/index.html (81-row table) + sources/&lt;id&gt;.html ×81
+    state.html  log.html
+    404.html
+  assets/style.css  assets/site.js  assets/search-index.json  .nojekyll
+</code></pre>
+<p>URLs are stable and derived from file paths — a GitHub page and a site page share their slug,
+so cross-links never rot.</p>
+<h2 id="5-navigation-model-easy-navigation">5. Navigation model (easy navigation)</h2>
+<p>Three persistent layers + one overlay:</p>
+<ol>
+<li><strong>Top bar</strong> (sticky, every page): wordmark "Recycling Empire" → home; links <strong>Materials</strong>,
+   <strong>Charter &amp; Playbook</strong>, <strong>About</strong>; search button (<code>Ctrl/⌘-K</code>, also plain <code>/</code>).</li>
+<li><strong>Material sidebar</strong> (left, sticky on all <code>materials/&lt;slug&gt;/</code> pages, collapsed to a
+   horizontal chip-row under the top bar on mobile):
+   <em>Overview · Ranking · Methods (8) · Registry · Invention · Reports · Sources (81) ·
+   Research · Charter · Glossary · State &amp; log</em> — the full map is always one click away.</li>
+<li><strong>"On this page"</strong> (right rail on wide screens, only on long pages): H2-level TOC from the
+   markdown, with scroll-spy highlighting; collapses under the content on narrow screens.</li>
+<li><strong>Search overlay</strong>: client-side, index prebuilt at generation time (<code>search-index.json</code>,
+   page titles + headings + text, sources included). Scores title &gt; heading &gt; body; results
+   grouped by section; Esc closes; fully keyboard-navigable.</li>
+</ol>
+<p>Every page also carries: <strong>breadcrumbs</strong> (Home › Cigarette butts › Methods › M-01), and
+<strong>prev/next pagers</strong> inside sequential groups (methods in registry order, sources alphabetical).</p>
+<h2 id="6-the-reading-journey-designed-path">6. The reading journey (designed path)</h2>
+<p>The material dashboard is the journey's hub. Its "Start here" block prescribes one order:</p>
+<ol>
+<li><strong>Overview</strong> (dashboard) — what this material is, its version, phase, stop-condition.</li>
+<li><strong>Ranking</strong> — the verdict: Table A top routes, why M-08 leads (the only published metals-gate
+   pass), the test-first list. <em>If you read one page, read this.</em></li>
+<li><strong>Final reports</strong> — the evidence boundary in full prose (batch-01 synthesis; validation &amp;
+   open questions).</li>
+<li><strong>Methods M-01…M-08</strong> — the action plans, in ranking order, each with its status badge and
+   gap-fill chips.</li>
+<li><strong>INV-01</strong> — the invented route that turns the field's missing mass balances into the
+   deliverable; its falsifier ledger and red-team placeholder (Phase 7).</li>
+<li><strong>Sources</strong> — the 81-document shelf, each with metadata and archive links.</li>
+<li><strong>Charter, glossary, state &amp; log</strong> — the rules and the record.</li>
+</ol>
+<p>Each step's card states what you will learn and how long it takes ("short read", "deep read"),
+so the reader can enter anywhere without losing the thread.</p>
+<h2 id="7-page-templates">7. Page templates</h2>
+<ul>
+<li><strong>Home</strong>: hero (one sentence + two buttons: <em>Browse materials</em>, <em>Read the playbook</em>), material
+  cards (name, one-line blurb, version/phase badge, counts), footer legend.</li>
+<li><strong>Material dashboard</strong>: identity card (name, version, status, site URL, priority methods),
+  stop-condition banner, "Start here" journey cards, shelf counters (sources / methods /
+  inventions / cards), ranking snapshot (top 3 rows of Table A), test-first preview,
+  phase-progress strip, migration note link.</li>
+<li><strong>Method page</strong>: spec-sheet grid rendered from the fenced metadata block (id, name, family,
+  status, version, sources), body with H2 sections + right-rail TOC, prev/next among methods,
+  label chips inline, archive links rewritten automatically.</li>
+<li><strong>Ranking page</strong>: the three tables verbatim with sticky first column, zebra rows, tabular
+  numerals; gates explained above the tables; test-first list as numbered cards.</li>
+<li><strong>Sources index</strong>: 81-row table (id, figures, original → archive, AI text → archive raw,
+  detail page) with a filter box and type-filter chips, client-side only.</li>
+<li><strong>Source detail</strong>: SOURCE.md content (or, for the 49 sources without SOURCE.md, an honest
+  auto-stub: id, figures count, links to the archive folder and text.md) + callout
+  "Full document lives in the butt-lab archive".</li>
+<li><strong>Reports / research / charter / glossary / state / log</strong>: plain article template with TOC.</li>
+</ul>
+<h2 id="8-components-inventory">8. Components inventory</h2>
+<p>cards (material, journey, stat), chips (evidence labels), badges (status), banners
+(stop-condition), spec-sheet grid, tables (sticky header, zebra, tabular figures), callouts
+(archive links, caveat notes), breadcrumbs, TOC rail, pagers, search overlay, footer legend,
+404 page with the material map.</p>
+<h2 id="9-accessibility-responsiveness">9. Accessibility &amp; responsiveness</h2>
+<ul>
+<li>WCAG AA contrast on every token pair (paper/ink 13.9:1; chips ≥ 4.6:1).</li>
+<li>Keyboard: visible focus rings (2px accent offset), search fully operable, skip-to-content link.</li>
+<li>Breakpoints: ≥1200px full three-column; 800-1200px two-column (TOC hides); &lt;800px single
+  column (sidebar → horizontal chips; tables scroll horizontally with sticky first column).</li>
+<li><code>prefers-reduced-motion</code> disables all transitions; no animation elsewhere.</li>
+<li>Semantic HTML throughout (<code>nav</code>, <code>main</code>, <code>article</code>, <code>aside</code>); one H1 per page; descriptive
+  link text (never "here").</li>
+</ul>
+<h2 id="10-performance">10. Performance</h2>
+<p>Single CSS file (~15 KB), single JS file (~8 KB), fonts via Google Fonts with <code>display=swap</code>
+and system fallbacks, search index ≤ 500 KB, no framework, no images required for pages (the
+archive holds the figures). Every page renders instantly from the CDN.</p>
+<h2 id="11-build-deploy">11. Build &amp; deploy</h2>
+<pre><code>python3 tools/site-builder/build.py        # renders materials/ → docs/ (deterministic; safe to re-run)
+</code></pre>
+<ul>
+<li><strong>GitHub Pages (chosen default)</strong>: Settings → Pages → Source: <em>Deploy from a branch</em>, branch
+  <code>main</code>, folder <code>/docs</code>. Site: <code>https://abdo2048.github.io/recycling-empire/</code>.</li>
+<li><strong>Cloudflare Pages (equivalent alternative)</strong>: connect the repo, build command none, output
+  dir <code>docs</code>. Private access later: Cloudflare Access in front of the domain (PLAYBOOK Phase 6).</li>
+<li>After the build, commit both <code>materials/</code> (source of truth) and <code>docs/</code> (rendered output);
+  MATERIALS.md and the material's <code>material.yaml</code> hold the live URL.</li>
+</ul>
+  
+</article>
+<nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#site-design-the-unified-recycling-empire-site-phase-6">Site design — the unified Recycling Empire site (Phase 6)</a>
+<a class="lvl3" href="#1-design-goals">1. Design goals</a>
+<a class="lvl3" href="#2-typography">2. Typography</a>
+<a class="lvl3" href="#3-color-system">3. Color system</a>
+<a class="lvl3" href="#4-information-architecture">4. Information architecture</a>
+<a class="lvl3" href="#5-navigation-model-easy-navigation">5. Navigation model (easy navigation)</a>
+<a class="lvl3" href="#6-the-reading-journey-designed-path">6. The reading journey (designed path)</a>
+<a class="lvl3" href="#7-page-templates">7. Page templates</a>
+<a class="lvl3" href="#8-components-inventory">8. Components inventory</a>
+<a class="lvl3" href="#9-accessibility-responsiveness">9. Accessibility &amp;amp; responsiveness</a>
+<a class="lvl3" href="#10-performance">10. Performance</a>
+<a class="lvl3" href="#11-build-deploy">11. Build &amp;amp; deploy</a></nav>
+</main>
+<footer>
+  <div class="legend">
+    <span class="chip chip-source_supported">source supported</span>
+    <span class="chip chip-ai_inference">ai inference</span>
+    <span class="chip chip-ai_proposal">ai proposal</span>
+    <span class="chip chip-parameter_not_located">parameter not located</span>
+  </div>
+  <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="./playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
+  <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="./site-design.html">Design</a></p>
+</footer>
+<div class="soverlay" id="soverlay" hidden>
+  <div class="sbox">
+    <input id="sinput" type="search" placeholder="Search the knowledge base…" autocomplete="off">
+    <div id="sresults" class="sresults"></div>
+    <p class="shint">Esc to close · results come from the built index</p>
+  </div>
+</div>
+<script src=".//assets/site.js" defer></script>
+</body>
+</html>

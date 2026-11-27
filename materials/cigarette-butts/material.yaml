@@ -1,0 +1,12 @@
+# Material identity — filled at Phase 0 (2026-11-22 in butt-lab), migrated to this repo at Phase 6
+name: "Cigarette butts"
+slug: cigarette-butts
+created: "2026-11-22"
+status: active
+version: v0.8
+site_url: "https://abdo2048.github.io/recycling-empire/"  # live once GitHub Pages is enabled (Settings → Pages → Source: main, folder /docs); Cloudflare Pages with output dir docs/ works identically
+priority_methods: [M-01-mego-wash, M-02-defenzo-solvent, M-03-unb-alkaline-pulping, M-04-keenat-dry-thermal, M-05-tchaomegot-sc-co2, M-06-terracycle-trade-secret, M-07-pyrolysis-triacetin, M-08-rmit-brick]
+custom_ranking_factors: []  # the six standard factors are used as-is (see ranking.md)
+stop_conditions:
+  - "Metals gate (charter): Cd/Pb/As/Hg uncharacterised in a route's product means that route is on hold for product-facing work. M-08 fired bricks hold the only published pass (Kurmus Ch.5 leaching + Ch.6 PAH gates)."
+  - "No physical trials (PLAYBOOK rule 7): desk research authorizes none; qualified facilities, risk assessment, lawful disposal and a named human actor are required for anything physical."

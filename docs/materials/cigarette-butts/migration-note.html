@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Migration note — Recycling Empire</title>
+<meta name="doc-root" content="../../">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../..//assets/style.css">
+</head>
+<body data-root="../../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <nav class="topnav" aria-label="Primary">
+    <a class="brand" href="../../index.html">Recycling<em>Empire</em></a>
+    <a href="../../index.html#materials">Materials</a>
+    <a href="../../playbook.html">Playbook</a>
+    <a href="../../site-design.html">Site design</a>
+    <button id="searchbtn" type="button" aria-label="Search">Search <kbd>Ctrl K</kbd></button>
+  </nav>
+</header>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#materials">Materials</a></li><li aria-current="page">Migration note</li></ol></nav>
+<main id="main">
+<aside class="side" aria-label="Material sections"><h2>Cigarette butts</h2><nav><a href="index.html">Overview</a><a href="ranking.html">Ranking</a><a href="methods/index.html">Action plans</a><a href="methods/cards.html">Summary cards</a><a href="registry.html">Registry</a><a href="inventions/index.html">Inventions</a><a href="reports/index.html">Final reports</a><a href="sources/index.html">Sources</a><a href="research/index.html">Research shelf</a><a href="charter.html">Charter</a><a href="glossary.html">Glossary</a><a href="state.html">State</a><a href="log.html">Log</a><a class="on" href="migration-note.html">Migration note</a></nav></aside>
+<article class="content">
+  <p class="kicker">Phase 6</p><h1>Migration note</h1>
+  
+  <h1 id="migration-note-cigarette-butts-recycling-empire-phase-6-2026-11-26">Migration note — cigarette-butts → recycling-empire (Phase 6, 2026-11-26)</h1>
+<p>Case 1 completed its research in the <a href="https://github.com/abdo2048/butt-lab">butt-lab</a> repository
+(sessions 1-10, Phases 1-5) and this folder is now its <strong>canonical home</strong>. One repo, one site
+(PLAYBOOK golden rule 1): from now on, work happens only here, and the unified site is built
+from <code>materials/</code> by <a href="../../../tools/site-builder/build.py">tools/site-builder/build.py</a>.</p>
+<h2 id="what-moved-here">What moved here</h2>
+<p>The entire text knowledge base, byte-exact from butt-lab:</p>
+<table>
+<thead>
+<tr>
+<th>Content</th>
+<th>Files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Identity + state</td>
+<td><code>material.yaml</code>, <code>STATE.md</code>, <code>LOG.md</code>, <code>README.md</code>, <code>MIGRATION-NOTE.md</code></td>
+</tr>
+<tr>
+<td>Rules + vocabulary</td>
+<td><code>charter.md</code> (v2), <code>GLOSSARY.md</code></td>
+</tr>
+<tr>
+<td>Phase 5 ranking</td>
+<td><code>ranking.md</code> (36 items, six factors, test-first list)</td>
+</tr>
+<tr>
+<td>Phase 2 registry</td>
+<td><code>registry/methods.yaml</code> (30 entries, sync-corrected) + <code>registry/methods-old.yaml</code> (immutable backup)</td>
+</tr>
+<tr>
+<td>Phase 3 action plans</td>
+<td><code>methods/M-01</code> … <code>methods/M-08</code> (v0.1-v0.5) + <code>methods/_cards.md</code> (22 cards)</td>
+</tr>
+<tr>
+<td>Arena research shelf</td>
+<td><code>methods/research/2026-11-25-arena/</code> — FINDINGS 1/2, MANIFEST, README, 5 transcripts, 3 csv</td>
+</tr>
+<tr>
+<td>Phase 4 invention</td>
+<td><code>inventions/INV-01-split-loop-refinery.md</code> + candidate hypotheses + batch-02 proposals + TEMPLATE</td>
+</tr>
+<tr>
+<td>Final reports</td>
+<td><code>reports/final/batch-01-synthesis.md</code>, <code>reports/final/validation-and-open-questions.md</code></td>
+</tr>
+<tr>
+<td>Source metadata</td>
+<td><code>sources/INDEX.md</code> (82 rows — one row added for defenzo-2020-materials during migration), <code>sources/README.md</code>, <code>sources/links.json</code>, and all 32 <code>sources/&lt;id&gt;/SOURCE.md</code> files</td>
+</tr>
+</tbody>
+</table>
+<p>Migration content fixes (recorded in the INDEX footer): the <code>espr-2021-challenges-review</code> row
+pointed at a stale <code>ese-2021-challenges-review/</code> folder name (a butt-lab-era defect) and
+<code>defenzo-2020-materials</code> had a folder + SOURCE.md but no INDEX row — both corrected during
+migration; count corrected 81 → 82.</p>
+<h2 id="what-stayed-in-butt-lab-the-frozen-archive">What stayed in butt-lab (the frozen archive)</h2>
+<p>The heavy shelf cannot travel through the API-based migration path (per-file push limit ~1 MB;
+the archive is 546 MB). It stays in <a href="https://github.com/abdo2048/butt-lab">butt-lab</a>, which is
+now a <strong>read-only archive</strong>:</p>
+<ul>
+<li><code>sources/&lt;id&gt;/document.pdf</code> / <code>document.html</code> — the originals (humans read these)</li>
+<li><code>sources/&lt;id&gt;/text.md</code> — the AI-readable conversions (4.7 MB)</li>
+<li><code>sources/&lt;id&gt;/figures/</code> — extracted images</li>
+<li><code>methods/research/2026-11-25-arena/attempts/</code> + <code>cdx/</code> — raw fetch artifacts behind the FINDINGS</li>
+<li><code>publication/</code> — the old reader's data layer (superseded by the unified site)</li>
+<li>all historical dirs (<code>archive/</code>, <code>docs/</code>, <code>state/</code>, <code>tools/</code>, <code>mcp/</code>, <code>operator/</code>, …)</li>
+</ul>
+<p>Every migrated file and every generated site page resolves links into the archive:
+originals link to <code>https://github.com/abdo2048/butt-lab/tree/main/&lt;path&gt;</code> and AI-readable text
+links to <code>https://raw.githubusercontent.com/abdo2048/butt-lab/main/&lt;path&gt;</code>. The builder does
+this rewrite automatically (see <code>tools/site-builder/build.py</code>).</p>
+<h2 id="why-this-split-is-safe">Why this split is safe</h2>
+<ul>
+<li>The <strong>record of knowledge</strong> (plans, rankings, registry, invention, reports, source metadata) is
+  complete here and self-contained — nothing on the site needs the binaries to be understood.</li>
+<li>The <strong>originals</strong> are immutable published documents; a frozen public archive repo is a stable
+  link target, and each document also exists in a second copy under the operator's control
+  (butt-materials / local machine).</li>
+<li>If a full byte-level move is ever wanted, a single local operation completes it:
+  <code>git clone https://github.com/abdo2048/butt-lab &amp;&amp; cp -r butt-lab/sources/* recycling-empire/materials/cigarette-butts/sources/</code> —
+  the builder already handles both layouts (it links locally when a file exists in the folder).</li>
+</ul>
+<h2 id="reader-retirement">Reader retirement</h2>
+<p>The old reader at <code>https://butt-lab.am6.workers.dev/</code> (Cloudflare Worker over <code>publication/</code>)
+is superseded by the unified site. Decommissioning the Worker is an operator step: it serves a
+frozen snapshot and stays up until the operator switches it off. <a href="../../../MATERIALS.md">MATERIALS.md</a>
+records the change.</p>
+  
+</article>
+<nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#migration-note-cigarette-butts-recycling-empire-phase-6-2026-11-26">Migration note — cigarette-butts → recycling-empire (Phase 6, 2026-11-26)</a>
+<a class="lvl3" href="#what-moved-here">What moved here</a>
+<a class="lvl3" href="#what-stayed-in-butt-lab-the-frozen-archive">What stayed in butt-lab (the frozen archive)</a>
+<a class="lvl3" href="#why-this-split-is-safe">Why this split is safe</a>
+<a class="lvl3" href="#reader-retirement">Reader retirement</a></nav>
+</main>
+<footer>
+  <div class="legend">
+    <span class="chip chip-source_supported">source supported</span>
+    <span class="chip chip-ai_inference">ai inference</span>
+    <span class="chip chip-ai_proposal">ai proposal</span>
+    <span class="chip chip-parameter_not_located">parameter not located</span>
+  </div>
+  <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="../../playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
+  <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="../../site-design.html">Design</a></p>
+</footer>
+<div class="soverlay" id="soverlay" hidden>
+  <div class="sbox">
+    <input id="sinput" type="search" placeholder="Search the knowledge base…" autocomplete="off">
+    <div id="sresults" class="sresults"></div>
+    <p class="shint">Esc to close · results come from the built index</p>
+  </div>
+</div>
+<script src="../..//assets/site.js" defer></script>
+</body>
+</html>

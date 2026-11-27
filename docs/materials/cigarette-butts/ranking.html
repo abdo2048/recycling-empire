@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ranking — six factors, 36 items — Recycling Empire</title>
+<meta name="doc-root" content="../../">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../..//assets/style.css">
+</head>
+<body data-root="../../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <nav class="topnav" aria-label="Primary">
+    <a class="brand" href="../../index.html">Recycling<em>Empire</em></a>
+    <a href="../../index.html#materials">Materials</a>
+    <a href="../../playbook.html">Playbook</a>
+    <a href="../../site-design.html">Site design</a>
+    <button id="searchbtn" type="button" aria-label="Search">Search <kbd>Ctrl K</kbd></button>
+  </nav>
+</header>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../index.html">Home</a></li><li><a href="../../index.html#materials">Materials</a></li><li aria-current="page">Ranking — six factors, 36 items</li></ol></nav>
+<main id="main">
+<aside class="side" aria-label="Material sections"><h2>Cigarette butts</h2><nav><a href="index.html">Overview</a><a class="on" href="ranking.html">Ranking</a><a href="methods/index.html">Action plans</a><a href="methods/cards.html">Summary cards</a><a href="registry.html">Registry</a><a href="inventions/index.html">Inventions</a><a href="reports/index.html">Final reports</a><a href="sources/index.html">Sources</a><a href="research/index.html">Research shelf</a><a href="charter.html">Charter</a><a href="glossary.html">Glossary</a><a href="state.html">State</a><a href="log.html">Log</a><a href="migration-note.html">Migration note</a></nav></aside>
+<article class="content">
+  <p class="kicker">Phase 5 output</p><h1>Ranking — six factors, 36 items</h1>
+  <section class="specsheet"><div class="spec"><span>file</span><b>ranking.md</b></div><div class="spec"><span>version</span><b>v0.1</b></div><div class="spec"><span>date</span><b>2026-11-26 (session 10, Phase 5)</b></div><div class="spec"><span>status</span><b>draft — Phase 5 output; Phase 7 review rounds may revise</b></div><div class="spec"><span>basis</span><b>shelf state after session 9 (M-01..M-08 full plans, INV-01 v0.1, batch-02 proposals, 22 registry cards)</b></div><div class="spec"><span>scoring</span><b>1-5 per factor, 5 = favorable; every score carries a one-line justification; total 6-30</b></div></section>
+  <p><strong>What was scored (36 items).</strong> Table A: the nine route-level candidates — the eight full action plans (M-01..M-08) plus the Phase 4 invention INV-01. Table B: the five scientist-inventor batch-02 proposals (scored for comparison only — they are enablement components, not complete routes). Table C: all 22 registry summary cards. H1/H2/H3 of <code>inventions/candidate-hypotheses-01.md</code> are NOT scored separately: INV-01 explicitly inherited them (<code>prior_project_hypotheses_inherited</code> in its metadata), and scoring them twice would double-count.</p>
+<p><strong>Two gates bind every product-facing score before any factor is read:</strong></p>
+<ol>
+<li><strong>Metals stop-condition (charter):</strong> Cd/Pb/As/Hg uncharacterised in a route's PRODUCT means that route is on hold for product-facing work. On this shelf, product metals have never been measured for M-01/M-02/M-03/M-04/M-05/INV-01, and TerraCycle's own 2013 deck lists the metals with no concentrations — so every Product-usefulness score below 4 carries this gate. The ONE published exception is M-08: fired bricks passed the leaching gate with ICP-MS across pH 2.5-9.2 (Kurmus Ch.5) and the PAH gate (Ch.6) — the only route with metals-gate DATA, which is why it ranks first.</li>
+<li><strong>No clean/safe/validated claims (charter):</strong> a high evidence score means the SOURCES measured things, never that a product is safe. The team's lab decides.</li>
+</ol>
+<p>Material-specific factors: the ranking template allows extra columns from material.yaml — butt-lab has no material.yaml yet, so the six standard factors are used as-is. If a material.yaml appears before migration, append its factors with their own rubrics and re-total.</p>
+<h2 id="table-a-route-level-ranking-9-items">Table A — route-level ranking (9 items)</h2>
+<table>
+<thead>
+<tr>
+<th>Rank</th>
+<th>Method</th>
+<th>Cost &amp; equipment</th>
+<th>Small-scale feasibility</th>
+<th>Safety</th>
+<th>Evidence strength</th>
+<th>Product usefulness</th>
+<th>Legal status</th>
+<th>Total</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>M-08 RMIT fired-clay bricks</td>
+<td>4</td>
+<td>5</td>
+<td>4</td>
+<td>5</td>
+<td>4</td>
+<td>5</td>
+<td>27</td>
+<td>Only route with published metals-gate data (fired bricks pass leaching + PAH gates); most accessible lab program</td>
+</tr>
+<tr>
+<td>2</td>
+<td>M-03 UnB alkaline pulping</td>
+<td>5</td>
+<td>5</td>
+<td>3</td>
+<td>5</td>
+<td>3</td>
+<td>5</td>
+<td>26</td>
+<td>Strongest experimental base (peer-reviewed 35-cook characterization) + expired patent; pulp metals never measured</td>
+</tr>
+<tr>
+<td>3</td>
+<td>M-02 De Fenzo wash + film</td>
+<td>5</td>
+<td>5</td>
+<td>3</td>
+<td>4</td>
+<td>3</td>
+<td>5</td>
+<td>25</td>
+<td>Cheapest chemistry, peer-reviewed product characterization, no blocking patent; no removal-efficiency numbers; gate binds</td>
+</tr>
+<tr>
+<td>4</td>
+<td>M-01 Mego water wash</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>4</td>
+<td>2</td>
+<td>19</td>
+<td>Most complete patent protocol, zero quantitative performance data; active FR patent to 2037</td>
+</tr>
+<tr>
+<td>5</td>
+<td>M-07 whole-butt pyrolysis</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>4</td>
+<td>2</td>
+<td>5</td>
+<td>18</td>
+<td>Numbers confirmed by two sources; 200 g ceiling; products are assay streams, not products; furnace-lab hazard class</td>
+</tr>
+<tr>
+<td>6</td>
+<td>INV-01 split-loop refinery</td>
+<td>3</td>
+<td>4</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>17</td>
+<td>Components proven, integration untested — ranked mid exactly as its falsifier ledger predicts</td>
+</tr>
+<tr>
+<td>7</td>
+<td>M-04 Keenat dry thermal</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>15</td>
+<td>Decontamination premise unmeasured; operator abandoned the route on its own LCA</td>
+</tr>
+<tr>
+<td>8</td>
+<td>M-06 TerraCycle route</td>
+<td>1</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>5</td>
+<td>14</td>
+<td>Trade secret by design — nothing to replicate; best logistics record on the registry</td>
+</tr>
+<tr>
+<td>9</td>
+<td>M-05 TchaoMegot SC-CO2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td>11</td>
+<td>Certified pressure plant + zero performance data in the whole family + broadest active blocking family</td>
+</tr>
+</tbody>
+</table>
+<h3 id="score-justifications-table-a">Score justifications — Table A</h3>
+<p>Each bullet is the one-line justification for that factor's score.</p>
+<p><strong>M-08 RMIT fired-clay bricks — 27</strong>
+- Cost &amp; equipment 4: brick-lab equipment is ordinary (Hobart mixer, 105 degC oven, 1050 degC chamber furnace — Kurmus Ch.4); no solvents, no pressure; ICP-MS/GC-MS via partner lab.
+- Small-scale feasibility 5: the entire published program is lab bricks at kg-batch scale (Ch.3-4); no continuous line involved.
+- Safety 4: clay work is benign, but firing elevates CO/CO2/HCN vs plain bricks (5% CBs: CO 5.8x, Mohajerani 2016 via Torkashvand) — exhaust extraction; unfired/shredded CB material leaches metals (Ch.5) — fired-only rule.
+- Evidence strength 5: the registry's only standards-based multi-gate program — strength/density/conductivity (Ch.3-4), furnace-logged energy (Ch.4), ABLP/TCLP ICP-MS leaching pH 2.5-9.2 (Ch.5), 16-EPA-PAH screen below hazard thresholds (Ch.6), bacteriology + UVC odor (Ch.7-8).
+- Product usefulness 4: fired 1% bricks hold 30.8 MPa (load-bearing band 5-10 MPa) with published leach compliance — the ONLY product on the registry that has passed a metals gate; capped because 1% loading makes butts an additive, not a recycling answer, and durability is untested.
+- Legal status 5: research publication; no known patent blocking (registry).</p>
+<p><strong>M-03 UnB alkaline pulping — 26</strong>
+- Cost &amp; equipment 5: NaOH 1% + HCl + pot/hotplate + blender + hand sheet mold — commodity chemicals only.
+- Small-scale feasibility 5: demonstrated from 233 g analysis cooks to a 50 L pilot; the plan's 10 L/kg basis is bench-ready.
+- Safety 3: atmospheric throughout (no pressure), but dark liquor is the hazard center — nicotine 35.4 g/L measured (dermally toxic), NNK 3,057 ng/mL, COD ~30 g/L; caustic cook + HCl acidification; never to drain.
+- Evidence strength 5: peer-reviewed full protocol (Teixeira 2017, Waste Management) with 35-cook liquor characterization, FT-IR deacetylation kinetics, 7-cycle reuse loop; expired patent + operating pilot.
+- Product usefulness 3: pulp sold to a cardboard factory (company self-report); whiteness 54.16% keeps it in brown/grey grades; PULP metals never measured (row 8) — gate binds.
+- Legal status 5: BR0305004B1 expired under both term interpretations (computed 2023-10-06 filing term / 2024-11-11 grant term); free to use.</p>
+<p><strong>M-02 De Fenzo wash + film — 25</strong>
+- Cost &amp; equipment 5: water/ethanol/acetone + beakers + oven — the cheapest chemistry on the registry.
+- Small-scale feasibility 5: designed at grams; kg batches are repetitions of the same bench sequence; solvent cost is the scale driver (row 10), not feasibility.
+- Safety 3: acetone flash ~-20 degC, ethanol ~13 degC — fume hood; spent liquors carry nicotine/PAHs = hazardous wastewater; no severe acute hazard beyond flammability + nicotine.
+- Evidence strength 4: peer-reviewed with full product characterization (FTIR bands; Tg 192 vs 193 degC; 367 degC degradation peak; TGA residue ~10%) and a replicable published recipe; no removal-efficiency numbers (row 8) keep it below 5.
+- Product usefulness 3: recovered CA proven chemically equivalent to virgin CA; film demonstrated but brittle (plasticizer proposal: triacetin 20 wt%, row 6); product value conditional on the metals gate (row 9: never measured).
+- Legal status 5: no known blocking patent (registry).</p>
+<p><strong>M-01 Mego water wash — 19</strong>
+- Cost &amp; equipment 4: bench equivalents are cheap (20-50 L tanks, pump, sieve shaker, oven, bench mill); the 314 t press variant is optional, not required.
+- Small-scale feasibility 4: batch tanks at kg scale work; the patent's continuous 1 kg/min line miniaturizes naturally.
+- Safety 3: water-based core, but spent washes are nicotine-bearing hazardous wastewater, dry-milling dust is explosible and toxic, ethanol polish is flammable.
+- Evidence strength 2: the granted B1 is the most complete numeric protocol among patents yet discloses NO yield/purity/removal numbers ("decrease drastically" only); mechanism corroborated externally (De Fenzo 50 degC stage; C-16 recipe) but the process itself has zero quantitative support.
+- Product usefulness 4: a named product spec exists (&lt;1500 um CA fine particles; optional 350 degC plates) matching demonstrated CA-recovery products; row 11 gate binds (metals never measured).
+- Legal status 2: active granted FR patent, expiry 2037-05-15 (annuities paid through 2026-04-16); blocks commercial use in France; lab verification only as French law allows.</p>
+<p><strong>M-07 whole-butt pyrolysis — 18</strong>
+- Cost &amp; equipment 2: fixed-bed furnace + GC-TCD/GC-MS + gas analyser + scrubber train = instrument lab; a partner facility is the realistic path.
+- Small-scale feasibility 3: the 200 g fixed bed is the largest whole-butt reactor in the field (Chemosphere 2026); batchable but instrumentation-heavy; no continuous-run data.
+- Safety 2: 650-750 degC on toxic waste; CO measured at 8% of product gas, HCN class unmeasured; PAH-laden condenser tars; oil carries nicotine-derived alkaloids 7.95-11.17% area.
+- Evidence strength 4: peer-reviewed full text (JAAP 2023) with exact yield triplets each summing ~100 wt%, independently confirmed post-dating by Chemosphere 2026; single group, no independent replication, no pilot — not 5.
+- Product usefulness 2: oil is NOT blend-ready (alkaloids + phenols; purification uncosted); char adsorbent candidacy gated by uncharacterized trace metals (row 4); gas CV never measured — today the route yields assay streams, not products.
+- Legal status 5: research publications; no known patent blocking.</p>
+<p><strong>INV-01 split-loop refinery — 17</strong>
+- Cost &amp; equipment 3: integrates M-01 tanks + M-02 ethanol polish + M-03 cook + chitosan jar tests + a partner furnace and partner assays — more unit operations than any single route, all bench-class except S5/assays.
+- Small-scale feasibility 4: explicitly pilot-shaped (10 kg batch cycle, five weighed streams); its core deliverable — the weighed toxicant mass balance — works best small.
+- Safety 2: inherits every component hazard (nicotine liquors to 35.4 g/L, caustic cook, flammable ethanol, explosible fines, 650 degC destructor) and adds integration complexity; no pressure anywhere and each unit op bounded — still the widest hazard surface of the wet routes.
+- Evidence strength 2: an invented composite — every component source-backed, but the integration claims (sink-stream cook, unified liquor train, two-stage condensate) are untested, exactly as its 6-row falsifier ledger states.
+- Product usefulness 3: up to three product streams (S1 CA, S2 pulp, S5 condensate), ALL conditional on the ICP-MS gate and falsifiers 1/2/5; the route's guaranteed output is the mass-balance dataset itself.
+- Legal status 3: built from expired (UnB) and patent-free components, but Stage B/C replicate the ACTIVE Mego disclosure — commercial use needs an FTO check; research use plausible.</p>
+<p><strong>M-04 Keenat dry thermal — 15</strong>
+- Cost &amp; equipment 3: oven + grinder are cheap; extruder compounding plus DESIGNED off-gas capture are polymer-lab items.
+- Small-scale feasibility 3: batchable (3-12 h oven dwell is slow); extrusion bench-scale fine.
+- Safety 2: the route evaporates toxics BY DESIGN (PAHs named; nicotine bp ~247 degC is not destroyed at 80-240 degC) with no capture spec in the patent; dry nicotine-bearing dust; condensate/carbon = hazardous waste.
+- Evidence strength 2: mechanical properties ISO-measured in the patent examples (PA11+30%: 48 MPa max stress), but the decontamination premise has zero measured support — the "~200 degC destroys nicotine/phenol/pesticides" claim is NOT in the primary text (Phase 5 registry correction); the operator abandoned the route on its own LCA.
+- Product usefulness 2: pellets for street furniture are real (mechanical data published) but the operator ceased material recycling (cost + pollutant-fate, self-report) and the metals gate binds (row 10).
+- Legal status 3: FR3110470A1 shows no grant event in the A1 file; EP3912739 unverified; X citations against composite claims 15-17 — uncertainty, not freedom.</p>
+<p><strong>M-06 TerraCycle route — 14</strong>
+- Cost &amp; equipment 1: nothing to buy or build — the process core is a trade secret (zero patents, zero filing mentions; withheld by design), all reprocessing contracted out; replication is impossible from public data.
+- Small-scale feasibility 1: no process numbers exist at any scale; the only documented scale is the operator's own logistics.
+- Safety 2: outputs are nicotine-bearing by the operator's own end-use restriction; compost stream hazardous; gamma parameters withheld — no assumed safety.
+- Evidence strength 3: the registry's best-documented LOGISTICS record (press corpus, Bloomberg 2022 read in full, the 2013 PE INTERNATIONAL toxicity deck, a 14-point growth curve, computed ~0.016% capture rate) wrapped around a black-box process — scored for process replicability, hence mid.
+- Product usefulness 2: industrial plastic products are real but downcycled (playground/outdoor furniture per Szaky), nicotine-bearing, no public specs; its own LCA names transport + packaging the dominant burden — the route's lesson is that collection binds.
+- Legal status 5: zero patents (USPTO assignee search, v0.4-verified); trade secret; no blocking claims.</p>
+<p><strong>M-05 TchaoMegot SC-CO2 — 11</strong>
+- Cost &amp; equipment 1: a certified SC-CO2 plant (0.2-1500 L chambers, 280-320 bar class) is partner-facility-only; the charter's no-DIY-pressure rule is absolute here.
+- Small-scale feasibility 2: 5-20 L lab extractors exist at partner facilities; batch contact 1 min-8 h; never student-lab equipment.
+- Safety 2: 300 bar stored energy is lethal-class; CO2 asphyxiation; flammable co-solvent under pressure; HP6/HP14 concentrate stream.
+- Evidence strength 2: granted family (FR3102075B1, FR3102076B3, US12065781B2) with ZERO quantitative performance data in any of the four primary documents (M-05's verdict); the circulating 99.7%/0.3% figures are not in the patents (Phase 5 correction).
+- Product usefulness 3: insulation boards (15% Trevira binder, 170 degC/15 min cure) carry granted use claims and a real product shape; no thermal/fire numbers anywhere; metals gate binds.
+- Legal status 1: active multi-jurisdiction granted family, ~2039-2040 expiry — the broadest active blocking family on the registry.</p>
+<h2 id="table-b-batch-02-invention-proposals-scored-for-comparison-components-not-routes">Table B — batch-02 invention proposals (scored for comparison; components, not routes)</h2>
+<p>Basis: <code>inventions/scientist-inventor-batch-02-proposals.md</code> (2026-11-17; <span class="chip chip-ai_proposal">ai proposal</span>/<span class="chip chip-ai_inference">ai inference</span>; simulations computed, nothing measured). P-numbers follow the file's order; rows are ordered by total. Their value is measured by what they de-risk in the ranked routes, not by their own outputs.</p>
+<table>
+<thead>
+<tr>
+<th>Proposal</th>
+<th>Cost &amp; equipment</th>
+<th>Small-scale feasibility</th>
+<th>Safety</th>
+<th>Evidence strength</th>
+<th>Product usefulness</th>
+<th>Legal status</th>
+<th>Total</th>
+<th>One-line verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1 M01-Gate — dry pneumatic + triboelectric pre-fractionation</td>
+<td>4</td>
+<td>4</td>
+<td>4</td>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>20</td>
+<td>Highest-leverage add-on to ANY wet route — diverts metals-rich ash/tobacco before wetting; pure proposal, no product of its own</td>
+</tr>
+<tr>
+<td>P2 J-H-01-M — counter-current wash + GAC/IDA polish</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>5</td>
+<td>20</td>
+<td>Converts dissolved toxins into weighable spent media; computed simulation only (cycle-20 nicotine 517.6 mg/L at 15% purge)</td>
+</tr>
+<tr>
+<td>P5 F5-ED — alkaline deacetylation + BMED NaOAc split</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>18</td>
+<td>Directly answers M-03's sodium-accumulation falsifier (row 7) — recovers NaOH + acetic acid; BMED is specialty equipment</td>
+</tr>
+<tr>
+<td>P3 F3-SC — microfiltration + staged EtOH/CO2 antisolvent</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>16</td>
+<td>Highest-purity CA target; scCO2/pervaporation = partner equipment; FTO of the F3 base unverified</td>
+</tr>
+<tr>
+<td>P4 F2-VSC — vacuum-vented extrusion + acid/S-GAC capture</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>4</td>
+<td>16</td>
+<td>The simulation itself shows 98-99% of Cd/Pb mass RETAINED in the composite — the metals gate binds hardest here</td>
+</tr>
+</tbody>
+</table>
+<p>Score justifications (compressed per row):
+- P1: Cost 4 — air classifier + triboelectric belt are bench/industrial-lite items; Safety 4 — dry, chemical-free, dust controls only; Evidence 1 — gap-closing note + falsification test only, nothing measured; Product 2 — enablement component; Legal 5 — no claims identified.
+- P2: Cost 4 — tanks + GAC/IDA columns are standard water-treatment kit; Evidence 2 — computed simulation, no measurement; Safety 3 — nicotine liquors plus a NEW weighable hazardous solid (spent media); Product 2 / Legal 5 — enablement, no blocking claims.
+- P5 F5-ED: Cost 2 — BMED electrodialysis is specialty lab equipment; Evidence 2 — M-03 base demonstrated (61.2 kg pulp / 75.8 kg NaOAc computed) + BMED is a standard salt-splitting unit op, but the combination is simulated only; Product 3 — pulp + recovered NaOH + acetic acid; Legal 5 — UnB base expired.
+- P3 F3-SC: Cost 2 — scCO2 + pervaporation = partner equipment; Evidence 2 — simulated (9.8 mg/kg nicotine with staged EtOH/CO2 vs 78.3 mg/kg with plain water antisolvent — <span class="chip chip-ai_proposal">ai proposal</span> numbers); Safety 2 — pressure + flammables; Product 3 — highest-purity CA target; Legal 4 — F3 base status unverified, CN106928486 adjacency is CN-only.
+- P4 F2-VSC: Cost 3 — twin-screw + capture train = polymer lab; Evidence 2 — dilution arithmetic, not measurement; Product 2 — the simulation RETAINS 98-99% of Cd/Pb in the product, so the gate binds hardest; Safety 2 — by-design off-gassing of nicotine/Hg needs the acid condenser + S-GAC bed to actually work; Legal 4 — unverified.</p>
+<h2 id="table-c-registry-summary-cards-22-items">Table C — registry summary cards (22 items)</h2>
+<p>Compact form: scores in the table; the Note column carries the justifications compressed (extreme scores justified first). Full per-card context lives in <code>methods/_cards.md</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Card</th>
+<th>Cost &amp; equipment</th>
+<th>Small-scale feasibility</th>
+<th>Safety</th>
+<th>Evidence strength</th>
+<th>Product usefulness</th>
+<th>Legal status</th>
+<th>Total</th>
+<th>Note (justifications)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-16 academic-green-ethanol-wash</td>
+<td>5</td>
+<td>5</td>
+<td>3</td>
+<td>4</td>
+<td>3</td>
+<td>5</td>
+<td>25</td>
+<td>Cost/Scale 5 beaker chemistry; Evidence 4 peer-reviewed recipe (50 degC/60 min -&gt; 3 rinses -&gt; 2x ethanol 99%); Legal 5 no block. DUPLICATE of M-02's source — already folded into M-01 row 6 / INV-01 Stage C; never run as a separate route</td>
+</tr>
+<tr>
+<td>C-05 us20140287144-abandoned</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>5</td>
+<td>20</td>
+<td>Legal 5 ABANDONED — free to use; Evidence 2 short abandoned filing; Product 2 covers FACTORY acetate waste, not post-consumer butts</td>
+</tr>
+<tr>
+<td>C-06 us5504119-expired</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>5</td>
+<td>20</td>
+<td>Legal 5 EXPIRED (1994) — the free-to-use prior-art backbone for any team solvent route; Evidence 2 unextracted but only needed as prior art</td>
+</tr>
+<tr>
+<td>C-17 academic-acetic-acid-route</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>20</td>
+<td>Cost 4 green commodity solvent; Evidence 2 abstract-level (2025); overlaps C-07 chemistry with academic rigor; Legal 5</td>
+</tr>
+<tr>
+<td>C-18 academic-ca-membranes</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>19</td>
+<td>Product 3 high-value end-use but performance vs virgin CA <span class="chip chip-parameter_not_located">parameter not located</span>; Evidence 2 two peer-reviewed papers, specs unextracted; Legal 5</td>
+</tr>
+<tr>
+<td>C-13 kalabak-ethanol-fuel</td>
+<td>4</td>
+<td>4</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>18</td>
+<td>Cost 4 recipe fully published (5-320 g/L, 5-60 min); Evidence 2 quantities disclosed, endpoint unvalidated; Product 2 uncharacterized extract is not a fuel product (M-07 row 2 concern class); Legal 3 EP pending</td>
+</tr>
+<tr>
+<td>C-19 cigarette-butt-asphalt</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>5</td>
+<td>18</td>
+<td>Scale 2 road-scale; Evidence 2 registry-level, Marshall stability unverified; Product 3 encapsulation (105 degC/24 h) mandatory because CBs are toxic — shares M-08's encapsulation logic; Legal 5</td>
+</tr>
+<tr>
+<td>C-20 concrete-additive</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>18</td>
+<td>Evidence 1 no specific study read — weakest construction card; Product 2 water-absorption/degradation risk (<span class="chip chip-ai_inference">ai inference</span>); Cost 4; Legal 5</td>
+</tr>
+<tr>
+<td>C-22 cnr-knowledge-share-ca-recovery</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>18</td>
+<td>Evidence 2 evidence file exists but offering-stage TRL unverified; Product 3 claimed uses match the CNR ecosystem (M-02/C-01 adjacency); Legal 4 licensing route, status unclear on page</td>
+</tr>
+<tr>
+<td>C-14 matteri-ep2520184a1</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>5</td>
+<td>17</td>
+<td>Legal 5 deemed withdrawn 2013 — free to use; Evidence 1 washing parameters never extracted; Product 2</td>
+</tr>
+<tr>
+<td>C-21 3d-printing-filament</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>3</td>
+<td>4</td>
+<td>17</td>
+<td>Evidence 1 startup coverage only, specs/printing parameters unlocated; Product 3 FDM filament plausible with plasticizer/drying control (<span class="chip chip-ai_inference">ai inference</span>); Legal 4 no patent located, method unknown</td>
+</tr>
+<tr>
+<td>C-07 cn106928486</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>16</td>
+<td>Evidence 2 primary-source-read; 58-92% recovery is a patent assertion with unresolved denominator; Product 3 CA recovery; Legal 2 CN-only grant</td>
+</tr>
+<tr>
+<td>C-04 burich-us7560059</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>15</td>
+<td>Evidence 1 unextracted; Legal 3 granted 2009 — expiry check owed; Safety 3 acetone wetting</td>
+</tr>
+<tr>
+<td>C-12 kr20160005298</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>15</td>
+<td>Evidence 1 unextracted; Legal 3 KR-only; Product 2</td>
+</tr>
+<tr>
+<td>C-15 kr-microbial-composting</td>
+<td>4</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>15</td>
+<td>Cost 4 low-tech composting; Evidence 1 strains/time/temperature absent — CA biodegradation slow/unproven (<span class="chip chip-ai_inference">ai inference</span>); Legal 2 KR granted 2018</td>
+</tr>
+<tr>
+<td>C-02 cerdia-ca-recovery</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td>14</td>
+<td>Evidence 2 filing unextracted but the applicant operates acetate tow plants (most credible CA-recovery claimant); Legal 1 newest active filing = highest FTO risk on the shelf; single highest-value unextracted item</td>
+</tr>
+<tr>
+<td>C-03 huang-us10980272</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>1</td>
+<td>14</td>
+<td>Evidence 2 apparatus patent read, chemistry/performance absent; Legal 1 active to ~2039-06-04; Product 2 apparatus only</td>
+</tr>
+<tr>
+<td>C-08 cn111822484</td>
+<td>3</td>
+<td>3</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>14</td>
+<td>Evidence 1 unextracted Chinese filing; Product 2 filter-rod regeneration serves the tobacco loop, not waste; Legal 2 status unknown</td>
+</tr>
+<tr>
+<td>C-01 cnr-mask-filters</td>
+<td>3</td>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>13</td>
+<td>Safety 2 contact product with disinfection chemistry <span class="chip chip-parameter_not_located">parameter not located</span>; Evidence 1 abstract-level; Product 2 never passed a filtration standard on record; Legal 2 active pandemic-era family</td>
+</tr>
+<tr>
+<td>C-11 cn108807014-supercapacitor</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>2</td>
+<td>2</td>
+<td>2</td>
+<td>13</td>
+<td>Evidence 2 mirrors the peer-reviewed 330.1 F/g result verified in M-07's companion line; Cost/Scale 2 activation line; Legal 2</td>
+</tr>
+<tr>
+<td>C-09 cn111118670-carbon-fiber</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>12</td>
+<td>Evidence 1 unextracted; industrial applicability doubtful given feed heterogeneity (<span class="chip chip-ai_inference">ai inference</span>); Cost/Scale 2 carbonization line</td>
+</tr>
+<tr>
+<td>C-10 cn107946082-graphene</td>
+<td>2</td>
+<td>2</td>
+<td>3</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+<td>12</td>
+<td>Evidence 1 unextracted; materials-family adjacency (M-07 companion line); Legal 2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="factor-rubrics-template-verbatim">Factor rubrics (template, verbatim)</h2>
+<ul>
+<li>Cost &amp; equipment access: 5 = available to a student lab; 1 = industrial-only</li>
+<li>Small-scale feasibility: 5 = works at kg-per-batch scale with simple setup; 1 = needs a continuous industrial line</li>
+<li>Safety: 5 = benign chemicals and conditions; 1 = severe acute hazards</li>
+<li>Evidence strength: 5 = peer-reviewed experimental support; 1 = marketing claims only</li>
+<li>Product usefulness: 5 = product the team can use or sell; 1 = no usable output</li>
+<li>Legal status: 5 = expired, abandoned, or no blocking claims; 1 = active broad patent family</li>
+</ul>
+<p>Material-specific factors (if any) are listed in material.yaml and appended as extra columns with their own rubrics. butt-lab has no material.yaml — none appended.</p>
+<h2 id="how-to-read-this-ranking">How to read this ranking</h2>
+<ol>
+<li><strong>The top three win for the same reason — and are blocked at the same place.</strong> M-08, M-03 and M-02 hold the three strongest experimental bases and the three most accessible equipment profiles. All three hit the SAME wall: product metals never measured (M-08 is the exception — its FIRED product passed). The metals gate is therefore not one constraint among many; it is THE shared gate, and the test-first list opens with it.</li>
+<li><strong>M-01 outranks its evidence score because its product spec is concrete.</strong> The patent discloses no numbers (Evidence 2) but names a product, a process chain and QC criteria a bench can replicate; the price is the active FR patent (Legal 2). Treat it as the process donor it already is inside INV-01.</li>
+<li><strong>INV-01 ranks mid on purpose.</strong> An untested integration of proven components should not outscore its own components until its falsifiers are decided. Its two kill tests (sink-pulp, unified loop) are on the test-first list, and its guaranteed output — the weighed toxicant mass balance — is the field's missing artifact (Chemosphere 2026; INERIS 2018).</li>
+<li><strong>The bottom two fail for opposite reasons.</strong> M-05 is blocked by equipment (certified pressure plant), a void of performance data and the broadest active patent family; M-06 is blocked by design (trade secret). Neither carries new process information for the team; M-06's transferable content is logistics reality — collection binds (~0.016% capture; transport + packaging dominate its own LCA).</li>
+<li><strong>What would change the ranking.</strong> (a) Metals-gate results: an ICP-MS pass on product streams unfreezes the Product rows of M-01/M-02/M-03/INV-01 and re-totals the top of the table. (b) The C-02 Cerdia spec extraction (highest-value unextracted item) could redraw the FTO column. (c) INV-01 falsifier outcomes move it above or below M-01. (d) If the full PE INTERNATIONAL inventory report behind the 2013 deck ever surfaces, M-06's evidence row upgrades.</li>
+</ol>
+<h2 id="test-first-for-the-team">Test first (for the team)</h2>
+<p>Ordered by information value; each tied to the gap-fill rows it confirms or kills, with the expected measurement and the decision rule. Desk research authorizes no physical trial — every item needs a qualified facility, a risk assessment, lawful waste handling and a named human actor before it runs.</p>
+<ol>
+<li><strong>Metals characterization gate — ICP-MS (Cd, Pb, As, Hg + Cr, Ni, Se) on the feed, then on first-run product streams.</strong>
+   - Ties: charter stop-condition; M-01 row 11, M-02 row 9, M-03 row 8, M-04 row 10, M-05 row 6, M-06 row 10, M-07 row 4; INV-01 falsifier 4.
+   - Expected measurement: mg/kg dry basis per metal in (a) raw local feedstock, (b) whichever product stream runs first (S1 CA / washed pulp / cleaned fiber / pellets), (c) the concentrate streams (S4 sludges, pyrolysis char, recycler sludge), (d) M-08 fired vs unfired bricks if the matrix runs.
+   - Decision rule: any gate metal above the team's use-gate in a PRODUCT stream keeps the stop-condition on for that route (the route then produces characterization data, not products); concentration into S4/char confirms INV-01's routing prediction; fired-brick leach results re-verify the only published metals pass on local feedstock. Cheapest first step: characterize the raw feed — it needs no processing line.</li>
+<li><strong>Sink-pulp sheet trial — INV-01's top falsifier, starting with a 100 g float/sink run that doubles as the split-purity test.</strong>
+   - Ties: INV-01 falsifiers 1 and 3 (the float/sink pre-step is M-01 row 3's criterion); M-03 rows 2, 4, 10 re-based to the sink stream.
+   - Expected measurement: sunken-paper removal (&lt;10% residual paper in the floated CA after pass 1) and hand-sheet traction index vs the Teixeira Table-4 band (5-12 kNm/kg, partner-lab tensile).
+   - Decision rule: sheet collapses after ratio adjustment (10 -&gt; 32 L/kg) → drop Stage D; the route falls back to M-01+M-02 with a destructor tail (fallback documented in INV-01 9.1); sheet holds → the unified-loop drift test becomes the next kill shot.</li>
+<li><strong>M-08 replication matrix on LOCAL clay + local butts (0.5 / 1 / 1.5 / 2 wt%, 1050 degC / 3 h) with the leaching gate.</strong>
+   - Ties: M-08 rows 1, 4, 5, 9, 10; the ranking's top route.
+   - Expected measurement: compressive strength vs the 30.8 MPa (1 wt%) band; thermal conductivity vs the -15.1% drop; furnace kWh vs the measured -8.0%; ABLP/ICP-MS leachate with per-metal margin-to-limit computed at each pH 2.5-9.2 (row 5).
+   - Decision rule: local feedstock reproduces the sweet spot AND fired bricks leach below limits with quantified margins → M-08 stays the only route through the metals gate; margins tighter than the thesis figures → the bitumen/paraffin encapsulation pre-tests (Kurmus Ch.5) enter the queue before any use claim.</li>
+</ol>
+<p><strong>Next queue (after the top three):</strong> (4) unified-loop 5-cycle drift test (INV-01 falsifier 2; M-01 row 7; M-03 row 7 — plateau below the 50 mg/L nicotine cap at 20% bleed, else split trains); (5) M-02 50 g wash replication + product-equivalence QC (M-02 verify items 1-2), then film/triacetin trials (rows 5-6); (6) Stage-F condensate calibrated GC-MS — is triacetin actually in the 150-200 degC fraction? (INV-01 falsifier 5); (7) S4 mass-band weigh vs the 3-7 wt% proposal (INV-01 falsifier 6); (8) M-07 oil truth test — calibrated GC-MS + fuel-spec panel at 650 vs 750 degC (M-07 rows 2, 5, 8); (9) M-04 stage-b truth test (M-04 rows 1, 2, 4) only if the team ever takes a dry-thermal route; (10) M-05 partner-facility decontamination matrix (M-05 rows 1, 2, 4, 5) only with a certified extractor partner.</p>
+  
+</article>
+<nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#table-a-route-level-ranking-9-items">Table A — route-level ranking (9 items)</a>
+<a class="lvl3" href="#score-justifications-table-a">Score justifications — Table A</a>
+<a href="#table-b-batch-02-invention-proposals-scored-for-comparison-components-not-routes">Table B — batch-02 invention proposals (scored for comparison; components, not routes)</a>
+<a href="#table-c-registry-summary-cards-22-items">Table C — registry summary cards (22 items)</a>
+<a href="#factor-rubrics-template-verbatim">Factor rubrics (template, verbatim)</a>
+<a href="#how-to-read-this-ranking">How to read this ranking</a>
+<a href="#test-first-for-the-team">Test first (for the team)</a></nav>
+</main>
+<footer>
+  <div class="legend">
+    <span class="chip chip-source_supported">source supported</span>
+    <span class="chip chip-ai_inference">ai inference</span>
+    <span class="chip chip-ai_proposal">ai proposal</span>
+    <span class="chip chip-parameter_not_located">parameter not located</span>
+  </div>
+  <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="../../playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
+  <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="../../site-design.html">Design</a></p>
+</footer>
+<div class="soverlay" id="soverlay" hidden>
+  <div class="sbox">
+    <input id="sinput" type="search" placeholder="Search the knowledge base…" autocomplete="off">
+    <div id="sresults" class="sresults"></div>
+    <p class="shint">Esc to close · results come from the built index</p>
+  </div>
+</div>
+<script src="../..//assets/site.js" defer></script>
+</body>
+</html>

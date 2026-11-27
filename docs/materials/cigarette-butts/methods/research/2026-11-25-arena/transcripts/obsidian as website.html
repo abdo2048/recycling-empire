@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>obsidian as website.md — Recycling Empire</title>
+<meta name="doc-root" content="../../../../../../">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../../..//assets/style.css">
+</head>
+<body data-root="../../../../../../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <nav class="topnav" aria-label="Primary">
+    <a class="brand" href="../../../../../../index.html">Recycling<em>Empire</em></a>
+    <a href="../../../../../../index.html#materials">Materials</a>
+    <a href="../../../../../../playbook.html">Playbook</a>
+    <a href="../../../../../../site-design.html">Site design</a>
+    <button id="searchbtn" type="button" aria-label="Search">Search <kbd>Ctrl K</kbd></button>
+  </nav>
+</header>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../../../../index.html">Home</a></li><li><a href="../../../../../../index.html#materials">Materials</a></li><li aria-current="page">obsidian as website.md</li></ol></nav>
+<main id="main">
+<aside class="side" aria-label="Material sections"><h2>Cigarette butts</h2><nav><a href="../../../../index.html">Overview</a><a href="../../../../ranking.html">Ranking</a><a href="../../../index.html">Action plans</a><a href="../../../cards.html">Summary cards</a><a href="../../../../registry.html">Registry</a><a href="../../../../inventions/index.html">Inventions</a><a href="../../../../reports/index.html">Final reports</a><a href="../../../../sources/index.html">Sources</a><a href="../../../../research/index.html">Research shelf</a><a href="../../../../charter.html">Charter</a><a href="../../../../glossary.html">Glossary</a><a href="../../../../state.html">State</a><a href="../../../../log.html">Log</a><a href="../../../../migration-note.html">Migration note</a></nav></aside>
+<article class="content">
+  <p class="kicker">Transcript</p><h1>obsidian as website.md</h1>
+  
+  <hr />
+<p><strong>Title:</strong> obsidian as website
+<strong>Exported:</strong> Tuesday 24-11-2026, 01:55 PM
+<strong>Method:</strong> Captured answers verified against what is shown
+<a href="https://search.brave.com/ask?q=hey%2C+is+there+possbility+to+make+knowledge+management+markdown+software+%28like+obsidian+for+example%29+...&amp;amp;conversation=09d7289e79697b772aac23fd0f5c004cffcb">Chat URL</a> ↗</p>
+<hr />
+<blockquote>
+<p>[!question] Q1</p>
+<p>hey, is there possbility to make knowledge management markdown software (like obsidian for example) to work like as if it was simple website interface? for example to understand me better, i imainge like file which has buttons, cards which when clicked goes to a another file.
+so imainge like a website showing recycle methods for tex cloth for example, and this done in obsidian (or any knowledge management markdown). 
+isnt this possible with html syntax in markdown? navigation will be good? i cant imagine it yet.
+what you think?</p>
+</blockquote>
+<p><strong>Yes, absolutely possible.</strong> Obsidian (and similar tools) can get surprisingly close to a "website feel" using a few techniques:</p>
+<p><strong>Within Obsidian itself:</strong></p>
+<ul>
+<li><strong>Wikilinks</strong> (<code>[[Textile Recycling]]</code>) are your navigation — each note is a "page," clicking a link jumps to the next. This is the core "website" behavior.</li>
+<li><strong>MOC (Map of Content) notes</strong> act as your homepage/index — a single note with a curated list of links to sub-topics, like a site nav.</li>
+<li><strong>HTML in markdown</strong> — you can embed raw HTML (<code>&lt;div&gt;</code>, <code>&lt;a&gt;</code>, <code>&lt;button&gt;</code>, etc.) directly in <code>.md</code> files. Caveat: Obsidian does <strong>not</strong> render markdown <em>inside</em> HTML tags, so you mix plain HTML for layout and markdown around it.</li>
+<li><strong>Buttons plugin</strong> (community) — adds actual clickable <code>&lt;button&gt;</code> elements that can trigger actions or navigate.</li>
+<li><strong>CSS Snippets</strong> — drop a <code>.css</code> file in <code>.obsidian/snippets/</code> and toggle it on to restyle callouts, headings, etc. to look like cards, tiles, or a grid layout.</li>
+<li><strong>Callouts</strong> (<code>&gt; [!info]</code>) can be styled via CSS to look like info cards.</li>
+<li><strong>Dataview plugin</strong> — dynamically queries your vault and renders results as tables/lists, so a "catalog page" auto-updates as you add notes.</li>
+</ul>
+<p><strong>For your textile recycling example</strong>, the structure would look like:</p>
+<pre><code>📁 textile-recycling/
+├── index.md              ← &quot;homepage&quot; with card-style links
+├── mechanical.md         ← mechanical recycling methods
+├── chemical.md           ← chemical recycling methods
+├── upcycling.md          ← upcycling / reuse
+└── comparisons.md        ← pros/cons table
+</code></pre>
+<p><code>index.md</code> uses wikilinks (or HTML <code>&lt;a href&gt;</code> styled as cards) to link to each sub-page. Clicking navigates within Obsidian just like clicking a link on a website.</p>
+<p><strong>If you want a real published website</strong> (not just local):</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+<th>Cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Quartz</strong></td>
+<td>Converts an Obsidian vault into a static site, preserves wikilinks</td>
+<td>Free</td>
+</tr>
+<tr>
+<td><strong>Obsidian Publish</strong></td>
+<td>One-click hosting, looks like the app</td>
+<td>Paid</td>
+</tr>
+<tr>
+<td><strong>Pandoc</strong></td>
+<td>CLI conversion to HTML, full control</td>
+<td>Free</td>
+</tr>
+</tbody>
+</table>
+<p><strong>My take:</strong> For a personal knowledge base you navigate daily, stay in Obsidian with MOC + wikilinks + a CSS snippet for card styling. It's low-friction and the navigation feels very "website-like" once you build a few index notes. Only reach for Quartz/Publish if you need to share it externally or want a real URL structure.</p>
+<p><strong>Sources</strong></p>
+<ol>
+<li><a href="https://www.markdowntools.com/blog/markdown-in-obsidian-complete-workflow-guide">Markdown in Obsidian: The Complete Workflow Guide</a></li>
+<li><a href="https://www.reddit.com/r/ObsidianMD/comments/1siol4q/how_to_get_markdown_to_work_inside_html/">r/ObsidianMD on Reddit: How to get markdown to work inside html?</a></li>
+</ol>
+<hr />
+<blockquote>
+<p>[!question] Q2</p>
+<p>could you create fast simple dummy example i can past it into obsidian now to see it? include cards for example</p>
+</blockquote>
+<p>Here's a 3-note set. Create these in a new folder in your vault (e.g. <code>textile-demo/</code>):</p>
+<p><strong>Note 1: <code>index.md</code></strong> (paste as a new note named <code>index</code>)</p>
+<pre><code class="language-markdown"># ♻️ Textile Recycling
+
+&lt;div style=&quot;display:flex; flex-wrap:wrap; gap:12px; margin:16px 0;&quot;&gt;
+
+&lt;div style=&quot;flex:1; min-width:180px; padding:24px 16px; border-radius:12px; background:#e8f5e9; text-align:center; border:1px solid #c8e6c9;&quot;&gt;
+  &lt;a href=&quot;[[mechanical]]&quot; style=&quot;text-decoration:none; color:#1b5e20; font-size:1.15em; font-weight:bold;&quot;&gt;
+    🔄&lt;br&gt;Mechanical&lt;br&gt;&lt;span style=&quot;font-size:0.8em; font-weight:normal;&quot;&gt;Shredding &amp; spinning&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;flex:1; min-width:180px; padding:24px 16px; border-radius:12px; background:#e3f2fd; text-align:center; border:1px solid #bbdefb;&quot;&gt;
+  &lt;a href=&quot;[[chemical]]&quot; style=&quot;text-decoration:none; color:#0d47a1; font-size:1.15em; font-weight:bold;&quot;&gt;
+    ⚗️&lt;br&gt;Chemical&lt;br&gt;&lt;span style=&quot;font-size:0.8em; font-weight:normal;&quot;&gt;Dissolve &amp; re-polymerize&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;flex:1; min-width:180px; padding:24px 16px; border-radius:12px; background:#fff3e0; text-align:center; border:1px solid #ffe0b2;&quot;&gt;
+  &lt;a href=&quot;[[upcycling]]&quot; style=&quot;text-decoration:none; color:#e65100; font-size:1.15em; font-weight:bold;&quot;&gt;
+    ✂️&lt;br&gt;Upcycling&lt;br&gt;&lt;span style=&quot;font-size:0.8em; font-weight:normal;&quot;&gt;Design &amp; reuse&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+
+&gt; [!tip] How to navigate
+&gt; Click any card above → opens that note. Use the **← back** link at the bottom of each sub-page to return here.
+</code></pre>
+<p><strong>Note 2: <code>mechanical.md</code></strong></p>
+<pre><code class="language-markdown"># 🔄 Mechanical Recycling
+
+Shredding textile waste into fibres, then re-spinning into yarn.
+
+## Process
+1. Sort by fibre type
+2. Shred into short fibres
+3. Clean &amp; card
+4. Spin into new yarn
+
+## Limits
+- Fibre shortens each cycle → quality drops
+- Blends (poly-cotton) are hard to separate
+
+---
+[← Back to index](index)
+</code></pre>
+<p><strong>Note 3: <code>chemical.md</code></strong></p>
+<pre><code class="language-markdown"># ⚗️ Chemical Recycling
+
+Dissolving fibres back into monomers, then re-polymerizing into virgin-quality material.
+
+## Methods
+| Method | Best for | Status |
+|--------|----------|--------|
+| Solvent-based | Cellulose, wool | Commercial |
+| Depolymerization | Polyester (PET) | Commercial |
+| Hydrolysis | Nylon | Pilot |
+
+## Advantage
+Fibre length resets → no quality loss
+
+---
+[← Back to index](index)
+</code></pre>
+<p><strong>Note 4: <code>upcycling.md</code></strong></p>
+<pre><code class="language-markdown"># ✂️ Upcycling
+
+Turning waste into higher-value products without breaking down the fibre.
+
+## Examples
+- Denim → car insulation
+- T-shirts → rags / wipers
+- Runners → playground surfaces
+
+---
+[← Back to index](index)
+</code></pre>
+<hr />
+<p><strong>To try it:</strong> create the 4 notes above in one folder, open <code>index</code> in reading mode (or live preview) → you'll see the coloured cards. Click one → jumps to that note. Hit the back link → returns to index.</p>
+<p>That's the whole "website feel" — no plugins, no CSS files, just inline-styled HTML + wikilinks. From here you can layer in a CSS snippet for nicer hover effects or use the <strong>Buttons</strong> community plugin if you want actual <code>&lt;button&gt;</code> elements.</p>
+<hr />
+<blockquote>
+<p>[!question] Q3</p>
+<p>hmm! iam on index and tried to click card, but doesnt do anything, when i click doesnt do anything or view the code.
+i tried reading mode and click doesnt do anything.
+however the back to index link is working</p>
+</blockquote>
+<p>Good catch — that's a known Obsidian limitation: <strong>markdown links and wikilinks don't work inside block-level HTML</strong> (<code>&lt;div&gt;</code>, etc.). Obsidian disables markdown parsing inside HTML blocks, so <code>[[mechanical]]</code> inside a <code>&lt;div&gt;</code> is just dead text.</p>
+<p>The back link worked because <code>[← Back to index](index)</code> is a regular markdown link <em>outside</em> any HTML.</p>
+<p>Here are two working fixes:</p>
+<hr />
+<h2 id="fix-1-table-zero-css-works-immediately">Fix 1: Table (zero CSS, works immediately)</h2>
+<p>Replace your <code>index.md</code> content with:</p>
+<pre><code class="language-markdown"># ♻️ Textile Recycling
+
+| 🔄 | ⚗️ | ✂️ |
+|:---:|:---:|:---:|
+| **Mechanical** | **Chemical** | **Upcycling** |
+| Shredding &amp; spinning | Dissolve &amp; re-polymerize | Design &amp; reuse |
+| [[mechanical]] | [[chemical]] | [[upcycling]] |
+
+&gt; [!tip] How to navigate
+&gt; Click any note name above → opens that note.
+</code></pre>
+<p>Wikilinks inside table cells render as proper clickable links. Not as pretty as cards, but it works with zero config.</p>
+<hr />
+<h2 id="fix-2-html-cards-with-obsidian-uri-the-look-you-wanted">Fix 2: HTML cards with <code>obsidian://</code> URI (the look you wanted)</h2>
+<p>Replace your <code>index.md</code> with this. <strong>Find your vault name first</strong>: Settings → General → the name at the top (e.g. <code>MyVault</code>).</p>
+<pre><code class="language-markdown"># ♻️ Textile Recycling
+
+&lt;div style=&quot;display:flex; flex-wrap:wrap; gap:12px; margin:16px 0;&quot;&gt;
+
+&lt;div style=&quot;flex:1; min-width:180px; padding:24px 16px; border-radius:12px; background:#e8f5e9; text-align:center; border:1px solid #c8e6c9;&quot;&gt;
+  &lt;a href=&quot;obsidian://open?vault=YOUR_VAULT&amp;file=mechanical&quot; style=&quot;text-decoration:none; color:#1b5e20; font-size:1.15em; font-weight:bold;&quot;&gt;
+    🔄&lt;br&gt;Mechanical&lt;br&gt;&lt;span style=&quot;font-size:0.8em; font-weight:normal;&quot;&gt;Shredding &amp; spinning&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;flex:1; min-width:180px; padding:24px 16px; border-radius:12px; background:#e3f2fd; text-align:center; border:1px solid #bbdefb;&quot;&gt;
+  &lt;a href=&quot;obsidian://open?vault=YOUR_VAULT&amp;file=chemical&quot; style=&quot;text-decoration:none; color:#0d47a1; font-size:1.15em; font-weight:bold;&quot;&gt;
+    ⚗️&lt;br&gt;Chemical&lt;br&gt;&lt;span style=&quot;font-size:0.8em; font-weight:normal;&quot;&gt;Dissolve &amp; re-polymerize&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;div style=&quot;flex:1; min-width:180px; padding:24px 16px; border-radius:12px; background:#fff3e0; text-align:center; border:1px solid #ffe0b2;&quot;&gt;
+  &lt;a href=&quot;obsidian://open?vault=YOUR_VAULT&amp;file=upcycling&quot; style=&quot;text-decoration:none; color:#e65100; font-size:1.15em; font-weight:bold;&quot;&gt;
+    ✂️&lt;br&gt;Upcycling&lt;br&gt;&lt;span style=&quot;font-size:0.8em; font-weight:normal;&quot;&gt;Design &amp; reuse&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/div&gt;
+
+&lt;/div&gt;
+</code></pre>
+<p>Replace <code>YOUR_VAULT</code> with your actual vault name (spaces become <code>%20</code>).</p>
+<p><strong>Caveat:</strong> this uses Obsidian's URI scheme, so it opens via the app's URL handler. Some users report a slight delay compared to native wikilinks. Also, these links won't show up in Graph View or backlinks.</p>
+<hr />
+<h2 id="tldr">TL;DR</h2>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Clickable?</th>
+<th>Pretty?</th>
+<th>Graph/backlinks?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wikilinks in <code>&lt;div&gt;</code></td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+<tr>
+<td>Wikilinks in table</td>
+<td>✅</td>
+<td>🤷</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><code>obsidian://</code> in <code>&lt;div&gt;</code></td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+</tr>
+</tbody>
+</table>
+<p>For a personal navigation hub that looks good, <strong>Fix 2</strong> is the closest to what you described. For a knowledge base where graph connectivity matters, <strong>Fix 1</strong> (or just plain wikilinks with a CSS snippet) is more robust.</p>
+<p><strong>Sources</strong></p>
+<ol>
+<li><a href="https://forum.obsidian.md/t/links-not-recognised-when-they-appear-in-text-following-block-html-element/62003">Links not recognised when they appear in text following block HTML element - Bug graveyard - Obsidian Forum</a></li>
+<li><a href="https://forum.obsidian.md/t/html-inside-markdown-links-breaks-it/52267">HTML inside Markdown links breaks it - Bug reports - Obsidian Forum</a></li>
+</ol>
+<hr />
+<blockquote>
+<p>[!question] Q4</p>
+<p>searrch as of now nov 2026, are there workaorunds to obsidna limitation?</p>
+</blockquote>
+<p>Short answer: <strong>no, the limitation is still there</strong> as of now. Obsidian's team (kepano) confirmed in April 2026 that it's an intentional design choice — markdown will not render inside HTML blocks. No plugin has patched it.</p>
+<p><strong>However</strong>, there are workarounds that get you the "clickable cards" look without fighting the parser:</p>
+<hr />
+<h2 id="best-workaround-css-snippet-on-a-tablelist">Best workaround: CSS snippet on a table/list</h2>
+<p>The trick: keep your links as <strong>markdown</strong> (so they stay clickable), and use CSS to <em>visually</em> transform a table or list into cards.</p>
+<p><strong>Step 1</strong> — Create a file <code>cards.css</code> in your vault's <code>.obsidian/snippets/</code> folder:</p>
+<pre><code class="language-css">/* Makes table rows look like clickable cards */
+.cards-grid table {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  border-collapse: separate;
+}
+.cards-grid table thead { display: none; }
+.cards-grid table tbody { display: contents; }
+.cards-grid table tr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 180px;
+  height: 140px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  background: #f9f9f9;
+  padding: 16px;
+  text-align: center;
+  transition: box-shadow 0.2s;
+}
+.cards-grid table tr:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+.cards-grid table td {
+  display: block;
+  padding: 4px 0;
+}
+.cards-grid table td:first-child {
+  font-size: 2em;
+}
+.cards-grid table td:nth-child(2) {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.cards-grid table td:last-child {
+  font-size: 0.85em;
+  color: #666;
+}
+</code></pre>
+<p><strong>Step 2</strong> — Enable it: Settings → Appearance → CSS Snippets → toggle on <code>cards</code>.</p>
+<p><strong>Step 3</strong> — Replace your <code>index.md</code> with:</p>
+<pre><code class="language-markdown">---
+cssclasses: cards-grid
+---
+
+# ♻️ Textile Recycling
+
+| 🔄 | Mechanical | Shredding &amp; spinning |
+|:---:|:---:|:---:|
+| ⚗️ | Chemical | Dissolve &amp; re-polymerize |
+| ✂️ | Upcycling | Design &amp; reuse |
+
+&gt; [!tip]
+&gt; Click any row to navigate.
+</code></pre>
+<p>Wait — that table has the links in the wrong column. Here's the corrected version where the wikilink is in the title cell:</p>
+<pre><code class="language-markdown">---
+cssclasses: cards-grid
+---
+
+# ♻️ Textile Recycling
+
+| | | |
+|:---:|:---:|:---:|
+| 🔄 | [[mechanical\|Mechanical]] | Shredding &amp; spinning |
+| ⚗️ | [[chemical\|Chemical]] | Dissolve &amp; re-polymerize |
+| ✂️ | [[upcycling\|Upcycling]] | Design &amp; reuse |
+</code></pre>
+<p>The <code>\|</code> escapes the pipe so it's treated as an alias, not a column separator.</p>
+<p><strong>Result:</strong> you get a 3-column grid of styled "cards." Each title is a real wikilink → clickable → opens the note. Hover shows a shadow. No HTML, no broken links.</p>
+<hr />
+<h2 id="alternative-obsidian-bases-newer-more-powerful">Alternative: Obsidian Bases (newer, more powerful)</h2>
+<p>If you're on Obsidian 1.10+, <strong>Bases</strong> has a built-in card view with a <code>link()</code> function:</p>
+<pre><code class="language-yaml"># textile.base
+filters:
+  and:
+    - file.folder == &quot;textile-demo&quot;
+views:
+  - type: cards
+    name: Methods
+    order:
+      - file.name
+</code></pre>
+<p>Create a <code>.base</code> file with that content. It auto-renders your notes as a card grid, and each card is <strong>clickable</strong> (it links to the note). You can add properties (emoji, description) via frontmatter and display them on the card.</p>
+<p><strong>Caveat:</strong> the <code>html()</code> function in Bases formulas also can't render internal wikilinks (confirmed Nov 2025), but the default card link works fine.</p>
+<hr />
+<h2 id="tldr_1">TL;DR</h2>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>Clickable?</th>
+<th>Card look?</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTML <code>&lt;div&gt;</code> + wikilink</td>
+<td>❌</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Table + CSS snippet</td>
+<td>✅</td>
+<td>✅</td>
+<td>5 min</td>
+</tr>
+<tr>
+<td>Bases card view</td>
+<td>✅</td>
+<td>✅</td>
+<td>2 min</td>
+</tr>
+<tr>
+<td><code>obsidian://</code> URI in HTML</td>
+<td>✅</td>
+<td>✅</td>
+<td>5 min</td>
+</tr>
+</tbody>
+</table>
+<p>For your use case, <strong>the CSS snippet on a table</strong> is the fastest "paste and it works" solution. Bases is cleaner long-term if you want the card grid to auto-update as you add notes.</p>
+<p><strong>Sources</strong></p>
+<ol>
+<li><a href="https://www.reddit.com/r/ObsidianMD/comments/1siol4q/how_to_get_markdown_to_work_inside_html/">r/ObsidianMD on Reddit: How to get markdown to work inside html?</a></li>
+<li><a href="https://www.markdowntools.io/obsidian-cheat-sheet">Obsidian Markdown Cheat Sheet — Free PDF Download</a></li>
+<li><a href="https://github.com/obsidianmd/obsidian-help/blob/master/en/Editing%20and%20formatting/HTML%20content.md">obsidian-help/en/Editing and formatting/HTML content.md at master · obsidianmd/obsidian-help · GitHub</a></li>
+<li><a href="https://www.reddit.com/r/ObsidianMD/comments/vxcjhx/how_to_use_div_for_side_by_side_headings/">r/ObsidianMD on Reddit: How to use <div> for side by side headings</a></li>
+</ol>
+<hr />
+<blockquote>
+<p>[!question] Q5</p>
+<p>no one tackled this before like a plugin or anything</p>
+</blockquote>
+<p>Actually, <strong>yes — several plugins tackle exactly this.</strong> You're not the first to want it. Here are the most relevant ones:</p>
+<hr />
+<h2 id="closest-to-what-you-described">Closest to what you described</h2>
+<h3 id="home-cards-2k-downloads-active-as-of-oct-2026"><strong>Home Cards</strong> (2k+ downloads, active as of Oct 2026)</h3>
+<p>Gives your vault a <strong>homepage/dashboard</strong> of clickable note cards. You can create a "page" for any folder — so your <code>textile-demo/</code> folder gets its own card grid page automatically. Cards show note titles, excerpts, tags, and are clickable to open the note.</p>
+<ul>
+<li>Install from community plugins, search "Home Cards"</li>
+<li>Click the grid icon in the ribbon → opens your dashboard</li>
+<li>Each folder/tag can have its own "page" of cards</li>
+</ul>
+<p>This is the closest to "my vault feels like a website with a nav."</p>
+<hr />
+<h3 id="obsidian-card-grid-by-bjornclauw"><strong>obsidian-card-grid</strong> (by bjornclauw)</h3>
+<p>Renders <strong>YAML code fences</strong> in your markdown notes as interactive card grids. Critically, it has an <code>iconCard</code> type that supports <strong>internal links</strong> — so a card can link to another note.</p>
+<pre><code class="language-markdown">```card-grid
+columns: 3
+gap: 20
+
+cards:
+  - type: iconCard
+    title: Mechanical
+    icon: recycle
+    link: &quot;mechanical.md&quot;
+    backgroundColor: &quot;#e8f5e9&quot;
+
+  - type: iconCard
+    title: Chemical
+    icon: flask
+    link: &quot;chemical.md&quot;
+    backgroundColor: &quot;#e3f2fd&quot;
+
+  - type: iconCard
+    title: Upcycling
+    icon: scissors
+    link: &quot;upcycling.md&quot;
+    backgroundColor: &quot;#fff3e0&quot;
+</code></pre>
+<p>```</p>
+<p>This is literally "cards in a markdown file that navigate to other files" — exactly your use case. No HTML, no broken links.</p>
+<hr />
+<h3 id="cardhometab"><strong>CardHomeTab</strong></h3>
+<p>Turns a single markdown note into a <strong>start page</strong> by splitting it on headings and rendering each section as a card. Each card can carry its own CSS snippet for styling. The cards are rendered through Obsidian's own renderer, so wikilinks inside them work.</p>
+<hr />
+<h2 id="other-options-more-dashboard-than-website-nav">Other options (more "dashboard" than "website nav")</h2>
+<table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hearth</strong> (40+ card types)</td>
+<td>Full drag-and-drop dashboard, like a new-tab page. More "dashboard" than "website."</td>
+</tr>
+<tr>
+<td><strong>Card Workspace</strong> (4k downloads)</td>
+<td>Sidebar card browser for a folder — click a card to open the note.</td>
+</tr>
+<tr>
+<td><strong>Card Navigator</strong></td>
+<td>Grid/list view of your vault notes as cards, browse by folder/tag.</td>
+</tr>
+<tr>
+<td><strong>Grid Card View</strong> (for Bases)</td>
+<td>Card grid for Bases data, clickable headers link to the file.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="my-recommendation-for-your-textile-example">My recommendation for your textile example</h2>
+<p><strong><code>obsidian-card-grid</code></strong> is the most direct answer to "I want a markdown file with clickable cards that go to other files." It's literally a code fence in your <code>index.md</code> that renders as a card grid with working internal links. No CSS snippets, no HTML hacks, no <code>obsidian://</code> URIs.</p>
+<p>Install it, paste the YAML block above into your <code>index.md</code>, and you get the exact "website homepage with cards" feel you described — inside a normal markdown note.</p>
+<p><strong>Sources</strong></p>
+<ol>
+<li><a href="https://community.obsidian.md/plugins/home-cards">Home Cards - Obsidian Plugin</a></li>
+<li><a href="https://community.obsidian.md/plugins/gallery-navigator">Gallery Navigator - Obsidian Plugin</a></li>
+<li><a href="https://github.com/kenanlian/obsidian-card-workspace">GitHub - kenanlian/obsidian-card-workspace · GitHub</a></li>
+<li><a href="https://github.com/wakeyi-git/obsidian-card-navigator">GitHub - wakeyi-git/obsidian-card-navigator · GitHub</a></li>
+<li><a href="https://github.com/bjornclauw/obsidian-card-grid">GitHub - bjornclauw/obsidian-card-grid: An oObsidian plugin that renders YAML-formatted card grids · GitHub</a></li>
+<li><a href="https://community.obsidian.md/plugins/card-home-tab">CardHomeTab - Obsidian Plugin</a></li>
+<li><a href="https://community.obsidian.md/plugins/hearth">Hearth - Obsidian Plugin</a></li>
+<li><a href="https://community.obsidian.md/plugins/card-workspace">Card Workspace - Obsidian Plugin</a></li>
+<li><a href="https://github.com/mafflerbach/obsidian-grid-card-view">GitHub - mafflerbach/obsidian-grid-card-view · GitHub</a></li>
+</ol>
+  
+</article>
+<nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#fix-1-table-zero-css-works-immediately">Fix 1: Table (zero CSS, works immediately)</a>
+<a href="#fix-2-html-cards-with-obsidian-uri-the-look-you-wanted">Fix 2: HTML cards with obsidian:// URI (the look you wanted)</a>
+<a href="#tldr">TL;DR</a>
+<a href="#best-workaround-css-snippet-on-a-tablelist">Best workaround: CSS snippet on a table/list</a>
+<a href="#alternative-obsidian-bases-newer-more-powerful">Alternative: Obsidian Bases (newer, more powerful)</a>
+<a href="#tldr_1">TL;DR</a>
+<a href="#closest-to-what-you-described">Closest to what you described</a>
+<a class="lvl3" href="#home-cards-2k-downloads-active-as-of-oct-2026">Home Cards (2k+ downloads, active as of Oct 2026)</a>
+<a class="lvl3" href="#obsidian-card-grid-by-bjornclauw">obsidian-card-grid (by bjornclauw)</a>
+<a class="lvl3" href="#cardhometab">CardHomeTab</a>
+<a href="#other-options-more-dashboard-than-website-nav">Other options (more &quot;dashboard&quot; than &quot;website nav&quot;)</a>
+<a href="#my-recommendation-for-your-textile-example">My recommendation for your textile example</a></nav>
+</main>
+<footer>
+  <div class="legend">
+    <span class="chip chip-source_supported">source supported</span>
+    <span class="chip chip-ai_inference">ai inference</span>
+    <span class="chip chip-ai_proposal">ai proposal</span>
+    <span class="chip chip-parameter_not_located">parameter not located</span>
+  </div>
+  <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="../../../../../../playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
+  <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="../../../../../../site-design.html">Design</a></p>
+</footer>
+<div class="soverlay" id="soverlay" hidden>
+  <div class="sbox">
+    <input id="sinput" type="search" placeholder="Search the knowledge base…" autocomplete="off">
+    <div id="sresults" class="sresults"></div>
+    <p class="shint">Esc to close · results come from the built index</p>
+  </div>
+</div>
+<script src="../../../../../..//assets/site.js" defer></script>
+</body>
+</html>

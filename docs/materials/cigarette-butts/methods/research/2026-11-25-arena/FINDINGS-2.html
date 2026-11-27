@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Second pass — unprompted findings, 2026-11-25 — Recycling Empire</title>
+<meta name="doc-root" content="../../../../../">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../../../..//assets/style.css">
+</head>
+<body data-root="../../../../../">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <nav class="topnav" aria-label="Primary">
+    <a class="brand" href="../../../../../index.html">Recycling<em>Empire</em></a>
+    <a href="../../../../../index.html#materials">Materials</a>
+    <a href="../../../../../playbook.html">Playbook</a>
+    <a href="../../../../../site-design.html">Site design</a>
+    <button id="searchbtn" type="button" aria-label="Search">Search <kbd>Ctrl K</kbd></button>
+  </nav>
+</header>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="../../../../../index.html">Home</a></li><li><a href="../../../../../index.html#materials">Materials</a></li><li aria-current="page">Second pass — unprompted findings, 2026-11-25</li></ol></nav>
+<main id="main">
+<aside class="side" aria-label="Material sections"><h2>Cigarette butts</h2><nav><a href="../../../index.html">Overview</a><a href="../../../ranking.html">Ranking</a><a href="../../index.html">Action plans</a><a href="../../cards.html">Summary cards</a><a href="../../../registry.html">Registry</a><a href="../../../inventions/index.html">Inventions</a><a href="../../../reports/index.html">Final reports</a><a href="../../../sources/index.html">Sources</a><a href="../../../research/index.html">Research shelf</a><a href="../../../charter.html">Charter</a><a href="../../../glossary.html">Glossary</a><a href="../../../state.html">State</a><a href="../../../log.html">Log</a><a href="../../../migration-note.html">Migration note</a></nav></aside>
+<article class="content">
+  <p class="kicker">Findings</p><h1>Second pass — unprompted findings, 2026-11-25</h1>
+  
+  <h1 id="second-pass-unprompted-findings-2026-11-25">Second pass — unprompted findings, 2026-11-25</h1>
+<p>Things the brief didn't ask for that change how the stream should be modelled. Three items here
+<strong>correct or overturn</strong> conclusions in the first-pass report; those are marked ⚠️ <strong>CORRECTION</strong> at the
+top so they don't get read as new-and-additive.</p>
+<p>Captures added to <code>new-25-11-2026/</code> (3 more HTML files + 1 CSV). Bundle now 13 HTML/PDF + 3 CSV.</p>
+<hr />
+<h2 id="correction-1-the-sterilization-step-comes-first-after-all-my-first-pass-inference-was-wrong">⚠️ CORRECTION 1 — the sterilization step comes FIRST after all. My first-pass inference was wrong.</h2>
+<p>In the first pass I inferred from Albe Zakes' 2013 quote that the order was shred → compost →
+irradiate the residual butts, and flagged that as a meaningful change to M-06 row 1. <strong>That was
+wrong, and I should have caught it — the Times of Trenton source in your own brief names a better
+witness than a press quote.</strong></p>
+<p>TerraCycle's <strong>Global VP of Research &amp; Development</strong> — Ernie Simpson, the same person your brief
+already lists as the process developer — states the order unambiguously:</p>
+<blockquote>
+<p><strong>FACT</strong> | "Once collected, the cigarette butts go through a multi-step process developed by the
+company to separate the plastic in the butts from the toxins… <strong>'We first sterilize the material
+with gamma, or irradiation sterilization, and then we separate the tobacco and paper from the
+filaments,'</strong> he says. 'Basically, we're looking for the cellulose acetate.'"
+— Ernie Simpson, Global VP R&amp;D, TerraCycle, in CityLab, 2016-03-23
+https://www.citylab.com/life/2016/03/can-turning-cigarette-butts-into-plastic-solve-the-litter-problem-terracycle/475044/
+(live URL now redirects to a Bloomberg paywall/robot wall — captured via Wayback 2020-01-05,
+<code>CityLab_2016-03-23_Simpson_sterilize-first_1000butts_100g_plastic.html</code>) | <strong>confidence: high</strong></p>
+</blockquote>
+<p><strong>So the tally is now 2 sources for sterilize-first vs 1 against:</strong>
+- Surfrider SF FAQ, 2017 — "<strong>first</strong> sterilized using Gamma radiation … then shredded" ✓ first
+- Simpson, TerraCycle R&amp;D VP, 2016 — "we <strong>first</strong> sterilize … <strong>and then</strong> we separate" ✓ first
+- Zakes, TerraCycle Global VP, 2013 — gamma described after composting ✗</p>
+<p><strong>What this changes for M-06 row 1:</strong> the irradiation load is the <strong>whole intake</strong> — tobacco, ash,
+paper, wrapper and filter together, as received — not just the recovered filter fraction. That is a
+materially larger and more expensive step than my first-pass note implied, and it moves the
+utility/cost model back toward the "sterilize the bulk stream" assumption. The R&amp;D VP outranks the
+comms VP; treat 2013 as the loose paraphrase. <strong>M-06 row 1 should read: whole-stream gamma
+sterilization upstream of mechanical separation.</strong></p>
+<p>Also from the same source — the reassuring part for modelling: the step is described as existing to
+"separate the plastic … from the toxins," i.e. a <strong>regulatory/hygiene</strong> requirement, not a materials
+one.</p>
+<hr />
+<h2 id="correction-2-the-mass-divisor-is-settled-and-three-independent-routes-agree-to-the-gram">⚠️ CORRECTION 2 — the mass divisor is settled, and three independent routes agree to the gram</h2>
+<p>First pass I flagged "1 lb ≈ 2,268 butts, official figure says 1,000" and left it as an open tension.
+It is no longer open. Three unrelated routes converge on <strong>0.20 g per smoked butt</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Evidence</th>
+<th>Implied</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Composition</strong> (peer-reviewed)</td>
+<td>filter ≈ 0.20 g, 97% cellulose acetate → 0.194 g CA/butt</td>
+<td>2,268 butts/lb</td>
+</tr>
+<tr>
+<td><strong>Weighed</strong> (field)</td>
+<td>"6.43 pounds … 14,583 cigarette butts" — Marquette, 2022</td>
+<td>2,268 butts/lb</td>
+</tr>
+<tr>
+<td><strong>Plastic yield</strong> (TerraCycle's own)</td>
+<td>"about a thousand cigarette butts to produce 100 grams of plastic"</td>
+<td>2,268 butts/lb</td>
+</tr>
+</tbody>
+</table>
+<p>The third one is the elegant one: 1,000 butts × 0.194 g CA = 194 g of acetate in; 100 g of pellet
+out = <strong>~52% mass yield</strong>, which is exactly what a mechanical recovery with losses should give. The
+number only coheres if a butt weighs 0.20 g.</p>
+<blockquote>
+<p><strong>FACT</strong> | "It takes about a thousand cigarette butts to produce 100 grams of plastic, which means
+it's not particularly profitable." — CityLab, 2016-03-23 (same article) | <strong>high</strong></p>
+</blockquote>
+<p><strong>The official "1 lb = 1,000 butts" divisor implies 0.454 g/butt — over twice the true mass.</strong> It is
+an accounting convention, not a measurement, and it is self-consistent within TerraCycle's books
+(Carnival: 42.5M butts ÷ $42,500 = exactly 1,000/lb). So the reports are not lying about the
+donation — they are converting butts to pounds with a 2.3× inflator.</p>
+<p><strong>Consequences to carry into M-06 row 5:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Quantity</th>
+<th>As published</th>
+<th>Corrected (0.20 g/butt)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>261,000 lb (KAB 2024)</td>
+<td>118.4 t</td>
+<td><strong>~52 t</strong></td>
+</tr>
+<tr>
+<td>100M pieces (Dec 2018)</td>
+<td>45.4 t</td>
+<td><strong>20.0 t</strong></td>
+</tr>
+<tr>
+<td>45,089,591 units (Dec 2015)</td>
+<td>20.5 t</td>
+<td><strong>9.0 t</strong></td>
+</tr>
+<tr>
+<td>150,000 butts/pallet</td>
+<td>150 lb of butts</td>
+<td><strong>66 lb of butts</strong></td>
+</tr>
+<tr>
+<td>Plastic yield</td>
+<td>—</td>
+<td><strong>~0.1 kg CA per 1,000 butts; ~50% mass yield to pellet</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Recommendation now firmer than in pass 1: quote ~52 t as the real mass and ~118 t as the published
+figure, and state the divisor discrepancy explicitly.</strong> Reporting 118 t without this caveat would
+overstate the material by 2.3×.</p>
+<p>This also <strong>kills the 5,000-butts-per-pallet figure</strong> from pass 1 more decisively: 5,000 butts ≈ 1 kg
+of filter, which cannot be a pallet. 150,000 butts ≈ 30 kg of filter into a pallet is right.</p>
+<hr />
+<h2 id="correction-3-your-brief-has-the-lawsuit-wrong-and-it-matters">⚠️ CORRECTION 3 — your brief has the lawsuit wrong, and it matters</h2>
+<p>The brief says "Jan Dell false-advertising suit (settled 2021) … complaints/answers sometimes
+describe the process chain including sterilization," and names it as a place to hunt for gamma detail.</p>
+<p>The case is <strong>Last Beach Cleanup v. TerraCycle, Inc.</strong>, N.D. Cal. <strong>4:21-cv-06086</strong>, filed
+2021-03-04, removed 2021-08-06, <strong>settled 2021-11-05</strong>, dismissal with prejudice 2021-11-10.
+https://climatecasechart.com/case/last-beach-cleanup-v-terracycle-inc/ | <strong>confidence: high</strong></p>
+<p><strong>It is not a cigarette case.</strong> The eight co-defendants are Coca-Cola, P&amp;G, Late July Snacks, Gerber,
+L'Oréal, Tom's of Maine, Clorox and Materne — and the challenged claims are about <em>packaging</em>
+recyclability (condiment packets, pouches, cups). <strong>Cigarettes are not in the complaint</strong>, so it will
+never yield a cigarette-process description. <strong>Cross that item off the Wish 2 list.</strong></p>
+<p>What it <em>does</em> yield is a governance fact worth having: TerraCycle agreed to <strong>maintain records
+substantiating its recycling representations</strong>, develop policies to <strong>track materials for recycling</strong>,
+and implement a <strong>supply-chain third-party certification program</strong>, plus reimburse LBC's legal fees.
+If TerraCycle ever has to produce a per-stream mass ledger — for its own certification programme —
+that is the document to subpoena/request. It is the most plausible route to a <em>weighed</em> tonnage
+figure. <strong>That is a stronger lead than anything left in the Wish 1 list.</strong></p>
+<p>(The <strong>Bloomington, Illinois</strong> suit vs Bell International/Akshar is a separate, unrelated nuisance case
+about a warehouse; it will not describe sterilization either.)</p>
+<hr />
+<h2 id="bonus-1-market-size-and-capture-rate-the-most-useful-number-in-this-whole-exercise">Bonus 1 — market size and capture rate: the most useful number in this whole exercise</h2>
+<p>For the invention phase the relevant question isn't how much TerraCycle moved, it's what share of the
+problem that is. Nobody in the corpus states it, so here it is:</p>
+<ul>
+<li><strong>US butt waste: ~135 million lb/yr</strong> (≈ 61,000 t/yr), the figure TerraCycle and AP releases cite
+  (see <code>social.terracycle.com</code> "Reynolds subsidiary funding cigarette recycling").
+  Sanity check: ~200 bn cigarettes/yr × 0.20 g ≈ 40,000 t = 88 M lb. Same order; 135 M lb is
+  defensible with a smoking-rate-heavy vintage. <strong>Treat as order-of-magnitude, not precise.</strong></li>
+<li><strong>TerraCycle: 261,000 lb cumulative over ~12 yr ≈ 21,750 lb/yr.</strong></li>
+</ul>
+<blockquote>
+<p><strong>≈ 0.016% of US annual butt mass — about 1 pound in 6,200.</strong></p>
+</blockquote>
+<p>Even allowing a 2.3× divisor error in TerraCycle's favour or against it, this stays a
+<strong>hundredth-of-a-percent</strong> solution. Global: cigarette-butt litter is put at <strong>1.69 billion lb/yr</strong>.</p>
+<p><strong>Why this is the useful number:</strong> it reframes M-06. The mail-back model is not a recycling pathway
+that happens to be small; it is a <strong>demonstration/PR instrument</strong> whose tonnage is rounding error
+against the stream. Any invention-phase design that inherits the collection assumption inherits that
+0.016%. The binding constraint is <strong>collection and logistics, not the gamma step, not the
+pelletizing chemistry</strong> — those are solved and known. Budget and modelling effort should sit on
+collection density and consolidation, where the 2.3× divisor never mattered.</p>
+<p>Corollary for the economics: at a $1/lb donation, the <em>entire</em> 12-year programme generated
+<strong>~$261,000 total</strong> for Keep America Beautiful, against <strong>$12.5 million</strong> Reynolds says it has spent
+since 2009 on litter education, prevention, cleanup and recycling through KAB+TerraCycle. The
+recycling tail is ~2% of the spend; the programme is overwhelmingly a litter-prevention and
+marketing vehicle. <strong>Do not model it as a materials business.</strong></p>
+<h2 id="bonus-2-current-status-november-2026-the-archive-has-nothing-after-2016">Bonus 2 — current status, November 2026 (the archive has nothing after 2016)</h2>
+<p>Both programmes are <strong>live right now</strong>, and both are worth capturing because they have been renamed
+and re-funded:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>US</th>
+<th>Canada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>URL</td>
+<td><code>terracycle.com/en-US/brigades/cigarette-waste-recycling</code> (200)</td>
+<td><code>terracycle.com/en-CA/brigades/cigarette-waste-en-ca</code> (200)</td>
+</tr>
+<tr>
+<td>Brand</td>
+<td>Cigarette Waste Free Recycling Program</td>
+<td><strong>UNSMOKE</strong> Cigarette Free Recycling Program</td>
+</tr>
+<tr>
+<td>Sponsor</td>
+<td><strong>Santa Fe Natural Tobacco Company</strong> ("has sponsored this free recycling program")</td>
+<td><strong>UNSMOKE</strong></td>
+</tr>
+<tr>
+<td>Reward</td>
+<td>100 points/lb, $0.01/point → $1/lb</td>
+<td>100 points/lb, $0.01/point</td>
+</tr>
+<tr>
+<td>Age gate</td>
+<td>—</td>
+<td>19+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The old <code>/brigades/cigarette-waste-brigade</code> URLs are <strong>404</strong>; the programme survived the site
+  migration under a new path. Worth redirecting any dead links in the project's notes.</li>
+<li><strong>Canada is now UNSMOKE-branded, not SFNTC-branded</strong> — a sponsor change the corpus doesn't record.</li>
+<li><strong>TerraCycle's own current process copy still says only</strong>: <em>"Once collected, the cigarette waste is
+  cleaned and separated by material type… The ash and tobacco are separated out and composted in a
+  specialized process."</em> <strong>No mention of gamma, in 2026, on the live page.</strong> So the sterilization
+  disclosure exists <strong>only</strong> in third-party sources (Surfrider 2017 formal; CityLab 2016 and Global
+  News 2013 via staff). TerraCycle has consistently declined to put it in its own published process
+  description. <strong>That is now a documented pattern, not a gap</strong> — and it is the reason no dose figure
+  exists. Record it as: <em>disclosed verbally to press, never in company copy or filings.</em></li>
+<li><strong>Enrollment limits are still real:</strong> "Enrollment limits may apply. If the program is full, you will
+  be added to a waitlist." This is precisely the practice the 2021 suit attacked, still in place.</li>
+<li>TerraCycle launched a <strong>national US vape-device recycling service 2026-07-29</strong> (paid, not
+  brand-funded) — the tobacco-adjacent line is expanding, not contracting.</li>
+</ul>
+<h2 id="bonus-3-patents-terracycle-has-none-which-is-itself-the-finding">Bonus 3 — patents: TerraCycle has none, which is itself the finding</h2>
+<p>Google Patents assignee search for <strong>TerraCycle: 0 results.</strong> TerraCycle has <strong>not patented</strong> the
+cigarette process — it is a trade secret. That explains, at a stroke, why the offering circular, the
+1-K filings and the website all describe the process in one vague sentence and no parameters: there is
+no patent disclosure to mine, and the company has no incentive to publish.</p>
+<p>The freedom-to-operate landscape around it, if the invention phase needs it:</p>
+<ul>
+<li><strong>US 7,560,059 B2</strong> — "Process and method for recycling cigarette butts", Blake Burich, 2009. The
+  core prior art; acetone-wetting of cellulose acetate.</li>
+<li><strong>US 2014/0287144 A1</strong> — Burich &amp; Putnam, CA manufacturing-waste recycling, 2014 (abandoned).
+  Discloses the useful mechanical recipe: grind to ~½ inch, wet with acetone to a paste, add
+  plasticizer/colorant/UV stabiliser, <strong>pelletize for injection or extrusion</strong>.</li>
+<li><strong>US 10,980,272 B2</strong> — <strong>MINIWIZ Co., Ltd.</strong>, granted 2021-04-20, "Method and apparatus for
+  recycling cigarette waste." The most relevant live patent: a machine that aligns each butt,
+  <strong>cuts out the non-filter part</strong>, then mechanically pushes the CA plug out of the paper. Explicitly
+  discards non-CA filter blocks (activated carbon, PP, PLA). Also sets a <strong>1.5 cm minimum butt length</strong>
+  below which a butt is rejected as not worth recycling — a directly useful design parameter.
+  https://patents.justia.com/patent/10980272</li>
+<li>Nothing patents <strong>gamma irradiation of cigarette waste</strong>. Searches for cigarette + gamma/sterilization
+  return only unrelated medical-device art. <strong>So the irradiation step is unclaimed and unparameterised
+  in the patent literature</strong> — consistent with it being a contracted service under ISO 11137, not IP.</li>
+</ul>
+<h2 id="bonus-4-other-parameters-worth-having">Bonus 4 — other parameters worth having</h2>
+<ul>
+<li><strong>Filter composition, for mass balance:</strong> ~95–97% cellulose acetate of filter mass; <strong>12,000 fibres</strong>
+  per filter; plasticiser is <strong>triacetin (glycerol triacetate)</strong> at <strong>6–10% mass fraction</strong>; ~6–8%
+  water; <strong>0.2% TiO₂</strong> delustrant (this is why the fibres are white); ~1% oil agent; inner plug-wrap
+  paper + <strong>polyvinyl acetate</strong> adhesive; outer tipping paper. Degree of acetate substitution ~2.45.
+  <strong>Triacetin and the PVAc glue are the bits that will bite a re-melt/compounding route</strong> (plasticiser
+  loss and a second, incompatible polymer) — the literature's preferred recovery is therefore
+  <strong>solvent (acetone/ethyl acetate) dissolution–precipitation</strong>, not melt compounding.</li>
+<li><strong>Realistic recovery yield:</strong> a 2025 study recovered <strong>93.9%</strong> CA from 3,000 butts (425 g → 399 g) via
+  a chemical route — i.e. the chemistry is not the bottleneck. TerraCycle's mechanical route gets ~50%.</li>
+<li><strong>Minimum viable batch:</strong> TerraCycle told Libération (2018) it was <em>stockpiling</em> French and European
+  butts because large-scale recycling needs runs of "<strong>several tens of tonnes</strong>". A real constraint for
+  any process design.</li>
+<li><strong>Other programmes' economics for comparison:</strong> Vancouver paid <strong>$5/lb</strong> to United We Can (vs $1/lb
+  US); Caesars Windsor generated <strong>$3,500</strong> on 5.9 M butts (≈ $0.59/lb — inconsistent with a flat
+  $1/lb, so Canadian rates differ or the counts are loose).</li>
+<li><strong>Named partners with volumes</strong> (TerraCycle case-study deck, c.2023): Carnival 42.5 M butts / 23
+  vessels / 3,500+ shipments; Chumash Casino ~29 M since 2013; Caesars Windsor 5.9 M; Disney Fantasy
+  740 k on one vessel; Amazon 2 M since Earth Day 2021 across a <em>sample</em> of 278 FCs; Keep New Hanover
+  ~1.8 M. Largest single channel by far is <strong>cruise ships</strong> — worth knowing if the project wants a
+  concentrated feedstock.</li>
+<li><strong>Sponsor investment:</strong> Reynolds says <strong>&gt; $12.5 M since 2009</strong> (reynoldsamerican.com, live 2026);
+  a 2026 third-party piece says <strong>&gt; $15 M</strong> and that <strong>SFNTC funded 447 receptacles in 2023 alone</strong>.
+  Believe the company's own site; treat $15 M as the loose one.</li>
+</ul>
+<hr />
+<h2 id="net-effect-on-the-project">Net effect on the project</h2>
+<ol>
+<li><strong>M-06 row 1</strong> — order is now settled (whole-stream gamma <em>first</em>); dose/dwell still absent by
+   design, and now demonstrably <em>withheld</em> rather than merely unfound. Patents confirm nothing to mine.</li>
+<li><strong>M-06 row 5</strong> — real mass is <strong>~52 t</strong>, not 118 t; divisor error of 2.3× is now proven three ways.</li>
+<li><strong>New row worth adding</strong> — <strong>capture rate ≈ 0.016%</strong>. This is the number that should drive
+   invention-phase priorities, and it says the hard problem is collection, not processing.</li>
+<li><strong>Two dead leads closed</strong> — the Jan Dell suit (wrong stream entirely) and the Reg A+ circular
+   (no parameters). Both were top-ranked in the original brief; neither needs another attempt.</li>
+</ol>
+  
+</article>
+<nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#second-pass-unprompted-findings-2026-11-25">Second pass — unprompted findings, 2026-11-25</a>
+<a class="lvl3" href="#correction-1-the-sterilization-step-comes-first-after-all-my-first-pass-inference-was-wrong">⚠️ CORRECTION 1 — the sterilization step comes FIRST after all. My first-pass inference was wrong.</a>
+<a class="lvl3" href="#correction-2-the-mass-divisor-is-settled-and-three-independent-routes-agree-to-the-gram">⚠️ CORRECTION 2 — the mass divisor is settled, and three independent routes agree to the gram</a>
+<a class="lvl3" href="#correction-3-your-brief-has-the-lawsuit-wrong-and-it-matters">⚠️ CORRECTION 3 — your brief has the lawsuit wrong, and it matters</a>
+<a class="lvl3" href="#bonus-1-market-size-and-capture-rate-the-most-useful-number-in-this-whole-exercise">Bonus 1 — market size and capture rate: the most useful number in this whole exercise</a>
+<a class="lvl3" href="#bonus-2-current-status-november-2026-the-archive-has-nothing-after-2016">Bonus 2 — current status, November 2026 (the archive has nothing after 2016)</a>
+<a class="lvl3" href="#bonus-3-patents-terracycle-has-none-which-is-itself-the-finding">Bonus 3 — patents: TerraCycle has none, which is itself the finding</a>
+<a class="lvl3" href="#bonus-4-other-parameters-worth-having">Bonus 4 — other parameters worth having</a>
+<a class="lvl3" href="#net-effect-on-the-project">Net effect on the project</a></nav>
+</main>
+<footer>
+  <div class="legend">
+    <span class="chip chip-source_supported">source supported</span>
+    <span class="chip chip-ai_inference">ai inference</span>
+    <span class="chip chip-ai_proposal">ai proposal</span>
+    <span class="chip chip-parameter_not_located">parameter not located</span>
+  </div>
+  <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="../../../../../playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
+  <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="../../../../../site-design.html">Design</a></p>
+</footer>
+<div class="soverlay" id="soverlay" hidden>
+  <div class="sbox">
+    <input id="sinput" type="search" placeholder="Search the knowledge base…" autocomplete="off">
+    <div id="sresults" class="sresults"></div>
+    <p class="shint">Esc to close · results come from the built index</p>
+  </div>
+</div>
+<script src="../../../../..//assets/site.js" defer></script>
+</body>
+</html>

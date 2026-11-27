@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start a new material project — Recycling Empire</title>
+<meta name="doc-root" content="./">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href=".//assets/style.css">
+</head>
+<body data-root="./">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <nav class="topnav" aria-label="Primary">
+    <a class="brand" href="./index.html">Recycling<em>Empire</em></a>
+    <a href="./index.html#materials">Materials</a>
+    <a href="./playbook.html">Playbook</a>
+    <a href="./site-design.html">Site design</a>
+    <button id="searchbtn" type="button" aria-label="Search">Search <kbd>Ctrl K</kbd></button>
+  </nav>
+</header>
+<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="./index.html">Home</a></li><li aria-current="page">Start a new material project</li></ol></nav>
+<main id="main">
+
+<article class="content">
+  <p class="kicker">System</p><h1>Start a new material project</h1>
+  
+  <h1 id="start-a-new-material-project">Start a new material project</h1>
+<p>One page. Do this in order.</p>
+<h2 id="human-operator-steps">Human (operator) steps</h2>
+<ol>
+<li>Copy <code>template/</code> to <code>materials/&lt;slug&gt;/</code> (slug = short kebab-case name, e.g. <code>coffee-grounds</code>).</li>
+<li>Open a session with any AI that has internet and file access to this repository.</li>
+</ol>
+<h2 id="ai-instructions-paste-into-the-ai-session">AI instructions (paste into the AI session)</h2>
+<blockquote>
+<p>You are the research AI for material <NAME>. Read <code>/PLAYBOOK.md</code> fully, then <code>/materials/&lt;slug&gt;/STATE.md</code>. Work ONLY inside <code>/materials/&lt;slug&gt;/</code>. Follow the phases in order (0 Setup, 1 Gather, 2 Registry, 3 Action plans, 4 Invention, 5 Ranking). Obey the golden rules and the labeling rules. Update STATE.md before you stop and before any long step. When the phase set is complete, say so and stop — review rounds come later.</p>
+</blockquote>
+<h2 id="choosing-priorities">Choosing priorities</h2>
+<ul>
+<li>Pick 5-10 priority methods for full action plans (Phase 3); everything else gets a summary card.</li>
+<li>Priorities favor: viability at the team's scale, evidence strength, product usefulness, legal status.</li>
+</ul>
+<h2 id="when-is-a-material-done-first-version">When is a material "done" (first version)</h2>
+<ul>
+<li>All priority methods have action plans with labeled gap-fills</li>
+<li>One invented method exists</li>
+<li><code>ranking.md</code> filled and the test-first list written</li>
+<li>STATE.md says so with version <code>v1.0-candidate</code> — then review rounds (Phase 7), then the owner freezes the version</li>
+</ul>
+<h2 id="reminder-for-the-operator">Reminder for the operator</h2>
+<ul>
+<li>You may supply <code>sources/&lt;id&gt;/text.md</code> conversions yourself; operator-supplied conversions are preferred over AI conversion when available.</li>
+<li>Arbitration of review rounds is yours: mark accepted/rejected items in each round's <code>accepted.md</code>.</li>
+<li>Lab results from the team go to <code>lab-findings/</code> and automatically justify a new review round.</li>
+</ul>
+  
+</article>
+<nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#start-a-new-material-project">Start a new material project</a>
+<a class="lvl3" href="#human-operator-steps">Human (operator) steps</a>
+<a class="lvl3" href="#ai-instructions-paste-into-the-ai-session">AI instructions (paste into the AI session)</a>
+<a class="lvl3" href="#choosing-priorities">Choosing priorities</a>
+<a class="lvl3" href="#when-is-a-material-done-first-version">When is a material &quot;done&quot; (first version)</a>
+<a class="lvl3" href="#reminder-for-the-operator">Reminder for the operator</a></nav>
+</main>
+<footer>
+  <div class="legend">
+    <span class="chip chip-source_supported">source supported</span>
+    <span class="chip chip-ai_inference">ai inference</span>
+    <span class="chip chip-ai_proposal">ai proposal</span>
+    <span class="chip chip-parameter_not_located">parameter not located</span>
+  </div>
+  <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="./playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
+  <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="./site-design.html">Design</a></p>
+</footer>
+<div class="soverlay" id="soverlay" hidden>
+  <div class="sbox">
+    <input id="sinput" type="search" placeholder="Search the knowledge base…" autocomplete="off">
+    <div id="sresults" class="sresults"></div>
+    <p class="shint">Esc to close · results come from the built index</p>
+  </div>
+</div>
+<script src=".//assets/site.js" defer></script>
+</body>
+</html>
