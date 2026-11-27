@@ -13,13 +13,15 @@ markdown stays the source of truth; the builder only presents it.
    non-expert (the team, a reviewer, a funder) *finish* reading a method page — calm colors,
    one readable measure, no visual noise.
 2. **Trust through labeling.** The four evidence labels are the project's identity. They get a
-   permanent color system, a legend in the footer, and inline chips in text.
+   permanent color system, a legend in the footer, and the claim text itself carries the label
+   color as a highlight (hover/focus shows the canonical charter definition).
 3. **The stop-condition is never hidden.** The metals gate (Cd/Pb/As/Hg) banner appears on the
    home page, every material dashboard, and the ranking page. It is part of the design, not a
    footnote.
-4. **Zero-JavaScript-by-default.** The only JS is the search overlay and the table-of-contents
-   highlight; every page works without it. No frameworks, no build dependencies beyond Python
-   `markdown` + `PyYAML`.
+4. **Zero-JavaScript-by-default.** The only JS is the search overlay, the tooltip bubble, the
+   wide-table column pinning, and the table-of-contents highlight; every page works without it
+   (labels, citations and code tooltips degrade to visible chips / title attributes). No
+   frameworks, no build dependencies beyond Python `markdown` + `PyYAML`.
 5. **No monospace anywhere.** The user's explicit rule: mono fonts read as "developer tool",
    not research. Code spans, IDs, temperatures and numbers are set in Inter (tabular figures
    where alignment matters).
@@ -57,8 +59,10 @@ line up front"), applied to research pages:
 4. **Claim, then evidence, in the same block.** The first sentence carries the claim; the
    numbers, source anchors and caveats follow immediately — never a paragraph later.
 5. **Labels ride with the claim they qualify.** An evidence tag sits directly after the
-   sentence it grades (hover/focus shows the canonical charter definition); never clustered
-   at the end of a paragraph.
+   sentence it grades; the builder turns the tag word into a background highlight ON the claim
+   text itself (label color = tag color; hover/focus shows the canonical charter definition),
+   so the floating label word disappears and the colored sentence carries the meaning. Never
+   clustered at the end of a paragraph.
 6. **Units and anchors every time.** Every number carries its unit and its source anchor
    ("35.4 g/L measured in dark liquor (M-03)").
 7. **One concept, one name.** Terms are used consistently and point to the glossary on first
@@ -68,8 +72,11 @@ line up front"), applied to research pages:
 
 The builder enforces the structural half mechanically: lists that directly follow a paragraph
 line are re-spaced so they render as lists (`normalize_lists`), generated tables get the
-data-table style with bare-number cells centered (`enhance_tables`), and long measures stay
-capped at 68ch.
+data-table style with bare-number cells centered (`enhance_tables`), evidence tags become
+sentence-level highlights (`wrap_evidence`), `[S# p.x]` citations become clickable superscripts
+with the source title in a tooltip (`cite_superscripts` + `citation_map`), internal codes
+(M-xx / INV-xx / C-xx / P-x, INV-01 streams S1-S5) become dotted-underline links with
+explanatory tooltips (`annotate_codes`), and long measures stay capped at 68ch.
 
 ## 4. Color system
 
@@ -190,17 +197,26 @@ so the reader can enter anywhere without losing the thread.
 
 ## 9. Components inventory
 
-cards (material, journey, stat), evidence-label tags with tooltips, badges (status), banners
-(stop-condition), spec-sheet grid, data tables (bordered frame, zebra, tinted header, pinned
-identity column, tabular figures), callouts (archive links, caveat notes), breadcrumbs, TOC
-rail, pagers, search overlay, footer legend, 404 page with the material map.
+cards (material, journey, stat), evidence highlights (claim text with the label's background
+color + hover tooltip; bare chips only in the footer legend), code refs (dotted underline,
+tooltip, click-through for M-xx / INV-xx / C-xx / P-x), citation superscripts (numbered,
+clickable, source title + page in the tooltip), badges (status), banners (stop-condition),
+spec-sheet grid, data tables (bordered frame, zebra, tinted header; header row sticky while
+the wrapper scrolls vertically; identity columns pinned with solid backgrounds while it
+scrolls horizontally), callouts (archive links, caveat notes), breadcrumbs, TOC rail (fixed
+210px track), pagers, search overlay, single clamped tooltip bubble, footer legend, 404 page
+with the material map. Layout variants picked at build time: 3-column (side + content + toc),
+no-toc, side-rail, single — a rail is always a fixed-width track, never a flex-sized column
+that can eat the content width.
 
 ## 10. Accessibility & responsiveness
 
 - WCAG AA contrast on every token pair (paper/ink 13.9:1; label and badge colors ≥ 4.5:1).
-- Keyboard: visible focus rings (2px accent offset), search fully operable, skip-to-content link.
+- Keyboard: visible focus rings (2px accent offset), search fully operable, skip-to-content link;
+  highlights, code refs and citation superscripts are tabbable and show the tooltip on focus.
 - Breakpoints: ≥1200px full three-column; 800-1200px two-column (TOC hides); <800px single
-  column (sidebar → horizontal chips; tables scroll horizontally with sticky first column).
+  column (sidebar → horizontal chips; tables scroll with sticky header + pinned identity
+  columns; the second pinned column drops below 700px to keep room to scroll).
 - `prefers-reduced-motion` disables all transitions; no animation elsewhere.
 - Semantic HTML throughout (`nav`, `main`, `article`, `aside`); one H1 per page; descriptive
   link text (never "here").
@@ -210,6 +226,25 @@ rail, pagers, search overlay, footer legend, 404 page with the material map.
 Single CSS file (~15 KB), single JS file (~8 KB), fonts via Google Fonts with `display=swap`
 and system fallbacks, search index ≤ 500 KB, no framework, no images required for pages (the
 archive holds the figures). Every page renders instantly from the CDN.
+
+## 12a. Review round 2 (2026-11-28, v0.8.2) — feedback fixes
+
+Operator feedback after the first review round, all fixed at builder level (no research content
+changed): (1) wide-table pinned column showed the content behind it while scrolling
+horizontally — pinned cells now carry solid backgrounds and the wrapper scrolls vertically too
+with the header row pinned; the second (identity) column joins the pin via JS measurement
+below 700px viewport width it drops; (2) playbook / site-design pages: the TOC rail was
+auto-placed into the flex-sized column and swallowed the page — layout is now chosen per page
+(fixed 210px rail tracks); (3) literal `**` markdown leaked into the dashboard "Test first"
+panel — builder snippets render inline markdown (`inline_md`); (4) tags: the label word is no
+longer shown next to the sentence — the sentence itself is highlighted in the label's color
+and the label lives in the tooltip (colon form `parameter_not_located: what to measure`
+highlights the description); (5) `[S1 p.6]`-style citations became clickable superscript
+numbers with the source title + page in the tooltip (map built from each page's own Sources
+section, metadata `sources:` list as fallback); (6) internal codes became hoverable/clickable
+refs with "what this code means" tooltips; (7) root pages no longer render their title twice;
+(8) the CSS pseudo-element tooltip was replaced by one JS-positioned bubble clamped to the
+viewport (same dark style), also shown on focus and touch.
 
 ## 12. Build & deploy
 

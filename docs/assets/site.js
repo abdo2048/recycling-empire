@@ -1,9 +1,88 @@
-/* Recycling Empire — site behaviour: search overlay, sources filter, TOC scroll-spy.
+/* Recycling Empire — site behaviour: tooltip bubble, wide-table column pinning,
+   search overlay, sources filter, TOC scroll-spy.
    No dependencies; every page works without this file. */
 (function () {
   "use strict";
   var rootMeta = document.querySelector('meta[name="doc-root"]');
   var ROOT = rootMeta ? rootMeta.getAttribute("content") : "./";
+
+  /* ---------- hover/focus tooltips ----------
+     One dark bubble for the whole page, positioned by JS and clamped to the
+     viewport (CSS pseudo-element tooltips cannot be clamped, and sentence-
+     sized highlight spans sit anywhere in the line). Replaces the native
+     title attribute to avoid double tooltips. */
+  var tip = document.createElement("div");
+  tip.className = "tipbubble";
+  tip.setAttribute("role", "tooltip");
+  document.body.appendChild(tip);
+  var tipEl = null;
+
+  function tipShow(el) {
+    tipEl = el;
+    tip.textContent = el.getAttribute("data-tip") || "";
+    tip.classList.add("on");
+    tip.classList.remove("below");
+    tip.style.left = "0px";
+    tip.style.top = "0px";
+    var r = el.getBoundingClientRect();
+    var tw = tip.offsetWidth, th = tip.offsetHeight;
+    var cx = r.left + Math.min(r.width / 2, tw / 2 + 10);
+    var x = Math.max(8, Math.min(cx - tw / 2, window.innerWidth - tw - 8));
+    var y = r.top - th - 9;
+    if (y < 46) { y = r.bottom + 9; tip.classList.add("below"); }
+    tip.style.left = x + "px";
+    tip.style.top = y + "px";
+    tip.style.setProperty("--arrowx", Math.max(10, Math.min(cx - x, tw - 10)) + "px");
+  }
+  function tipHide() { tipEl = null; tip.classList.remove("on"); }
+
+  document.addEventListener("mouseover", function (e) {
+    var el = e.target && e.target.closest ? e.target.closest("[data-tip]") : null;
+    if (el) tipShow(el);
+  });
+  document.addEventListener("mouseout", function (e) {
+    var el = e.target && e.target.closest ? e.target.closest("[data-tip]") : null;
+    if (el && (!e.relatedTarget || !el.contains(e.relatedTarget))) tipHide();
+  });
+  document.addEventListener("focusin", function (e) {
+    var el = e.target && e.target.closest ? e.target.closest("[data-tip]") : null;
+    if (el) tipShow(el);
+  });
+  document.addEventListener("focusout", function () { tipHide(); });
+  document.addEventListener("touchstart", function (e) {
+    var el = e.target && e.target.closest ? e.target.closest("[data-tip]") : null;
+    if (el) { tipShow(el); } else { tipHide(); }
+  }, { passive: true });
+  window.addEventListener("scroll", function () { if (tipEl) tipShow(tipEl); }, { passive: true });
+  window.addEventListener("resize", tipHide);
+  Array.prototype.forEach.call(document.querySelectorAll("[data-tip][title]"), function (el) {
+    el.removeAttribute("title");
+  });
+
+  /* ---------- wide tables: pin the second (identity) column too ----------
+     CSS pins column 1; JS measures column 1's real width and pins column 2
+     beside it. Skipped on narrow screens where two pinned columns would
+     leave no room to scroll. */
+  var wideTables = document.querySelectorAll("table.tbl.wide");
+  function pinMeasure() {
+    Array.prototype.forEach.call(wideTables, function (t) {
+      var cell = t.querySelector("tbody tr:first-child > td:first-child") ||
+                 t.querySelector("thead tr:first-child > th:first-child");
+      if (!cell) return;
+      var w = cell.offsetWidth;
+      if (w > 0) t.style.setProperty("--pinw", w + "px");
+      t.classList.toggle("pin2", window.innerWidth >= 700);
+    });
+  }
+  if (wideTables.length) {
+    pinMeasure();
+    var pinTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(pinTimer);
+      pinTimer = setTimeout(pinMeasure, 150);
+    });
+    window.addEventListener("load", pinMeasure);
+  }
 
   /* ---------- search overlay ---------- */
   var overlay = document.getElementById("soverlay");

@@ -42,6 +42,7 @@ MD = markdown.Markdown(
     extensions=["tables", "fenced_code", "toc", "sane_lists"],
     extension_configs={"toc": {"permalink": False}},
 )
+MD2 = markdown.Markdown(extensions=["tables", "fenced_code"])
 
 # ---------------------------------------------------------------- utilities
 
@@ -118,6 +119,458 @@ def chip(m):
     return (f'<span class="tag tag-{lab}" tabindex="0" data-tip="{tip_attr}" '
             f'title="{tip_attr}">{disp}</span>')
 
+
+# ---------------------------------------------------------------- html tokens
+
+VOID_TAGS = {"br", "hr", "img", "input", "source", "wbr"}
+BLOCK_TAGS = {"p", "li", "td", "th", "dt", "dd", "h1", "h2", "h3", "h4", "h5", "h6",
+              "figcaption", "summary", "blockquote"}
+SKIP_ANN_TAGS = {"a", "code", "sup", "script", "style"}
+
+
+def tokenize_html(html):
+    """Split html into ["t", text] and ["o"|"c"|"s", tagname, raw] tokens."""
+    toks, pos = [], 0
+    for m in re.finditer(r"<[^>]+>", html):
+        if m.start() > pos:
+            toks.append(["t", html[pos:m.start()]])
+        raw = m.group(0)
+        nm = re.match(r"<\s*(/?)\s*([a-zA-Z0-9]+)", raw)
+        if nm is None:
+            toks.append(["t", raw])
+        else:
+            kind = "c" if nm.group(1) else ("s" if raw.rstrip().endswith("/>") else "o")
+            toks.append([kind, nm.group(2).lower(), raw])
+        pos = m.end()
+    if pos < len(html):
+        toks.append(["t", html[pos:]])
+    return toks
+
+
+def detokenize(toks):
+    return "".join(t[2] if t[0] in ("o", "c", "s") else t[1] for t in toks)
+
+
+def _hl_span(label, desc):
+    disp, tip = TAG_DEFS[label]
+    return (f'<span class="hl hl-{label}" tabindex="0" data-tip="{esc(tip)}">'
+            f'{desc.strip()}<span class="sr"> (evidence: {disp})</span></span>')
+
+
+def _block_text_map(toks, b0, b1):
+    """Text with one space per tag token; per-char map to (token idx, offset)
+    (None for tag placeholders); token idx -> inline stack before/after, as
+    tuples of OPEN-TOKEN INDICES (element identity, not just tag name)."""
+    parts, cmap, ctxb, ctxa, stack = [], [], {}, {}, []
+    for idx in range(b0, b1):
+        t = toks[idx]
+        ctxb[idx] = tuple(stack)
+        if t[0] == "o" and t[1] not in VOID_TAGS:
+            stack.append(idx)
+        elif t[0] == "c":
+            while stack and toks[stack[-1]][1] != t[1]:
+                stack.pop()
+            if stack:
+                stack.pop()
+        ctxa[idx] = tuple(stack)
+        if t[0] == "t":
+            for o in range(len(t[1])):
+                cmap.append((idx, o))
+            parts.append(t[1])
+        else:
+            cmap.append(None)
+            parts.append(" ")
+    return "".join(parts), cmap, ctxb, ctxa
+
+
+CHIP_RE = r'class="tag tag-(source_supported|ai_inference|ai_proposal|parameter_not_located)'
+
+
+def wrap_evidence(html):
+    """Evidence labels ride ON the claim they grade: the claim text gets the
+    label's background color and the hover tooltip; the bare label word is
+    hidden (its meaning lives in the tooltip and a screen-reader suffix).
+
+    Colon form (`parameter_not_located: what to measure`) becomes a highlight
+    carrying the description itself. Bare chips extend over the sentence or
+    cell they grade - backward to the sentence start, or forward to the
+    sentence end when the chip opens the sentence; parenthetical labels extend
+    over their parentheses. Build-time, so it works without JS."""
+    html = re.sub(
+        r"<code>(source_supported|ai_inference|ai_proposal|parameter_not_located):\s*(.*?)</code>",
+        lambda m: _hl_span(m.group(1), m.group(2)), html, flags=re.S)
+    toks = tokenize_html(html)
+    chip_opens = [i for i, t in enumerate(toks) if t[0] == "o" and re.search(CHIP_RE, t[2])]
+    if not chip_opens:
+        return html
+
+    def block_region(i_open):
+        j = i_open - 1
+        while j >= 0 and not (toks[j][0] in ("o", "c") and toks[j][1] in BLOCK_TAGS):
+            j -= 1
+        b0 = j + 1
+        k = i_open + 1
+        while k < len(toks) and not (toks[k][0] == "c" and toks[k][1] == "span"):
+            k += 1
+        chip_close = min(k, len(toks) - 1)
+        j = chip_close + 1
+        while j < len(toks) and not (toks[j][0] in ("o", "c") and toks[j][1] in BLOCK_TAGS):
+            j += 1
+        return b0, j, chip_close
+
+    edits, consumed = [], set()
+    blocks = {}
+    for i_open in chip_opens:
+        b0, b1, chip_close = block_region(i_open)
+        blocks.setdefault((b0, b1), []).append((i_open, chip_close))
+
+    for (b0, b1), chips in blocks.items():
+        text, cmap, ctxb, ctxa = _block_text_map(toks, b0, b1)
+
+        def pos_back(i):
+            while i >= 0 and cmap[i] is None:
+                i -= 1
+            return i
+
+        ranges = []
+        for i_open, chip_close in chips:
+            lab = re.search(CHIP_RE, toks[i_open][2]).group(1)
+            disp, tip = TAG_DEFS[lab]
+            chip_start = next((i for i, e in enumerate(cmap)
+                               if e and i_open < e[0] < chip_close), None)
+            chip_end = next((i + 1 for i, e in reversed(list(enumerate(cmap)))
+                             if e and i_open < e[0] < chip_close), None)
+            if chip_start is None or chip_end is None:
+                continue
+            # sentence start: walk back to the nearest sentence terminator
+            start, k = 0, chip_start - 1
+            while k >= 0:
+                c = text[k]
+                if c in ".;?:" and (k + 1 >= len(text) or text[k + 1] in " \t\n"):
+                    start = k + 1
+                    break
+                k -= 1
+            while start < chip_start and text[start] in " \t\n":
+                start += 1
+            chip_at_start = text[start:chip_start].strip() == ""
+            follows_colon = text[chip_end:].lstrip().startswith(":")
+            if chip_at_start or follows_colon:
+                # chip labels what FOLLOWS: extend to the sentence end
+                end, e = len(text), chip_end
+                while e < len(text):
+                    c = text[e]
+                    if c in ".?!" and (e + 1 >= len(text) or text[e + 1] in " \t\n"):
+                        end = e + 1
+                        break
+                    e += 1
+            else:
+                end = chip_end
+                # parenthetical label: extend over its parentheses
+                depth, k, opened = 0, chip_start - 1, None
+                while k >= 0:
+                    c = text[k]
+                    if c == ")":
+                        depth += 1
+                    elif c == "(":
+                        if depth == 0:
+                            opened = k
+                            break
+                        depth -= 1
+                    k -= 1
+                if opened is not None:
+                    d, e = 0, opened
+                    while e < len(text):
+                        if text[e] == "(":
+                            d += 1
+                        elif text[e] == ")":
+                            d -= 1
+                            if d == 0:
+                                end = e + 1
+                                break
+                        e += 1
+            while end > chip_end and text[end - 1] in " \t\n":
+                end -= 1
+            # sanity: the highlight must carry claim text, not just the label
+            inner = (text[start:chip_start] + text[chip_end:end]).strip()
+            if len(inner) < 3 or end <= start:
+                continue
+            ranges.append([start, end, lab, tip])
+        if not ranges:
+            continue
+        ranges.sort()
+        merged = []
+        for r in ranges:
+            if merged and r[0] <= merged[-1][1]:
+                m = merged[-1]
+                m[1] = max(m[1], r[1])
+                if r[2] not in m[2]:
+                    m[2] = m[2] + "+" + r[2]
+                    m[3] = m[3] + " \u00b7 " + r[3]
+            else:
+                merged.append(list(r))
+
+        def emit(start, end, labs, tip, chip_lo, chip_hi):
+            """Queue open/close token edits for one merged range; False when
+            no balanced insertion point exists (chip then stays visible)."""
+            open_tag = (f'<span class="hl hl-{labs.split("+")[0]}" tabindex="0" '
+                        f'data-tip="{esc(tip)}" aria-label="{esc("evidence: " + labs.replace("+", " + ").replace("_", " "))}">')
+
+            def snap_open(i_open, chip_close):
+                """Nearest text char at/after i_open+1 inside the chip -> its
+                (token, offset); None when the char is not inside a chip."""
+                e = next((cmap[i] for i in range(max(i_open + 1, 0), min(chip_close, len(cmap)))
+                          if cmap[i] and cmap[i][0] > i_open), None)
+                return e
+
+            so = pos_back(start)
+            # if the open position fell inside a chip span, open before the chip
+            open_at = None
+            if so is not None:
+                for io, cc in chips:
+                    if io < cmap[so][0] < cc:
+                        open_at = (io, None)
+                        break
+                if open_at is None:
+                    open_at = (cmap[so][0], cmap[so][1])
+            else:
+                open_at = (b0, None)
+            open_ctx = ctxb[open_at[0]] if open_at[1] is None else ctxb[open_at[0]]
+
+            # close: first text char at/after end (never inside a chip)
+            eo = None
+            i = end
+            while i < len(cmap) and cmap[i] is None:
+                i += 1
+            if i < len(cmap):
+                for io, cc in chips:
+                    if io < cmap[i][0] < cc:
+                        eo = (cc + 1, None) if cc + 1 < b1 else (b1, None)
+                        break
+                if eo is None:
+                    eo = (cmap[i][0], cmap[i][1])
+            else:
+                eo = (b1, None)
+            close_ctx = ctxb[eo[0]] if eo[0] < b1 else ()
+
+            if open_ctx == close_ctx:
+                edits.append((open_at[0], open_at[1], open_tag))
+                edits.append((eo[0], eo[1], "</span>"))
+                return True
+            # open the span at an earlier token boundary with the close context
+            for t in range(open_at[0] - 1, b0 - 1, -1):
+                if ctxb[t] == close_ctx:
+                    edits.append((t, None, open_tag))
+                    edits.append((eo[0], eo[1], "</span>"))
+                    return True
+            # else close the span at a later token boundary with the open context
+            for t in range(eo[0] + 1, b1 + 1):
+                if t == b1:
+                    if () == open_ctx:
+                        edits.append((open_at[0], open_at[1], open_tag))
+                        edits.append((b1, None, "</span>"))
+                        return True
+                    break
+                if ctxb[t] == open_ctx:
+                    edits.append((open_at[0], open_at[1], open_tag))
+                    edits.append((t, None, "</span>"))
+                    return True
+            return False
+
+        for start, end, labs, tip in merged:
+            ok = emit(start, end, labs, tip, 0, len(text))
+            if ok:
+                for i_open, chip_close in chips:
+                    cs = next((i for i, e in enumerate(cmap)
+                               if e and i_open < e[0] < chip_close), None)
+                    ce = next((i + 1 for i, e in reversed(list(enumerate(cmap)))
+                               if e and i_open < e[0] < chip_close), None)
+                    if cs is not None and ce is not None and start <= cs and ce <= end:
+                        consumed.add(i_open)
+
+    out = []
+    by_tok = {}
+    for tok_idx, off, payload in edits:
+        by_tok.setdefault(tok_idx, []).append((off, payload))
+    for idx, t in enumerate(toks):
+        ed = by_tok.get(idx)
+        if not ed:
+            if t[0] == "o" and idx in consumed and re.search(CHIP_RE, t[2]):
+                t = ["o", t[1], t[2].replace('" tabindex="0"', ' tag-embedded" tabindex="0"', 1)]
+            out.append(t)
+            continue
+        ed = sorted(ed, key=lambda x: x[0] if x[0] is not None else -1)
+        marked = t[0] == "o" and idx in consumed and re.search(CHIP_RE, t[2])
+        if marked:
+            t = ["o", t[1], t[2].replace('" tabindex="0"', ' tag-embedded" tabindex="0"', 1)]
+        if t[0] == "t":
+            txt, last = t[1], 0
+            for off, payload in ed:
+                o = 0 if off is None else min(off, len(txt))
+                out.append(["t", txt[last:o]])
+                out.append(["t", payload])
+                last = o
+            out.append(["t", txt[last:]])
+        else:
+            for off, payload in ed:
+                out.append(["t", payload])
+            out.append(t)
+    return detokenize(out)
+
+
+def _walk_annotated(toks):
+    """Yield (index, token) pairs, tracking skip-context (a/code/sup)."""
+    skip = []
+    for idx, t in enumerate(toks):
+        if t[0] == "o" and t[1] in SKIP_ANN_TAGS:
+            skip.append(t[1])
+        elif t[0] == "c" and skip and skip[-1] == t[1]:
+            skip.pop()
+        yield idx, t, bool(skip)
+
+
+def annotate_codes(html, mat, from_doc, streams=None):
+    """Make the site's internal codes self-explanatory: M-xx, INV-xx, C-xx and
+    batch-02 P-numbers become dotted-underline links with a tooltip ("M-01 -
+    Mego! water-wash recovery - action plan"). INV-xx output streams (S1..S5)
+    get tooltips on their own page. Skips links, code chips and citations."""
+    cmap = getattr(mat, "codemap", None)
+    if not cmap and not streams:
+        return html
+    toks = tokenize_html(html)
+    pat = re.compile(r"\b(M-\d{2}|INV-\d{2}|C-\d{2}|P[1-5])\b" +
+                     (r"|\bS([1-5])\b" if streams else ""))
+    out = []
+    for idx, t, skipped in _walk_annotated(toks):
+        if t[0] != "t" or skipped:
+            out.append(t)
+            continue
+        pieces = []
+        last = 0
+        for m in pat.finditer(t[1]):
+            code = m.group(0)
+            payload = None
+            if streams and code.startswith("S") and m.groups()[-1]:
+                info = streams.get(int(m.groups()[-1]))
+                if info:
+                    payload = (f'<span class="cref" tabindex="0" data-tip="{esc(info)}">'
+                               f'{code}</span>')
+            else:
+                info = cmap.get(code)
+                if info:
+                    tip = f"{code} \u2014 {info[0]} \u00b7 {info[1]}"
+                    payload = (f'<a class="cref" href="{esc(info[2])}" '
+                               f'data-tip="{esc(tip)}">{code}</a>')
+            if payload:
+                pieces.append(t[1][last:m.start()])
+                pieces.append(payload)
+                last = m.end()
+        if pieces:
+            pieces.append(t[1][last:])
+            for p in pieces:
+                out.append(["t", p] if not p.startswith("<") else ["s", "raw", p])
+        else:
+            out.append(t)
+    return detokenize(out)
+
+
+def citation_map(body_md, meta_sources, mat):
+    """n -> (shelf id or None, tooltip title) for [S#] citations. The page's
+    own "## ... Sources" section is authoritative (it lists every S-number the
+    page uses, with shelf folder or registry entry); the metadata `sources:`
+    list fills any remaining numbers."""
+    out = {}
+    m = re.search(r"^## [^\n]*(Sources|References)[^\n]*\n(.*?)(?=^## |\Z)",
+                  body_md, re.S | re.M)
+    if m:
+        for line in m.group(2).splitlines():
+            mm = re.match(r"-\s*\[S(\d+)\]\s*(.+)$", line.strip())
+            if not mm:
+                continue
+            n, rest = int(mm.group(1)), mm.group(2)
+            sid = None
+            sm = re.search(r"`sources/([a-z0-9\-]+)/`", rest)
+            if sm:
+                sid = sm.group(1)
+            else:
+                rm = re.search(r"Registry entry `([a-z0-9\-]+)`", rest)
+                if rm:
+                    sid = "registry/" + rm.group(1)
+            t = re.split(r"\s+\u2014\s+", rest)[0]
+            t = re.sub(r"`[^`]*`", "", t).strip(" .;")
+            if sid and mat:
+                st = mat.source_title(sid)
+                if st != sid.replace("-", " "):
+                    t = st
+            if not t or len(t) < 5 or t.lower().startswith("shelf"):
+                t = (sid or f"source {n}").replace("-", " ")
+            out[n] = (sid, t[:70])
+    for i, sid in enumerate(meta_sources or []):
+        out.setdefault(i + 1, (str(sid), mat.source_title(str(sid))[:70] if mat else str(sid)))
+    return out
+
+
+def cite_superscripts(html, srcmap, mat, from_doc):
+    """[S1 p.6] -> a clickable superscript number linking to the source page,
+    tooltip "S1 - <source title> - p.6"; bare patent-paragraph refs [0027]
+    become tooltip-only superscripts. Nothing changes where a page has no
+    resolvable source map."""
+    if not srcmap:
+        return html
+    toks = tokenize_html(html)
+    pat = re.compile(r"\[S(\d+)((?:[^\[\]]|\[(?:[^\[\]])*\])*)\]|\[(\d{3,4})\]")
+    out = []
+    for idx, t, skipped in _walk_annotated(toks):
+        if t[0] != "t" or skipped:
+            out.append(t)
+            continue
+        pieces = []
+        last = 0
+        for m in pat.finditer(t[1]):
+            if m.group(1):
+                n = int(m.group(1))
+                if n not in srcmap:
+                    continue
+                sid, title = srcmap[n]
+                rest = m.group(2).strip()
+                tip = f"S{n} \u2014 {title}" + (f" \u00b7 {rest}" if rest else "")
+                pieces.append(t[1][last:m.start()])
+                if sid:
+                    url = mat.cite_url(sid, from_doc)
+                    pieces.append(f'<sup class="cite"><a href="{esc(url)}" data-tip="{esc(tip)}" '
+                                  f'aria-label="source {n}: {esc(title)}">{n}</a></sup>')
+                else:
+                    pieces.append(f'<sup class="cite" tabindex="0" data-tip="{esc(tip)}" '
+                                  f'aria-label="source {n}: {esc(title)}">{n}</sup>')
+                last = m.end()
+            else:
+                num = m.group(3)
+                pieces.append(t[1][last:m.start()])
+                pieces.append(f'<sup class="cite cite-p" tabindex="0" '
+                              f'data-tip="patent paragraph {num}">\u00b6{num}</sup>')
+                last = m.end()
+        if pieces:
+            pieces.append(t[1][last:])
+            for p in pieces:
+                out.append(["s", "raw", p] if p.startswith("<") else ["t", p])
+        else:
+            out.append(t)
+    return detokenize(out)
+
+
+def inline_md(text):
+    """Render a short builder-generated snippet (dashboard test-first items,
+    ranking notes) with inline markdown (bold/code) instead of escaping it."""
+    MD2.reset()
+    h = MD2.convert(text).strip()
+    h = re.sub(r"^<p[^>]*>", "", h)
+    h = re.sub(r"</p>$", "", h.strip())
+    h = re.sub(r"<code>(source_supported|ai_inference|ai_proposal|parameter_not_located)</code>",
+               chip, h)
+    if h.count("**") % 2:
+        h = h.replace("**", "")
+    if h.count("`") % 2:
+        h = h.replace("`", "")
+    return h
 
 LIST_START = re.compile(r"^\s*(?:- |\* |\d+\. |\d+\) )")
 
@@ -257,6 +710,101 @@ class Material:
     def has(self, rel):
         return os.path.exists(os.path.join(self.abs, rel.replace("/", os.sep)))
 
+    def source_title(self, sid):
+        return self.source_titles.get(sid, sid.replace("-", " "))
+
+    def cite_url(self, sid, from_doc):
+        if sid.startswith("registry/"):
+            return url_for(from_doc, self.folder + "/registry.html")
+        det = self.pages.get(f"sources/{sid}/SOURCE.md")
+        if det:
+            return url_for(from_doc, det)
+        return ARCHIVE_TREE + f"sources/{sid}/"
+
+    def build_codemap(self):
+        """id -> (name, kind, page) for M-xx / INV-xx / C-xx / P1..P5, the
+        numbered-source titles for citation tooltips, and per-invention output
+        stream names (S1..S5). Feeds annotate_codes / cite_superscripts."""
+        self.source_titles = {}
+        sdir = os.path.join(self.abs, "sources")
+        if os.path.isdir(sdir):
+            for d in os.listdir(sdir):
+                smd = os.path.join(sdir, d, "SOURCE.md")
+                if os.path.isfile(smd):
+                    m = re.search(r"^## Exact title\s*\n(.+?)$", read(smd), re.M)
+                    if m:
+                        self.source_titles[d] = m.group(1).strip()
+        reg_names = {}
+        if yaml and self.has("registry/methods.yaml"):
+            try:
+                for e in (yaml.safe_load(read(os.path.join(self.abs, "registry",
+                                                           "methods.yaml"))) or {}).get("entries", []):
+                    reg_names[str(e.get("id", ""))] = str(e.get("name") or e.get("id", ""))
+            except Exception:
+                reg_names = {}
+            for k, v in reg_names.items():
+                self.source_titles["registry/" + k] = v
+        cm = {}
+        mdir = os.path.join(self.abs, "methods")
+        if os.path.isdir(mdir):
+            for f in os.listdir(mdir):
+                if re.match(r"M-\d.*\.md$", f):
+                    meta, _ = parse_meta_block(read(os.path.join(mdir, f)))
+                    mid = str(meta.get("id") or f[:4])
+                    cm[mid] = (str(meta.get("name") or mid)[:70], "action plan \u2014 click to open",
+                               self.pages.get("methods/" + f,
+                                              f"{self.folder}/methods/{f[:-3]}.html"))
+            cardsf = os.path.join(mdir, "_cards.md")
+            cards_page = self.pages.get("methods/_cards.md", f"{self.folder}/methods/cards.html")
+            if os.path.isfile(cardsf):
+                for m in re.finditer(r"^## (C-\d{2})\s+(\S+)\s*$", read(cardsf), re.M):
+                    slug = m.group(2)
+                    cm[m.group(1)] = (reg_names.get(slug, slug.replace("-", " "))[:70],
+                                      "registry summary card \u2014 click to open", cards_page)
+        self.streams = {}
+        idir = os.path.join(self.abs, "inventions")
+        batch_page = self.pages.get("inventions/scientist-inventor-batch-02-proposals.md",
+                                    f"{self.folder}/inventions/scientist-inventor-batch-02-proposals.html")
+        if os.path.isdir(idir):
+            for f in sorted(os.listdir(idir)):
+                if not (f.startswith("INV-") and f.endswith(".md")):
+                    continue
+                txt = read(os.path.join(idir, f))
+                meta, _ = parse_meta_block(txt)
+                iid = str(meta.get("id") or f[:6])
+                cm[iid] = (h1_of(txt, f[:-3])[:70], "invented route \u2014 click to open",
+                           self.pages.get("inventions/" + f,
+                                          f"{self.folder}/inventions/{f[:-3]}.html"))
+                smap = {}
+                for line in txt.splitlines():
+                    line = line.strip()
+                    if not line.startswith("|"):
+                        continue
+                    cells = [c.strip() for c in line.strip("|").split("|")]
+                    if not cells:
+                        continue
+                    m = re.match(r"^S([1-5])\s+(.+)$", cells[0])
+                    if m and not re.match(r"^[\s\-|:]+$", m.group(2)):
+                        smap[int(m.group(1))] = (f"{iid} output stream \u2014 {m.group(2)[:60]}")
+                if smap:
+                    self.streams["inventions/" + f] = smap
+        if self.has("ranking.md"):
+            rtext = read(os.path.join(self.abs, "ranking.md"))
+            mB = re.search(r"^## Table B[^\n]*\n(.*?)(?=^## |\Z)", rtext, re.S | re.M)
+            if mB:
+                for line in mB.group(1).splitlines():
+                    line = line.strip()
+                    if not line.startswith("|"):
+                        continue
+                    cells = [c.strip() for c in line.strip("|").split("|")]
+                    if not cells:
+                        continue
+                    m = re.match(r"^(P[1-5])\s+(.+)$", cells[0])
+                    if m and not re.match(r"^[\s\-|:]+$", m.group(2)):
+                        cm[m.group(1)] = (m.group(2).split(" \u2014 ")[0][:70],
+                                          "batch-02 proposal \u2014 click to open", batch_page)
+        self.codemap = cm
+
     def resolve(self, href, src_rel):
         if re.match(r"^(https?:|mailto:|#)", href):
             return None
@@ -298,9 +846,19 @@ def article(out_rel, mat, src_rel, title=None, kicker=None, pager=None, sub=None
     if mat:
         meta, body_md = parse_meta_block(body_md)
     title = title or h1_of(body_md, posixpath.basename(src_rel))
+    if mat is None:
+        # root pages have no meta block to consume the leading H1; drop it so
+        # the template's h1 block doesn't render the title twice
+        body_md = re.sub(r"^# .+?\n+", "", body_md, count=1)
+    title = title or h1_of(body_md, posixpath.basename(src_rel))
     body_html, toks = render_md(strip_angle_links(body_md))
     if mat:
         body_html = mat.rewrite_links(body_html, src_rel, out_rel)
+        body_html = cite_superscripts(body_html, citation_map(body_md, meta.get("sources") or [], mat), mat, out_rel)
+    body_html = wrap_evidence(body_html)
+    if mat:
+        streams = mat.streams.get(src_rel) if src_rel.startswith("inventions/") else None
+        body_html = annotate_codes(body_html, mat, out_rel, streams=streams)
     SEARCH.append({"u": out_rel, "t": title, "s": sub or "", "x": strip_tags(body_html)[:1500]})
     return out_rel, {"title": title, "kicker": kicker, "body": body_html,
                      "toc": toc_html(toks), "pager": pager or "", "meta_html": spec_sheet(meta)}
@@ -349,6 +907,8 @@ def build_material(mat):
                     mat.pages[rel] = f"{base}/sources/readme.html"
     if mat.has("MIGRATION-NOTE.md"):
         mat.pages["MIGRATION-NOTE.md"] = f"{base}/migration-note.html"
+
+    mat.build_codemap()
 
     # ---- data
     counts = {}
@@ -427,14 +987,14 @@ def build_material(mat):
 
     snap = ""
     if tableA:
-        rows = "".join(f'<tr><td class="rk">{esc(t["rank"])}</td><td><a href="methods/index.html">{esc(t["name"])}</a></td>'
-                       f'<td class="tot">{esc(t["total"])}</td><td class="note">{esc(t["note"][:150])}</td></tr>' for t in tableA[:3])
+        rows = "".join(f'<tr><td class="rk">{esc(t["rank"])}</td><td><a href="methods/index.html">{inline_md(t["name"])}</a></td>'
+                       f'<td class="tot">{esc(t["total"])}</td><td class="note">{inline_md(t["note"][:150])}</td></tr>' for t in tableA[:3])
         snap = (f'<section class="panel"><h2>Ranking snapshot</h2><table class="tbl"><thead><tr><th>#</th><th>Route</th><th>Total</th><th>Why</th></tr></thead>'
                 f'<tbody>{rows}</tbody></table><p class="more"><a href="ranking.html">Full six-factor table, all 36 items, rubrics and the test-first list →</a></p></section>')
 
     tprev = ""
     if test_first:
-        items = "".join(f"<li>{esc(t[:220])}</li>" for t in test_first[:3])
+        items = "".join(f"<li>{inline_md(t[:220])}</li>" for t in test_first[:3])
         tprev = f'<section class="panel"><h2>Test first</h2><ol>{items}</ol><p class="more"><a href="ranking.html">The complete ordered test list →</a></p></section>'
 
     phases = ["0 Setup", "1 Sources", "2 Registry", "3 Plans", "4 Invention", "5 Ranking", "6 Site", "7 Review"]
@@ -616,7 +1176,7 @@ def build_material(mat):
                      f'Rows with a metadata page link to it; the rest link straight to their archive folder. '
                      f'Filter below, or scroll the canonical <code>sources/INDEX.md</code> table.</p>'
                      f'<input id="srcfilter" type="search" placeholder="Filter sources…" autocomplete="off">'
-                     f'<table class="tbl" id="srctable"><thead><tr><th>Source</th><th>Title</th><th>Metadata</th><th>Figs</th><th>Size</th><th>AI text</th></tr></thead><tbody>{trs}</tbody></table>')
+                     f'<div class="tblwrap"><table class="tbl" id="srctable"><thead><tr><th>Source</th><th>Title</th><th>Metadata</th><th>Figs</th><th>Size</th><th>AI text</th></tr></thead><tbody>{trs}</tbody></table></div>')
         idx_out = f"{base}/sources/index.html"
         idx_out, idx_out_d = article(idx_out, mat, "sources/INDEX.md", title="Sources — the document shelf", kicker="Phase 1", sub="sources")
         idx_out_d["body"] = srcs_grid + '<section class="panel"><h2>Canonical index (sources/INDEX.md)</h2>' + idx_out_d["body"] + "</section>"
@@ -644,6 +1204,8 @@ def build_material(mat):
     if state_md:
         html, toks = render_md(strip_angle_links(state_md))
         html = mat.rewrite_links(html, "STATE.md", f"{base}/state.html")
+        html = wrap_evidence(html)
+        html = annotate_codes(html, mat, f"{base}/state.html")
         SEARCH.append({"u": f"{base}/state.html", "t": "STATE.md — resume file", "s": "", "x": strip_tags(html)[:1500]})
         pages.append((f"{base}/state.html", {"title": "STATE.md", "kicker": "Resume file", "body": html, "toc": toc_html(toks)}))
     if mat.has("LOG.md"):
@@ -677,7 +1239,7 @@ BASE_T = Template("""<!DOCTYPE html>
   </nav>
 </header>
 $crumbs
-<main id="main">
+<main id="main" class="$maincls">
 $sidebar
 <article class="content">
   $h1block
@@ -750,8 +1312,20 @@ def write_page(docpath, data, mat):
     h1block = ""
     if not data.get("notitle"):
         h1block = (f'<p class="kicker">{esc(data["kicker"])}</p>' if data.get("kicker") else "") + f"<h1>{esc(data['title'])}</h1>"
+    # layout variant: 3 columns (side + content + toc rail), 2 columns, or a
+    # single centered column — never let the toc rail eat the content width
+    has_side = bool(sidebar)
+    has_toc = bool(data.get("toc"))
+    if has_side and has_toc:
+        maincls = ""
+    elif has_side:
+        maincls = "no-toc"
+    elif has_toc:
+        maincls = "side-rail"
+    else:
+        maincls = "single"
     body = BASE_T.substitute(
-        title=esc(data["title"]), root=root, crumbs=cb, sidebar=sidebar,
+        title=esc(data["title"]), root=root, crumbs=cb, sidebar=sidebar, maincls=maincls,
         h1block=h1block,
         meta_html=data.get("meta_html", ""), body=data["body"], toc=data.get("toc", ""), pager=data.get("pager", ""))
     with open(full, "w", encoding="utf-8") as f:
@@ -828,7 +1402,7 @@ def main():
     build_home()
 
     with open(os.path.join(DOCS, "404.html"), "w", encoding="utf-8") as f:
-        f.write(BASE_T.substitute(title="Page not found", root="./", crumbs="", sidebar="", kicker="",
+        f.write(BASE_T.substitute(title="Page not found", root="./", crumbs="", sidebar="", maincls="single", kicker="",
                                   h1block="<h1>Page not found</h1>", meta_html="",
                                   body='<p>That page is not on the site. The material map:</p>' +
                                        "".join(f'<p><a href="{m.folder}/index.html">{esc(m.name)}</a></p>' for m in MATS),

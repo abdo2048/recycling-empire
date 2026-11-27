@@ -59,14 +59,21 @@ code {
 .crumbs li + li::before { content: "›"; margin-right: .35rem; color: var(--line); }
 .crumbs a { color: var(--ink-soft); }
 
-/* ---------- layout ---------- */
+/* ---------- layout ----------
+   Four variants, chosen at build time by which rails a page actually has:
+   default 3-col (side + content + toc), no-toc (2-col), side-rail (content
+   + toc), single (centered column). The toc rail is always a fixed 210px
+   track, never a flex-sized one that can eat the content width. */
 main { max-width: 1280px; margin: 0 auto; padding: .75rem 1.25rem 3rem; display: grid; grid-template-columns: 230px minmax(0, 1fr) 210px; gap: 2.2rem; }
 main > .side { display: block; }
-main:only-child, main > .content:only-child { grid-column: 2; }
-main > article.content:only-of-type:not(:only-child) {}
-main.no-rail { grid-template-columns: 230px minmax(0,1fr); }
-main.plain { grid-template-columns: minmax(0,1fr); max-width: 880px; }
-@media (max-width: 1200px) { main { grid-template-columns: 210px minmax(0,1fr); } main > .toc { display: none; } }
+main.no-toc { grid-template-columns: 230px minmax(0, 1fr); }
+main.side-rail { grid-template-columns: minmax(0, 1fr) 210px; }
+main.single { grid-template-columns: minmax(0, 1fr); max-width: 880px; }
+@media (max-width: 1200px) {
+  main, main.no-toc { grid-template-columns: 210px minmax(0, 1fr); }
+  main.side-rail { grid-template-columns: minmax(0, 1fr); }
+  main > .toc { display: none; }
+}
 /* ---------- sidebar ---------- */
 .side h2 { font-family: var(--serif); font-weight: 600; font-size: 1.02rem; margin: 1rem 0 .6rem; color: var(--ink); }
 .side nav { display: flex; flex-direction: column; position: sticky; top: 4.2rem; }
@@ -75,9 +82,9 @@ main.plain { grid-template-columns: minmax(0,1fr); max-width: 880px; }
 .side nav a.on { color: var(--accent-ink); border-left-color: var(--accent); font-weight: 600; background: var(--card); }
 
 /* ---------- toc rail ---------- */
-.toc { position: sticky; top: 4.2rem; align-self: start; padding-top: 1.4rem; font-size: .85rem; }
+.toc { position: sticky; top: 4.2rem; align-self: start; padding-top: 1.4rem; font-size: .85rem; min-width: 0; }
 .toc h2 { font: 600 .78rem var(--sans); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-soft); margin: 0 0 .5rem; }
-.toc a { display: block; padding: .18rem 0; color: var(--ink-soft); border-left: 2px solid transparent; padding-left: .6rem; }
+.toc a { display: block; padding: .18rem 0; color: var(--ink-soft); border-left: 2px solid transparent; padding-left: .6rem; overflow-wrap: break-word; }
 .toc a:hover { color: var(--ink); text-decoration: none; }
 .toc a.active { color: var(--accent-ink); border-left-color: var(--accent); font-weight: 600; }
 .toc a.lvl3 { padding-left: 1.3rem; font-size: .8rem; }
@@ -103,12 +110,17 @@ hr { border: 0; border-top: 1px solid var(--line); margin: 2rem 0; }
 blockquote { margin: 1.2rem 0; padding: .4rem 1rem; border-left: 3px solid var(--accent); background: var(--card); border-radius: 0 8px 8px 0; color: var(--ink-soft); }
 img { max-width: 100%; border-radius: 8px; }
 
-/* ---------- tables ---------- */
-.tblwrap, .content table { overflow-x: auto; }
+/* ---------- tables ----------
+   Data tables live in .tblwrap, which is the scroll container for BOTH axes
+   (max-height keeps tall tables from running off the page): the header row
+   stays pinned while scrolling vertically, the identity column stays pinned
+   while scrolling horizontally, and pinned cells have SOLID backgrounds so
+   nothing shows through. */
 table.tbl { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); font-size: .9rem; margin: 1rem 0 1.3rem; }
 table.tbl th, table.tbl td { text-align: left; padding: .6rem .75rem; border-bottom: 1px solid var(--line); vertical-align: top; }
 table.tbl th + th, table.tbl td + td { border-left: 1px solid #EFEBE1; }
-table.tbl thead th { position: sticky; top: 0; background: #EFF3EE; font: 600 .78rem var(--sans); text-transform: uppercase; letter-spacing: .05em; color: var(--accent-ink); border-bottom: 1px solid #DDE4DC; }
+table.tbl thead th { background: #EFF3EE; font: 600 .78rem var(--sans); text-transform: uppercase; letter-spacing: .05em; color: var(--accent-ink); border-bottom: 1px solid #DDE4DC; }
+.tblwrap table.tbl thead th { position: sticky; top: 0; z-index: 3; }
 table.tbl tbody tr:nth-child(even) { background: #FCFBF8; }
 table.tbl tbody tr:hover { background: #F4F8F3; }
 table.tbl td.num, table.tbl td.tot, table.tbl td.rk { font-feature-settings: "tnum"; text-align: right; }
@@ -116,20 +128,25 @@ table.tbl td.n { font-feature-settings: "tnum"; text-align: center; white-space:
 table.tbl td.note { color: var(--ink-soft); font-size: .88rem; }
 table.tbl tbody tr:last-child td { border-bottom: 0; }
 table.tbl code { font-size: .84rem; }
-.tblwrap { margin: 1rem 0 1.3rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.tblwrap { margin: 1rem 0 1.3rem; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); overflow: auto; max-height: min(75vh, 720px); }
 .tblwrap > table.tbl { margin: 0; border: 0; border-radius: 0; box-shadow: none; overflow: visible; }
-/* wide score tables (8+ columns): scroll horizontally with the identity column pinned */
+/* wide score tables (8+ columns): identity column pinned; column 2 joins it
+   once JS has measured column 1 (progressive: base state pins column 1) */
 table.tbl.wide { min-width: 960px; }
 table.tbl.wide th, table.tbl.wide td { padding: .5rem .55rem; font-size: .85rem; }
 table.tbl.wide thead th { font-size: .68rem; hyphens: auto; }
 table.tbl.wide thead th:not(:first-child):not(:last-child) { text-align: center; }
 table.tbl.wide th:last-child, table.tbl.wide td:last-child { min-width: 250px; }
-table.tbl.wide > thead th:first-child, table.tbl.wide > tbody td:first-child { position: sticky; left: 0; z-index: 2; box-shadow: 2px 0 5px -3px rgba(31,42,36,.22); }
-table.tbl.wide > thead th:first-child { background: #EFF3EE; }
-table.tbl.wide > tbody td:first-child { background: inherit; font-weight: 500; }
+table.tbl.wide > thead th:first-child, table.tbl.wide > tbody td:first-child { position: sticky; left: 0; }
+table.tbl.wide > thead th:first-child { background: #EFF3EE; z-index: 5; }
+table.tbl.wide > tbody td:first-child { background: var(--card); z-index: 2; font-weight: 500; box-shadow: 2px 0 5px -3px rgba(31,42,36,.22); }
 table.tbl.wide > tbody tr:nth-child(even) td:first-child { background: #FCFBF8; }
 table.tbl.wide > tbody tr:hover td:first-child { background: #F4F8F3; }
-table.tbl.wide > tbody tr:last-child td:first-child { box-shadow: 2px 0 5px -3px rgba(31,42,36,.22); }
+table.tbl.wide.pin2 > thead th:nth-child(2), table.tbl.wide.pin2 > tbody td:nth-child(2) { position: sticky; left: var(--pinw, 42px); }
+table.tbl.wide.pin2 > thead th:nth-child(2) { background: #EFF3EE; z-index: 4; box-shadow: 2px 0 5px -3px rgba(31,42,36,.22); }
+table.tbl.wide.pin2 > tbody td:nth-child(2) { background: var(--card); z-index: 2; box-shadow: 2px 0 5px -3px rgba(31,42,36,.22); }
+table.tbl.wide.pin2 > tbody tr:nth-child(even) td:nth-child(2) { background: #FCFBF8; }
+table.tbl.wide.pin2 > tbody tr:hover td:nth-child(2) { background: #F4F8F3; }
 
 /* ---------- chips & badges ---------- */
 .chip { display: inline-block; font: 600 .78rem var(--sans); border-radius: 999px; padding: .1rem .6rem; white-space: nowrap; }
@@ -138,29 +155,45 @@ table.tbl.wide > tbody tr:last-child td:first-child { box-shadow: 2px 0 5px -3px
 .chip-ai_proposal { background: var(--chip-amber-bg); color: var(--chip-amber-tx); }
 .chip-parameter_not_located { background: var(--chip-slate-bg); color: var(--chip-slate-tx); }
 
-/* evidence labels — inline colored text with a hover/focus tooltip (no pills) */
+/* evidence labels — the CLAIM text carries the label color as a highlight;
+   the bare label word is hidden (info lives in the hover tooltip + a
+   screen-reader suffix). Chips remain only in the footer legend. */
 .tag { position: relative; display: inline-block; font-weight: 600; font-size: .9em;
   border-bottom: 1.5px dashed currentColor; padding: 0 .1em; cursor: help; white-space: nowrap; }
 .tag-source_supported { color: var(--chip-green-tx); }
 .tag-ai_inference { color: var(--chip-blue-tx); }
 .tag-ai_proposal { color: var(--chip-amber-tx); }
 .tag-parameter_not_located { color: var(--chip-slate-tx); }
-.tag::after {
-  content: attr(data-tip);
-  position: absolute; bottom: calc(100% + 7px); left: 50%; transform: translateX(-50%);
+.tag-embedded { display: none; }
+@media print { .tag-embedded { display: inline; font-size: .8em; } }
+.hl { -webkit-box-decoration-break: clone; box-decoration-break: clone; border-radius: 4px;
+  padding: .06em .22em; margin: 0 .05em; cursor: help; border-bottom: 1.5px dashed var(--ink-soft); }
+.hl-source_supported { background: var(--chip-green-bg); border-bottom-color: var(--chip-green-tx); }
+.hl-ai_inference { background: var(--chip-blue-bg); border-bottom-color: var(--chip-blue-tx); }
+.hl-ai_proposal { background: var(--chip-amber-bg); border-bottom-color: var(--chip-amber-tx); }
+.hl-parameter_not_located { background: var(--chip-slate-bg); border-bottom-color: var(--chip-slate-tx); }
+.hl:hover { box-shadow: inset 0 0 0 999px rgba(31, 42, 36, .05); }
+.hl:focus { outline: none; }
+.hl:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+/* internal codes (M-01, INV-01, C-14, P2...) — dotted underline, tooltip, click */
+.cref { border-bottom: 1.5px dotted currentColor; cursor: help; font-feature-settings: "tnum"; }
+a.cref { color: inherit; text-decoration: none; }
+a.cref:hover { color: var(--accent-ink); text-decoration: none; }
+/* numbered-source citations [S3 p.6] -> clickable superscript */
+sup.cite { font-size: .68em; line-height: 0; margin: 0 .12em; }
+sup.cite a, sup.cite [tabindex] { color: var(--accent-ink); font-weight: 600; text-decoration: none; cursor: help; }
+sup.cite a:hover { color: var(--accent); }
+sup.cite.cite-p, sup.cite [tabindex] { color: var(--accent-ink); }
+/* single JS-positioned tooltip bubble, clamped to the viewport (works for
+   sentence highlights, chips, code refs and citation numbers alike) */
+.tipbubble { position: fixed; z-index: 90; max-width: min(320px, calc(100vw - 20px));
   background: #22312A; color: #fff; font: 500 .74rem/1.5 var(--sans); letter-spacing: .01em;
-  padding: .5rem .7rem; border-radius: 8px; width: max-content; max-width: 300px; white-space: normal;
-  opacity: 0; visibility: hidden; transition: opacity .12s ease; pointer-events: none;
-  z-index: 80; box-shadow: 0 6px 22px rgba(31,42,36,.22); text-align: left;
-}
-.tag::before {
-  content: ""; position: absolute; bottom: calc(100% + 2px); left: 50%; transform: translateX(-50%) rotate(45deg);
-  background: #22312A; width: 9px; height: 9px; opacity: 0; visibility: hidden;
-  transition: opacity .12s ease; pointer-events: none; z-index: 81;
-}
-.tag:hover::after, .tag:focus::after, .tag:hover::before, .tag:focus::before { opacity: 1; visibility: visible; }
-.tag:focus { outline: none; }
-.tag:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+  padding: .5rem .7rem; border-radius: 8px; box-shadow: 0 6px 22px rgba(31,42,36,.28);
+  opacity: 0; visibility: hidden; transition: opacity .12s ease; pointer-events: none; text-align: left; }
+.tipbubble.on { opacity: 1; visibility: visible; }
+.tipbubble::after { content: ""; position: absolute; top: -4px; left: var(--arrowx, 50%);
+  transform: translateX(-50%) rotate(45deg); background: #22312A; width: 9px; height: 9px; }
+.tipbubble.below::after { top: auto; bottom: -4px; }
 .badge { display: inline-block; font: 600 .74rem var(--sans); border-radius: 6px; padding: .12rem .5rem; border: 1px solid; }
 .b-green { background: var(--chip-green-bg); color: var(--chip-green-tx); border-color: #BFE0CF; }
 .b-blue { background: var(--chip-blue-bg); color: var(--chip-blue-tx); border-color: #C5D9F5; }
@@ -273,7 +306,8 @@ footer p:last-child { padding-bottom: 1.6rem; }
 
 /* ---------- mobile (last: overrides everything above) ---------- */
 @media (max-width: 860px) {
-  main, main.no-rail { grid-template-columns: minmax(0,1fr); }
+  main, main.no-toc, main.side-rail { grid-template-columns: minmax(0, 1fr); }
+  main.single { max-width: none; }
   main > .side { display: block; margin: 0 0 1rem; }
   .side nav { display: flex; flex-direction: row; flex-wrap: wrap; gap: .4rem; position: static; }
   .side nav a { border: 1px solid var(--line); background: var(--card); border-radius: 999px; padding: .25rem .7rem; }

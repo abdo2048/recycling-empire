@@ -5,7 +5,7 @@ Writing-system rules (see SITE-DESIGN.md § 3 — the readability contract):
 2. One idea per paragraph; at most ~3 sentences; >5 sentences becomes a list or a table.
 3. Parallel facts become bullets with **bold lead-ins**; sequences become numbered lists; comparisons become tables.
 4. Claim, then evidence — numbers, units and source anchors sit in the same block as the claim.
-5. Evidence labels ride directly after the claim they qualify (`source_supported` / `ai_inference` / `ai_proposal` / `parameter_not_located`).
+5. Evidence labels sit directly after the claim they qualify (`source_supported` / `ai_inference` / `ai_proposal` / `parameter_not_located`) — the site builder renders them as a highlight on the claim text itself, so the placement rule stays: tag word goes immediately after the sentence it grades, before the period.
 6. Every falsifiable claim names the test that would kill it.
 
 ## 0. Summary card

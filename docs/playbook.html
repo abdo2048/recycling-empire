@@ -22,13 +22,12 @@
   </nav>
 </header>
 <nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="./index.html">Home</a></li><li aria-current="page">Recycling Empire — Playbook</li></ol></nav>
-<main id="main">
+<main id="main" class="side-rail">
 
 <article class="content">
   <p class="kicker">System</p><h1>Recycling Empire — Playbook</h1>
   
-  <h1 id="recycling-empire-playbook">Recycling Empire — Playbook</h1>
-<p>A reusable system for turning "this waste material can maybe be recycled" into a browsable knowledge base of action plans that a real team can verify and test in qualified labs. Built by an AI researcher; judged by humans and other AIs after the build.</p>
+  <p>A reusable system for turning "this waste material can maybe be recycled" into a browsable knowledge base of action plans that a real team can verify and test in qualified labs. Built by an AI researcher; judged by humans and other AIs after the build.</p>
 <p>Case 1 (cigarette butts) currently lives in the <a href="https://github.com/abdo2048/butt-lab">butt-lab</a> repository and migrates into <code>materials/cigarette-butts/</code> of this repo when complete.</p>
 <p>Hand this file plus <a href="start-a-new-material.html">START-A-NEW-MATERIAL.md</a> to any AI with internet and file access. It runs one material through the phases below, inside one folder, updating one state file. That is the whole contract.</p>
 <h2 id="golden-rules">Golden rules</h2>
@@ -69,7 +68,7 @@
 </tr>
 </tbody>
 </table></div>
-<p>Secondhand claims count as <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" title="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span> until checked against the primary source. Company self-report is not measurement. "Clean / safe / validated" are never claimed — the team's lab decides.</p>
+<p><span class="hl hl-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" aria-label="evidence: ai inference">Secondhand claims count as <span class="tag tag-ai_inference tag-embedded" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" title="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span></span> until checked against the primary source. Company self-report is not measurement. "Clean / safe / validated" are never claimed — the team's lab decides.</p>
 <h2 id="phases">Phases</h2>
 <h3 id="phase-0-setup">Phase 0 — Setup</h3>
 <p>Clone <code>template/</code> to <code>materials/&lt;slug&gt;/</code>; fill <code>material.yaml</code>; initialize STATE.md and LOG.md.</p>
@@ -94,7 +93,7 @@ Output: <code>sources/&lt;source-id&gt;/</code> per source — <code>document.pd
 <p><strong>Prompt:</strong> "Phase 3: write full action plans for the priority methods, one file per method, using METHOD-TEMPLATE.md. Every gap gets a labeled estimate with reasoning and a falsifier. Then write summary cards for the rest."</p>
 </blockquote>
 <h3 id="phase-4-invention">Phase 4 — Invention</h3>
-<p>The AI designs its own method from the accumulated knowledge: <code>inventions/INV-XX-&lt;slug&gt;.md</code> — full recipe with numbers, every assumption <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>, explicit relation to the sources it builds on, falsifiers, safety notes. An invention is not a claim of novelty or patentability.</p>
+<p>The AI designs its own method from the accumulated knowledge: <span class="hl hl-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" aria-label="evidence: ai proposal"><code>inventions/INV-XX-&lt;slug&gt;.md</code> — full recipe with numbers, every assumption <span class="tag tag-ai_proposal tag-embedded" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span></span>, explicit relation to the sources it builds on, falsifiers, safety notes. An invention is not a claim of novelty or patentability.</p>
 <blockquote>
 <p><strong>Prompt:</strong> "Phase 4: design one invented method for <X>, built from the gathered knowledge. Full recipe with numbers; every assumption labeled ai_proposal; falsifiers for the load-bearing claims; safety notes."</p>
 </blockquote>
@@ -161,13 +160,20 @@ Honest limits: paywalled papers give abstracts only until the operator supplies 
 </table></div>
   
 </article>
-<nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#recycling-empire-playbook">Recycling Empire — Playbook</a>
-<a class="lvl3" href="#golden-rules">Golden rules</a>
-<a class="lvl3" href="#content-labels-mandatory-on-every-non-trivial-statement">Content labels (mandatory on every non-trivial statement)</a>
-<a class="lvl3" href="#phases">Phases</a>
-<a class="lvl3" href="#tools-a-research-ai-needs">Tools a research AI needs</a>
-<a class="lvl3" href="#safety-charter-condensed-binds-every-material">Safety charter (condensed; binds every material)</a>
-<a class="lvl3" href="#file-conventions">File conventions</a></nav>
+<nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#golden-rules">Golden rules</a>
+<a href="#content-labels-mandatory-on-every-non-trivial-statement">Content labels (mandatory on every non-trivial statement)</a>
+<a href="#phases">Phases</a>
+<a class="lvl3" href="#phase-0-setup">Phase 0 — Setup</a>
+<a class="lvl3" href="#phase-1-gather-sources">Phase 1 — Gather sources</a>
+<a class="lvl3" href="#phase-2-method-registry">Phase 2 — Method registry</a>
+<a class="lvl3" href="#phase-3-action-plans">Phase 3 — Action plans</a>
+<a class="lvl3" href="#phase-4-invention">Phase 4 — Invention</a>
+<a class="lvl3" href="#phase-5-ranking">Phase 5 — Ranking</a>
+<a class="lvl3" href="#phase-6-site">Phase 6 — Site</a>
+<a class="lvl3" href="#phase-7-review-rounds-after-the-build">Phase 7 — Review rounds (after the build)</a>
+<a href="#tools-a-research-ai-needs">Tools a research AI needs</a>
+<a href="#safety-charter-condensed-binds-every-material">Safety charter (condensed; binds every material)</a>
+<a href="#file-conventions">File conventions</a></nav>
 </main>
 <footer>
   <div class="legend">
