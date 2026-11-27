@@ -98,15 +98,85 @@ def h1_of(text, fallback):
     return m.group(1) if m else fallback
 
 
+# Gap-fill evidence labels: canonical charter wording, shown in a hover tooltip.
+TAG_DEFS = {
+    "source_supported": ("source supported",
+        "source supported — stated by a cited primary source (URL/section, units, mass basis)"),
+    "ai_inference": ("ai inference",
+        "ai inference — reasoned from sources; the chain is shown and the claim is falsifiable"),
+    "ai_proposal": ("ai proposal",
+        "ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier"),
+    "parameter_not_located": ("parameter not located",
+        "parameter not located — no number exists at the required basis; what to measure is stated instead"),
+}
+
+
 def chip(m):
     lab = m.group(1)
-    return f'<span class="chip chip-{lab}">{lab.replace("_", " ")}</span>'
+    disp, tip = TAG_DEFS[lab]
+    tip_attr = esc(tip)
+    return (f'<span class="tag tag-{lab}" tabindex="0" data-tip="{tip_attr}" '
+            f'title="{tip_attr}">{disp}</span>')
+
+
+LIST_START = re.compile(r"^\s*(?:- |\* |\d+\. |\d+\) )")
+
+
+def normalize_lists(text):
+    """sane_lists needs a blank line before a list that follows a paragraph line;
+    source files don't always have one, and the list then renders as one dense
+    paragraph with literal dashes. Insert the missing blank line (outside code
+    fences; never between list items; never directly after tables/quotes/headings)."""
+    lines = text.splitlines()
+    out = []
+    in_code = False
+    for ln in lines:
+        if ln.lstrip().startswith("```"):
+            in_code = not in_code
+            out.append(ln)
+            continue
+        if (not in_code and LIST_START.match(ln) and out and out[-1].strip()
+                and not LIST_START.match(out[-1])
+                and not out[-1].lstrip().startswith(("#", "|", ">", "```"))):
+            out.append("")
+        out.append(ln)
+    return "\n".join(out) + "\n"
+
+
+BARE_NUM = re.compile(r"^(?:\d+(?:[.,]\d+)?(?:\s?[KkMmG]?(?:B|g|L|t|wt%|vol%|mg|kg|min|s|h))?)$")
+NUM_CLASS = re.compile(r"class=\"([^\"]*)\"")
+
+
+def enhance_tables(html):
+    """Markdown tables leave the converter without classes: give every generated
+    table the .tbl style, wrap it for horizontal scroll, and center bare-number
+    cells (score columns) so wide note columns keep their reading width."""
+    def fix_cell(m):
+        attrs, content = m.group(1), m.group(2)
+        if BARE_NUM.match(strip_tags(content)):
+            if "class=" in attrs:
+                attrs = NUM_CLASS.sub(lambda c: f'class="{c.group(1)} n"', attrs, count=1)
+            else:
+                attrs += ' class="n"'
+        return f"<td{attrs}>{content}</td>"
+
+    def fix_table(m):
+        t = m.group(0)
+        if t.startswith("<table>"):
+            t = '<table class="tbl">' + t[len("<table>"):]
+        if t.count("<th") >= 8:
+            t = t.replace('<table class="tbl">', '<table class="tbl wide">', 1)
+        t = re.sub(r"<td([^>]*)>(.*?)</td>", fix_cell, t, flags=re.S)
+        return '<div class="tblwrap">' + t + "</div>"
+
+    return re.sub(r"<table[^>]*>.*?</table>", fix_table, html, flags=re.S)
 
 
 def render_md(text):
     MD.reset()
-    html = MD.convert(text)
+    html = MD.convert(normalize_lists(text))
     html = re.sub(r"<code>(source_supported|ai_inference|ai_proposal|parameter_not_located)</code>", chip, html)
+    html = enhance_tables(html)
     return html, MD.toc_tokens
 
 
@@ -619,10 +689,10 @@ $toc
 </main>
 <footer>
   <div class="legend">
-    <span class="chip chip-source_supported">source supported</span>
-    <span class="chip chip-ai_inference">ai inference</span>
-    <span class="chip chip-ai_proposal">ai proposal</span>
-    <span class="chip chip-parameter_not_located">parameter not located</span>
+    <span class="tag tag-source_supported" tabindex="0" data-tip="source supported — stated by a cited primary source (URL/section, units, mass basis)">source supported</span>
+    <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>
+    <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>
+    <span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>
   </div>
   <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="${root}playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
   <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="${root}site-design.html">Design</a></p>

@@ -38,9 +38,40 @@ markdown stays the source of truth; the builder only presents it.
 - Fallbacks: `Inter, system-ui, -apple-system, "Segoe UI", sans-serif` and
   `"Fraunces", Georgia, "Times New Roman", serif`.
 - Scale: H1 clamp(1.9rem→2.4rem) in Fraunces 600; H2 1.35rem Fraunces 600; body 1rem/1.7;
-  long-form measure max 68ch; table text 0.92rem.
+  long-form measure max 68ch; table text 0.85-0.9rem.
 
-## 3. Color system
+## 3. The writing system (readability contract)
+
+The prose framework every page follows, so a reader with no or moderate domain expertise can
+scan a page before committing to reading it. It is plain-language writing with BLUF ("bottom
+line up front"), applied to research pages:
+
+1. **Answer first.** Every section opens with its conclusion — a bolded lead ("**The route in
+   one paragraph.** …") or a short lede. Background never comes before the answer.
+2. **One idea per paragraph.** At most ~3 sentences; a paragraph carrying two ideas is split,
+   and a paragraph longer than ~5 sentences becomes a list or a table.
+3. **Parallel facts become bullet lists**, each bullet opened by a **bold lead-in**
+   ("**Tar/PAH/semi-polars — polarity-graded extraction.** …"); **sequences become numbered
+   lists**; **comparisons become tables** (e.g. INV-01 § 1: registry entries vs. what the
+   invention does instead).
+4. **Claim, then evidence, in the same block.** The first sentence carries the claim; the
+   numbers, source anchors and caveats follow immediately — never a paragraph later.
+5. **Labels ride with the claim they qualify.** An evidence tag sits directly after the
+   sentence it grades (hover/focus shows the canonical charter definition); never clustered
+   at the end of a paragraph.
+6. **Units and anchors every time.** Every number carries its unit and its source anchor
+   ("35.4 g/L measured in dark liquor (M-03)").
+7. **One concept, one name.** Terms are used consistently and point to the glossary on first
+   use; synonyms are avoided.
+8. **Falsifiers are explicit.** Where a claim could be killed, the page names the test that
+   would kill it.
+
+The builder enforces the structural half mechanically: lists that directly follow a paragraph
+line are re-spaced so they render as lists (`normalize_lists`), generated tables get the
+data-table style with bare-number cells centered (`enhance_tables`), and long measures stay
+capped at 68ch.
+
+## 4. Color system
 
 | Token | Value | Use |
 | --- | --- | --- |
@@ -53,17 +84,21 @@ markdown stays the source of truth; the builder only presents it.
 | `--accent-ink` | `#0A5D38` | hover / active states |
 | `--gate-bg` / `--gate-line` | `#FDF3E7` / `#E4B85C` | stop-condition banner (calm amber, not alarm red) |
 
-### Evidence-label chips (the identity colors)
+### Evidence labels (the identity colors)
 
-| Label | Chip |
+| Label | Color |
 | --- | --- |
-| `source_supported` | green — `#E3F2EA` bg, `#0E7C4A` text |
-| `ai_inference` | blue — `#E4EEFB` bg, `#1D5FBF` text |
-| `ai_proposal` | amber — `#FCF1DF` bg, `#9A5B14` text |
-| `parameter_not_located` | slate — `#ECEFF1` bg, `#546E7A` text |
+| `source_supported` | green text `#0E7C4A` |
+| `ai_inference` | blue text `#1D5FBF` |
+| `ai_proposal` | amber text `#9A5B14` |
+| `parameter_not_located` | slate text `#546E7A` |
 
-Chips are pill-shaped, 0.78rem Inter 600, applied automatically by the builder wherever the
-backticked label token appears in body text, and listed as a legend in every footer.
+In body text labels render as **inline colored text with a dashed underline** — not pill
+chips — applied automatically by the builder wherever the backticked label token appears.
+Hovering (or keyboard-focusing) a label shows a tooltip with the canonical charter wording
+for that label; a `title` attribute carries the same text natively. The footer legend uses
+the same treatment, so the legend doubles as an explainer. The tinted backgrounds stay in
+the system for status badges and the phase strip.
 
 ### Status badges
 
@@ -71,7 +106,7 @@ Method status (`draft`, `proposed`, `pending_deep_dive`, `primary-source-read`,
 `experimentally-supported-in-source`) render as small bordered badges tinted from neutral to
 green as evidence strength rises.
 
-## 4. Information architecture
+## 5. Information architecture
 
 ```
 docs/
@@ -92,7 +127,7 @@ docs/
 URLs are stable and derived from file paths — a GitHub page and a site page share their slug,
 so cross-links never rot.
 
-## 5. Navigation model (easy navigation)
+## 6. Navigation model (easy navigation)
 
 Three persistent layers + one overlay:
 
@@ -111,7 +146,7 @@ Three persistent layers + one overlay:
 Every page also carries: **breadcrumbs** (Home › Cigarette butts › Methods › M-01), and
 **prev/next pagers** inside sequential groups (methods in registry order, sources alphabetical).
 
-## 6. The reading journey (designed path)
+## 7. The reading journey (designed path)
 
 The material dashboard is the journey's hub. Its "Start here" block prescribes one order:
 
@@ -130,7 +165,7 @@ The material dashboard is the journey's hub. Its "Start here" block prescribes o
 Each step's card states what you will learn and how long it takes ("short read", "deep read"),
 so the reader can enter anywhere without losing the thread.
 
-## 7. Page templates
+## 8. Page templates
 
 - **Home**: hero (one sentence + two buttons: *Browse materials*, *Read the playbook*), material
   cards (name, one-line blurb, version/phase badge, counts), footer legend.
@@ -140,9 +175,12 @@ so the reader can enter anywhere without losing the thread.
   phase-progress strip, migration note link.
 - **Method page**: spec-sheet grid rendered from the fenced metadata block (id, name, family,
   status, version, sources), body with H2 sections + right-rail TOC, prev/next among methods,
-  label chips inline, archive links rewritten automatically.
-- **Ranking page**: the three tables verbatim with sticky first column, zebra rows, tabular
-  numerals; gates explained above the tables; test-first list as numbered cards.
+  evidence labels inline (colored text + tooltip), archive links rewritten automatically.
+- **Ranking page**: the three tables verbatim with the data-table style (borders, zebra rows,
+  tinted header, tabular numerals, centered score columns); the 8+-column score tables get a
+  960px minimum width, scroll horizontally inside a rounded frame with the identity column
+  pinned and a guaranteed 250px note column; gates explained above the tables; test-first
+  list as numbered cards.
 - **Sources index**: 81-row table (id, figures, original → archive, AI text → archive raw,
   detail page) with a filter box and type-filter chips, client-side only.
 - **Source detail**: SOURCE.md content (or, for the 49 sources without SOURCE.md, an honest
@@ -150,16 +188,16 @@ so the reader can enter anywhere without losing the thread.
   "Full document lives in the butt-lab archive".
 - **Reports / research / charter / glossary / state / log**: plain article template with TOC.
 
-## 8. Components inventory
+## 9. Components inventory
 
-cards (material, journey, stat), chips (evidence labels), badges (status), banners
-(stop-condition), spec-sheet grid, tables (sticky header, zebra, tabular figures), callouts
-(archive links, caveat notes), breadcrumbs, TOC rail, pagers, search overlay, footer legend,
-404 page with the material map.
+cards (material, journey, stat), evidence-label tags with tooltips, badges (status), banners
+(stop-condition), spec-sheet grid, data tables (bordered frame, zebra, tinted header, pinned
+identity column, tabular figures), callouts (archive links, caveat notes), breadcrumbs, TOC
+rail, pagers, search overlay, footer legend, 404 page with the material map.
 
-## 9. Accessibility & responsiveness
+## 10. Accessibility & responsiveness
 
-- WCAG AA contrast on every token pair (paper/ink 13.9:1; chips ≥ 4.6:1).
+- WCAG AA contrast on every token pair (paper/ink 13.9:1; label and badge colors ≥ 4.5:1).
 - Keyboard: visible focus rings (2px accent offset), search fully operable, skip-to-content link.
 - Breakpoints: ≥1200px full three-column; 800-1200px two-column (TOC hides); <800px single
   column (sidebar → horizontal chips; tables scroll horizontally with sticky first column).
@@ -167,13 +205,13 @@ cards (material, journey, stat), chips (evidence labels), badges (status), banne
 - Semantic HTML throughout (`nav`, `main`, `article`, `aside`); one H1 per page; descriptive
   link text (never "here").
 
-## 10. Performance
+## 11. Performance
 
 Single CSS file (~15 KB), single JS file (~8 KB), fonts via Google Fonts with `display=swap`
 and system fallbacks, search index ≤ 500 KB, no framework, no images required for pages (the
 archive holds the figures). Every page renders instantly from the CDN.
 
-## 11. Build & deploy
+## 12. Build & deploy
 
 ```
 python3 tools/site-builder/build.py        # renders materials/ → docs/ (deterministic; safe to re-run)

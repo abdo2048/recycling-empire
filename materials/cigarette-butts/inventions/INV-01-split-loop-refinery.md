@@ -14,7 +14,14 @@ prior_project_hypotheses_inherited: [inventions/candidate-hypotheses-01.md H1/H2
 (Keep the block above as the file's metadata; the site builder reads it.)
 
 ## 0. Summary card
-One invented pilot route built entirely from verified components already on the shelf: the M-01 float/sink water split and three-tank wash, the M-02 polarity-graded polish, the M-03 alkaline cook with its demonstrated closed dark-liquor loop, and the M-07 pyrolysis destructor with the Chemosphere 2026 two-stage frame. The design principle is the field's biggest documented failure turned into the method's core deliverable: Chemosphere 2026 found NO complete toxicant mass balance in 37 screened studies, and INERIS (2018) faulted even the best-in-class route (UnB) for exactly that — "ne réalise pas de bilan de masse des polluants et ne présente aucun résultat d'analyse chimique portant sur le flux de pâte cellulosique". INV-01 therefore directs every input kilogram into five weighed, assayable streams (S1 CA product, S2 pulp, S3 liquor loop, S4 toxin concentrate, S5 pyrolysis outputs), with the metals question routed — not hidden: the wet stages do not remove bound metals, so the concentrate and char streams are where metals are PREDICTED to accumulate, and the ICP-MS gate decides before anything leaves the lab. An invention is not a claim of novelty, patentability, safety or deployability; every assumption below is `ai_proposal`/`ai_inference` with a falsifier, and desk research authorizes no physical trial.
+
+**The route in one paragraph.** INV-01 is a pilot route built entirely from verified components already on the shelf: the M-01 float/sink water split and three-tank wash, the M-02 polarity-graded polish, the M-03 alkaline cook with its demonstrated closed dark-liquor loop, and the M-07 pyrolysis destructor with the Chemosphere 2026 two-stage frame. Every input kilogram is directed into five weighed, assayable streams — S1 CA product, S2 pulp, S3 liquor loop, S4 toxin concentrate, S5 pyrolysis outputs — so the route's core deliverable is the complete toxicant mass balance.
+
+**Why that is the deliverable.** The field's biggest documented failure is the missing mass balance: Chemosphere 2026 found NO complete toxicant mass balance in 37 screened studies, and INERIS (2018) faulted even the best-in-class route (UnB) for exactly that — "ne réalise pas de bilan de masse des polluants et ne présente aucun résultat d'analyse chimique portant sur le flux de pâte cellulosique". INV-01 turns that failure into the method's core output.
+
+**How the metals question is handled — routed, not hidden.** The wet stages do not remove bound metals, so the concentrate and char streams are where metals are PREDICTED to accumulate, and the ICP-MS gate decides before anything leaves the lab.
+
+**What this document is not.** An invention is not a claim of novelty, patentability, safety or deployability; every assumption below is `ai_proposal`/`ai_inference` with a falsifier, and desk research authorizes no physical trial.
 
 ## 1. Mechanism and why it is different from existing registry entries
 
@@ -24,7 +31,19 @@ Mechanism, per toxin class (`ai_inference` from shelf sources; show-your-chain):
 - **Metals (Cd/Pb/As/Hg)** — NOT REMOVED by any wet stage (no chelation in the base design). They are ROUTED: the design predicts they concentrate in S4 (clarifloculation + lignin + chitosan sludges) and then in S5 char. This prediction is the route's metals falsifier, and the charter stop-condition still binds all product-facing work until ICP-MS passes.
 - **Cellulose acetate** — preserved as polymer in S1 (float; water is a non-solvent for CA), intentionally converted to cellulose pulp ONLY where the sink stream enters the cook (M-03 deacetylation: acetate IR bands gone in 10 min at 80 degC / 1% NaOH).
 
-Why it is different from every registry entry: M-01 has no answer for tar (its own admission), for its recycler sludge, or for metals; M-03 cooks the WHOLE butt and thereby destroys the CA polymer (60.1% mass kept as cellulose — computed) to make low-grade pulp while running the strongest liquor loop; M-02 proves product quality but is grams-scale with batch solvents and no waste story; M-07 converts everything thermally with no mass balance of toxins and a 200 g ceiling; TerraCycle-style routes keep the decontamination step a trade secret and Bloomberg 2022 documents the storage/disposal problem that a closed loop avoids. No existing entry splits the feed BEFORE cooking, reuses one liquor train across BOTH the wash and the cook, or gives the concentrated hazardous tail a designed destructor stage. The prior project hypotheses (candidate-hypotheses-01 H1/H2) proposed staged washing and contaminant-rejecting recovery symbolically; INV-01 is the concrete instantiation with numbers and a falsifier ledger.
+Why it is different from every registry entry:
+
+| Registry entry | What it leaves unanswered | What INV-01 does instead |
+| --- | --- | --- |
+| M-01 water wash | No answer for tar (its own admission), for its recycler sludge, or for metals | Adds the ethanol polish, the bleed-with-cap rule, and makes the sludge a NAMED stream (S4) |
+| M-03 UnB pulping | Cooks the WHOLE butt and thereby destroys the CA polymer (60.1% mass kept as cellulose — computed) to make low-grade pulp, while running the strongest liquor loop | Keeps CA polymer intact by splitting the feed before the cook |
+| M-02 De Fenzo wash | Proves product quality but is grams-scale with batch solvents and no waste story | Keeps the polish as a stage, not a route, and pays the solvent cost only on the S1 stream |
+| M-07 pyrolysis | Converts everything thermally with no mass balance of toxins and a 200 g ceiling | Uses pyrolysis only where it is strong — destroying a small, concentrated, pre-characterized tail — and imports the two-stage frame |
+| TerraCycle-style routes | Keep the decontamination step a trade secret; Bloomberg 2022 documents the storage/disposal problem that a closed loop avoids | Closes the loop: every extracted pollutant has a named destination (S4 -> S5) |
+
+**Three things no existing entry does.** No existing entry (1) splits the feed BEFORE cooking, (2) reuses one liquor train across BOTH the wash and the cook, or (3) gives the concentrated hazardous tail a designed destructor stage.
+
+**Relation to the prior project hypotheses.** The prior project hypotheses (candidate-hypotheses-01 H1/H2) proposed staged washing and contaminant-rejecting recovery symbolically; INV-01 is the concrete instantiation with numbers and a falsifier ledger.
 
 ## 2. Full process spec (10 kg dried whole-butt pilot cycle; every number labeled)
 
