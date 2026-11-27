@@ -54,7 +54,7 @@
 </ul>
 <p>Scale note: the paper works at grams of butts. Nothing in it blocks kg-scale batches, but every liquor ratio in section 3 is a proposal to be validated at 50 g first.</p>
 <h2 id="3-gap-fill-table-labeled-expert-estimates">3. Gap-fill table — labeled expert estimates</h2>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>#</th>
@@ -66,77 +66,77 @@
 </thead>
 <tbody>
 <tr>
-<td>1</td>
+<td class="n">1</td>
 <td>Solid-to-liquid ratio, each stage</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: hot-water stage 1:20 w/v (e.g. 50 g butts : 1 L); cold rinses and ethanol stages 1:10 w/v</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: hot-water stage 1:20 w/v (e.g. 50 g butts : 1 L); cold rinses and ethanol stages 1:10 w/v</td>
 <td>Ratios are absent from the paper. 1:20 keeps the tow freely suspended and holds the leaching gradient across 60 min; 1:10 suffices for short rinse stages.</td>
 <td>Nicotine assay of each spent liquor across 3 ratio variants (1:10 / 1:20 / 1:40). Acceptance: liquor concentration plateaus — higher ratio adds nothing.</td>
 </tr>
 <tr>
-<td>2</td>
+<td class="n">2</td>
 <td>Agitation</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: orbital shaker 150 rpm (or manual swirl every 5 min at bench scale)</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: orbital shaker 150 rpm (or manual swirl every 5 min at bench scale)</td>
 <td>Not described in the paper; diffusion-limited leaching from dense tow needs convection.</td>
 <td>Parallel static vs 150 rpm runs; nicotine in spent liquor. Acceptance: agitated &gt;=2x the static removal per unit time.</td>
 </tr>
 <tr>
-<td>3</td>
+<td class="n">3</td>
 <td>Ethanol-stage temperature</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: ambient 20-25 degC</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: ambient 20-25 degC</td>
 <td>The paper names no temperature for the ethanol stages; phenol/PAH removal is solubility-limited, not rate-limited, at bench timescales. Avoids heating a flammable solvent.</td>
 <td>PAH screen on product: ambient vs 40 degC ethanol stage. Acceptance: no significant gain at 40 degC -&gt; keep ambient.</td>
 </tr>
 <tr>
-<td>4</td>
+<td class="n">4</td>
 <td>CA yield per mass of butts</td>
-<td><span class="chip chip-ai_inference">ai inference</span>: 45-60% of input butt mass as dried purified CA (same derivation as M-01 row 4)</td>
+<td><span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" title="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>: 45-60% of input butt mass as dried purified CA (same derivation as M-01 row 4)</td>
 <td>No yield in the paper. Filter tow dominates butt mass; paper and organic material are removed upstream; TGA residue ~10% bounds inorganic content.</td>
 <td>Weigh dried CA from a 50 g run x3. Acceptance band 40-70%.</td>
 </tr>
 <tr>
-<td>5</td>
+<td class="n">5</td>
 <td>Insoluble-fines removal before casting</td>
-<td><span class="chip chip-parameter_not_located">parameter not located</span> (not described); <span class="chip chip-ai_proposal">ai proposal</span>: filter the 5% acetone solution through ~100 um mesh (or settle 10 min and decant) before casting</td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span> (not described); <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: filter the 5% acetone solution through ~100 um mesh (or settle 10 min and decant) before casting</td>
 <td>A 2 mm transparent film from unwashed-but purified tow will show specks if ash/paper fines ride along; the paper does not say how the solution was clarified.</td>
 <td>Cast paired films with/without filtration. Acceptance: visible-defect count per 10 cm2 drops to &lt;=1 with filtration; else fines are not the defect source.</td>
 </tr>
 <tr>
-<td>6</td>
+<td class="n">6</td>
 <td>Plasticizer identity and dose</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: triacetin at 20 wt% of CA mass (e.g. 1 g per 5 g CA in 100 g of 5% solution — computed)</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: triacetin at 20 wt% of CA mass (e.g. 1 g per 5 g CA in 100 g of 5% solution — computed)</td>
 <td>The paper says plasticizer is needed but not which. Triacetin is the plasticiser already industrially used in CA filter tow, so it is feedstock-compatible and food-contact-listed. Arithmetic: 100 g of 5% w/w solution holds 5.0 g CA; 20 wt% of CA = 1.0 g triacetin.</td>
 <td>Cast films at 0 / 10 / 20 / 30 wt% triacetin; 180 deg bend test + thickness. Acceptance: 180 deg bend without cracking at 20 wt%.</td>
 </tr>
 <tr>
-<td>7</td>
+<td class="n">7</td>
 <td>Sterilisation parameters</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: dry-heat 105 degC for 30 min applied to the dried CA (extends the disclosed 60 degC dry) or a doubled ethanol stage as sanitiser</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: dry-heat 105 degC for 30 min applied to the dried CA (extends the disclosed 60 degC dry) or a doubled ethanol stage as sanitiser</td>
 <td>"Sterilized" is mentioned without parameters [S1 sec. 2]. 105 degC dry heat sits far below CA's Tg (192 degC [S1]) and is a standard dry-heat sanitisation band.</td>
 <td>Total viable count before/after; acceptance: no growth on plate count. If fails, escalate to the qualified-facility step, not to improvisation.</td>
 </tr>
 <tr>
-<td>8</td>
+<td class="n">8</td>
 <td>Contaminant removal efficiency (nicotine, PAHs)</td>
-<td><span class="chip chip-parameter_not_located">parameter not located</span>; working estimate <span class="chip chip-ai_proposal">ai proposal</span>: the full sequence removes &gt;=90% of extractable nicotine and &gt;=50% of 16-EPA-PAH content</td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>; working estimate <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: the full sequence removes &gt;=90% of extractable nicotine and &gt;=50% of 16-EPA-PAH content</td>
 <td>The paper proves property preservation, not detoxification; polarity logic predicts the water stages take nicotine and the ethanol stages take semi-polars.</td>
 <td>Nicotine (HPLC) per stage liquor + PAH screen (16 EPA) on feed and product. Decision rule: nicotine &lt;90% -&gt; extend hot-water stage to 90 min before changing chemistry.</td>
 </tr>
 <tr>
-<td>9</td>
+<td class="n">9</td>
 <td>Metals in product (Cd, Pb, As, Hg)</td>
-<td><span class="chip chip-parameter_not_located">parameter not located</span> — the paper reports no metals data; <strong>stop-condition: route on hold for product-facing work until feedstock metals are characterised</strong></td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span> — the paper reports no metals data; <strong>stop-condition: route on hold for product-facing work until feedstock metals are characterised</strong></td>
 <td>Water/ethanol washing does not chelate bound metals; residual ash (~10% TGA residue) is the suspect fraction.</td>
 <td>ICP-MS on dried CA + all spent liquors. Gate for any product use.</td>
 </tr>
 <tr>
-<td>10</td>
+<td class="n">10</td>
 <td>Scale-up path</td>
-<td><span class="chip chip-parameter_not_located">parameter not located</span> — paper is lab-scale only; <span class="chip chip-ai_inference">ai inference</span>: kg-scale needs M-01-style tanks and a solvent-recovery still for the ethanol/acetone loops</td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span> — paper is lab-scale only; <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" title="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>: kg-scale needs M-01-style tanks and a solvent-recovery still for the ethanol/acetone loops</td>
 <td>Batch solvent handling (2 ethanol washes + acetone for film) is the cost driver at scale, not the washing chemistry.</td>
 <td>1 kg pilot in M-01 tanks; log solvent consumption per kg; acceptance: ethanol+acetone losses &lt;=0.5 L/kg before any economic claim.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="4-safety-notes">4. Safety notes</h2>
 <ul>
 <li><strong>Ethanol 99% and acetone:</strong> both highly flammable (acetone flash point ~-20 degC; ethanol ~13 degC — class data, not from [S1]); fume hood, no ignition sources, grounded glassware/metal, small quantities per session.</li>
@@ -149,12 +149,14 @@
 <li>Desk research authorises no physical trial: qualified facility, risk assessment, lawful waste handling, named human actor.</li>
 </ul>
 <h2 id="5-what-the-team-must-verify-in-lab">5. What the team must verify in lab</h2>
-<p>Ordered by information value:
-1. <strong>Reproduce the wash sequence at 50 g scale</strong> (steps 4-7 with gap rows 1-3 proposals): nicotine per stage liquor, PAH screen on product. Confirms/kills rows 1, 2, 3, 8.
-2. <strong>Product equivalence QC:</strong> FTIR (carbonyl 1739 cm-1 band present, no new contaminant bands) + TGA (Tg/Tm within +-3 degC of the paper's 192/225 degC; degradation onset near 367 degC). Confirms the paper's central claim replicates on the team's feedstock; kills the route's quality premise if it fails.
-3. <strong>Film casting trial</strong> with/without filtration, 0/10/20/30 wt% triacetin, bend test. Confirms/kills rows 5, 6.
-4. <strong>Metals gate:</strong> ICP-MS on product + liquors (row 9) before any product-facing claim.
-5. Only after 1-4: <strong>1 kg solvent-accounted pilot</strong> (row 10).</p>
+<p>Ordered by information value:</p>
+<ol>
+<li><strong>Reproduce the wash sequence at 50 g scale</strong> (steps 4-7 with gap rows 1-3 proposals): nicotine per stage liquor, PAH screen on product. Confirms/kills rows 1, 2, 3, 8.</li>
+<li><strong>Product equivalence QC:</strong> FTIR (carbonyl 1739 cm-1 band present, no new contaminant bands) + TGA (Tg/Tm within +-3 degC of the paper's 192/225 degC; degradation onset near 367 degC). Confirms the paper's central claim replicates on the team's feedstock; kills the route's quality premise if it fails.</li>
+<li><strong>Film casting trial</strong> with/without filtration, 0/10/20/30 wt% triacetin, bend test. Confirms/kills rows 5, 6.</li>
+<li><strong>Metals gate:</strong> ICP-MS on product + liquors (row 9) before any product-facing claim.</li>
+<li>Only after 1-4: <strong>1 kg solvent-accounted pilot</strong> (row 10).</li>
+</ol>
 <h2 id="6-sources">6. Sources</h2>
 <ul>
 <li>[S1] De Fenzo A., Giordano M., Sansone L. (2020). "A Clean Process for Obtaining High-Quality Cellulose Acetate from Cigarette Butts." Materials 13(21):4710. doi:10.3390/ma13214710; PMID 33105718; PMC7659942. Full text: https://pmc.ncbi.nlm.nih.gov/articles/PMC7659942/ (open access); PDF: https://pmc.ncbi.nlm.nih.gov/articles/PMC7659942/pdf/materials-13-04710.pdf. Shelf record: <code>sources/defenzo-2020-materials/SOURCE.md</code> (protocol numbers captured 2026-11-24; document.pdf and text.md not yet shelved — operator conversion welcome). Funding/acknowledgement: Essequadro S.r.l. supplied butts and test support (declared in the paper).</li>
@@ -173,10 +175,10 @@
 </main>
 <footer>
   <div class="legend">
-    <span class="chip chip-source_supported">source supported</span>
-    <span class="chip chip-ai_inference">ai inference</span>
-    <span class="chip chip-ai_proposal">ai proposal</span>
-    <span class="chip chip-parameter_not_located">parameter not located</span>
+    <span class="tag tag-source_supported" tabindex="0" data-tip="source supported — stated by a cited primary source (URL/section, units, mass basis)">source supported</span>
+    <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>
+    <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>
+    <span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>
   </div>
   <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="../../../playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
   <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="../../../site-design.html">Design</a></p>

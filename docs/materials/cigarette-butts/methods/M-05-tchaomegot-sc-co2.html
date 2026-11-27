@@ -53,7 +53,7 @@
 <li>Scale note: even a 5-20 L lab SC-CO2 extractor is specialized equipment with certified pressure vessels — student-lab access is unlikely; partner-facility work is the realistic path. The charter's no-DIY-pressure-vessel rule binds absolutely here.</li>
 </ul>
 <h2 id="3-gap-fill-table-labeled-expert-estimates">3. Gap-fill table — labeled expert estimates</h2>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>#</th>
@@ -65,77 +65,77 @@
 </thead>
 <tbody>
 <tr>
-<td>1</td>
+<td class="n">1</td>
 <td>Operating point inside 280-320 bar / 15-80 degC</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: <strong>300 bar / 45 degC</strong>, 30-60 min contact, 2-3 cycles per batch</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: <strong>300 bar / 45 degC</strong>, 30-60 min contact, 2-3 cycles per batch</td>
 <td>Mid-range of the preferred window maximizes margin on both axes; CO2 density ~0.8-0.9 g/cm3 there — good solvation; nicotine is moderately polar, needs the high-pressure band or cosolvent.</td>
 <td>Partner-facility run: residual nicotine (HPLC) in fiber vs time/cycles; plateau = sufficient.</td>
 </tr>
 <tr>
-<td>2</td>
+<td class="n">2</td>
 <td>Co-solvent choice and dose</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: ethanol <strong>5 vol%</strong> of CO2</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: ethanol <strong>5 vol%</strong> of CO2</td>
 <td>Patent lists ethanol without dose; 1-10 vol% is the conventional SC-CO2 modifier band; ethanol is the least hazardous menu item that raises polarity for nicotine/phenols.</td>
 <td>Compare plain CO2 vs +5% ethanol on nicotine + phenol removal; if no gain at 5%, test 10% or drop cosolvent.</td>
 </tr>
 <tr>
-<td>3</td>
+<td class="n">3</td>
 <td>Chelating extractant (calixarenes)</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: <strong>skip in first trials</strong> — run plain CO2 and measure metals first</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: <strong>skip in first trials</strong> — run plain CO2 and measure metals first</td>
 <td>Calixarenes are expensive specialty molecules; SC-CO2 alone does not remove ionic/metals species without modifiers — the patent itself admits inorganic extraction needs extractants.</td>
 <td>ICP-MS of fiber before/after plain-CO2 run. Expect little change -&gt; metals handled by the feedstock-cleaning upstream step, not SCCO2.</td>
 </tr>
 <tr>
-<td>4</td>
+<td class="n">4</td>
 <td>Humidification level</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: pre-condition fibers to <strong>10-15% moisture</strong></td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: pre-condition fibers to <strong>10-15% moisture</strong></td>
 <td>Water is named as nicotine co-solvent without a dose; 10-15% is a typical fiber conditioning level that aids polar extraction without free water pooling.</td>
 <td>Pair runs dry vs conditioned; nicotine removal delta.</td>
 </tr>
 <tr>
-<td>5</td>
+<td class="n">5</td>
 <td>Residue concentrate quantity</td>
-<td>Conflict kept: S3 "a few grams per 10 kg" (<strong>~0.03-0.1 wt%</strong>) vs circulated press figure <strong>0.3%</strong> — neither is a measurement; <span class="chip chip-parameter_not_located">parameter not located</span> pending team-scale weigh</td>
+<td>Conflict kept: S3 "a few grams per 10 kg" (<strong>~0.03-0.1 wt%</strong>) vs circulated press figure <strong>0.3%</strong> — neither is a measurement; <span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span> pending team-scale weigh</td>
 <td>The B3 figure is an in-document estimate; the press figure is not in any patent.</td>
 <td>Weigh separator residue per batch at partner facility; assay it (nicotine, PAHs, metals) — this defines the hazardous-waste stream.</td>
 </tr>
 <tr>
-<td>6</td>
+<td class="n">6</td>
 <td>Metals in cleaned fiber</td>
-<td><span class="chip chip-parameter_not_located">parameter not located</span>; <strong>stop-condition binds</strong> — Cd/Pb/As/Hg uncharacterised in product</td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>; <strong>stop-condition binds</strong> — Cd/Pb/As/Hg uncharacterised in product</td>
 <td>Nothing in the family measures metals; row-3 reasoning says plain SCCO2 will not touch ionic metals.</td>
 <td>ICP-MS on cleaned fiber (gate for insulation boards — building products are contact products).</td>
 </tr>
 <tr>
-<td>7</td>
+<td class="n">7</td>
 <td>50/60 bar press quotes vs patent 280-320 bar</td>
-<td><span class="chip chip-ai_inference">ai inference</span>: the press figure likely describes a pilot running in the dense-liquid/near-critical region (&lt;73.85 bar), which claim 1's "dense fluid" language tolerates but the "supercritical" framing contradicts; keep both</td>
+<td><span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" title="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>: the press figure likely describes a pilot running in the dense-liquid/near-critical region (&lt;73.85 bar), which claim 1's "dense fluid" language tolerates but the "supercritical" framing contradicts; keep both</td>
 <td>The 50/60 bar number appears in NO patent document; the nested preference chain ends at 280-320 bar.</td>
 <td>Ask the company (or run) both points; nicotine removal at 60 bar vs 300 bar decides whether the press point is a real process variant or a simplification.</td>
 </tr>
 <tr>
-<td>8</td>
+<td class="n">8</td>
 <td>Contact time within 1 min-8 h</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: 30-60 min (see row 1); ultrasound assist <strong>33 kHz, 5-10 min</strong> if available</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: 30-60 min (see row 1); ultrasound assist <strong>33 kHz, 5-10 min</strong> if available</td>
 <td>The range spans 3 orders of magnitude; lab SC-CO2 extraction of plant alkaloids typically runs 30-120 min; ultrasound parameters are entirely unspecified in the patent.</td>
 <td>Time-series residual nicotine; ultrasound on/off comparison.</td>
 </tr>
 <tr>
-<td>9</td>
+<td class="n">9</td>
 <td>Board performance</td>
-<td><span class="chip chip-parameter_not_located">parameter not located</span>: no thermal conductivity or fire class data in the family; S3 gives cure (170 degC/15 min) and binder ratio (15/85) only</td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>: no thermal conductivity or fire class data in the family; S3 gives cure (170 degC/15 min) and binder ratio (15/85) only</td>
 <td>The end-use claims are the family's granted core (S2) — but no performance numbers back them.</td>
 <td>Partner-facility board trial: lambda measurement + reaction-to-fire screening (E-class expectation for untested organic boards).</td>
 </tr>
 <tr>
-<td>10</td>
+<td class="n">10</td>
 <td>Economics / cycle time</td>
-<td><span class="chip chip-parameter_not_located">parameter not located</span> in family; company communicates via press (self-report)</td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span> in family; company communicates via press (self-report)</td>
 <td>No throughput, energy, or cost data in any of the four documents.</td>
 <td>Only partner-facility trial data can fill this; treat as unknown, not zero.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="4-safety-notes">4. Safety notes</h2>
 <ul>
 <li><strong>High-pressure equipment only</strong>: certified autoclave, pressure relief devices, trained operators, never improvised — the charter's no-DIY-pressure-vessel rule is absolute for this route. 300 bar stored energy is lethal-class hazard. [S1]</li>
@@ -147,11 +147,13 @@
 <li>Desk research authorizes no physical trial; qualified facility, risk assessment, lawful waste handling, named human actor.</li>
 </ul>
 <h2 id="5-what-the-team-must-verify-in-lab">5. What the team must verify in lab</h2>
-<p>Realistically via a partner facility with a certified SC-CO2 extractor (5-20 L):
-1. <strong>Decontamination truth test</strong> (rows 1, 2, 4, 8): 3-point matrix — plain CO2 300 bar/45 degC/30 min vs +5% ethanol vs humidified; residual nicotine + phenols + PAHs in fiber; weigh + assay the separator concentrate (row 5). THE experiment: fills the family's total quantitative void.
-2. <strong>Metals gate</strong> (rows 3, 6): ICP-MS on cleaned fiber; decides whether chelation is ever needed.
-3. <strong>Board trial</strong> (row 9): 15% Trevira blend, 170 degC/15 min cure; thermal conductivity + fire screening.
-4. Desktop: register status of FR3102180A1 (pending-&gt;grant?) and US12065781B2 annuities (row in registry); press-quote reconciliation (row 7).</p>
+<p>Realistically via a partner facility with a certified SC-CO2 extractor (5-20 L):</p>
+<ol>
+<li><strong>Decontamination truth test</strong> (rows 1, 2, 4, 8): 3-point matrix — plain CO2 300 bar/45 degC/30 min vs +5% ethanol vs humidified; residual nicotine + phenols + PAHs in fiber; weigh + assay the separator concentrate (row 5). THE experiment: fills the family's total quantitative void.</li>
+<li><strong>Metals gate</strong> (rows 3, 6): ICP-MS on cleaned fiber; decides whether chelation is ever needed.</li>
+<li><strong>Board trial</strong> (row 9): 15% Trevira blend, 170 degC/15 min cure; thermal conductivity + fire screening.</li>
+<li>Desktop: register status of FR3102180A1 (pending-&gt;grant?) and US12065781B2 annuities (row in registry); press-quote reconciliation (row 7).</li>
+</ol>
 <h2 id="6-sources">6. Sources</h2>
 <ul>
 <li>[S1] FR3102180A1 — "Nettoyage des fibres issues des megots de cigarette par mise en contact avec un fluide supercritique et recyclage des fibres depolluees", PAQUE Julien, filed 28.01.2020, priority 22.10.2019 FR1911822, published 23.04.2021 (Bulletin 21/16). Shelf: <code>sources/fr3102180a1/</code>. Family: WO2021079050A1, US12065781B2 (registry), EP counterpart not on shelf.</li>
@@ -172,10 +174,10 @@
 </main>
 <footer>
   <div class="legend">
-    <span class="chip chip-source_supported">source supported</span>
-    <span class="chip chip-ai_inference">ai inference</span>
-    <span class="chip chip-ai_proposal">ai proposal</span>
-    <span class="chip chip-parameter_not_located">parameter not located</span>
+    <span class="tag tag-source_supported" tabindex="0" data-tip="source supported — stated by a cited primary source (URL/section, units, mass basis)">source supported</span>
+    <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>
+    <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>
+    <span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>
   </div>
   <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="../../../playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
   <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="../../../site-design.html">Design</a></p>

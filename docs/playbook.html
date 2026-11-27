@@ -43,7 +43,7 @@
 <li><strong>The endpoint rule.</strong> A review round happens only if the previous round produced accepted changes or new evidence arrived (lab findings, new sources). A round with no accepted changes freezes the project at a stable version. Done means done.</li>
 </ol>
 <h2 id="content-labels-mandatory-on-every-non-trivial-statement">Content labels (mandatory on every non-trivial statement)</h2>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Label</th>
@@ -52,24 +52,24 @@
 </thead>
 <tbody>
 <tr>
-<td><span class="chip chip-source_supported">source supported</span></td>
+<td><span class="tag tag-source_supported" tabindex="0" data-tip="source supported — stated by a cited primary source (URL/section, units, mass basis)" title="source supported — stated by a cited primary source (URL/section, units, mass basis)">source supported</span></td>
 <td>Stated by a cited primary source; include citation, units, mass basis.</td>
 </tr>
 <tr>
-<td><span class="chip chip-ai_inference">ai inference</span></td>
+<td><span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" title="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span></td>
 <td>Reasoned by the AI from sources; show the reasoning chain.</td>
 </tr>
 <tr>
-<td><span class="chip chip-ai_proposal">ai proposal</span></td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span></td>
 <td>Invented or estimated by the AI; testable assumption; needs reasoning + falsifier.</td>
 </tr>
 <tr>
-<td><span class="chip chip-parameter_not_located">parameter not located</span></td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span></td>
 <td>No number exists at the required basis; say what is missing and how to measure it.</td>
 </tr>
 </tbody>
-</table>
-<p>Secondhand claims count as <span class="chip chip-ai_inference">ai inference</span> until checked against the primary source. Company self-report is not measurement. "Clean / safe / validated" are never claimed — the team's lab decides.</p>
+</table></div>
+<p>Secondhand claims count as <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" title="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span> until checked against the primary source. Company self-report is not measurement. "Clean / safe / validated" are never claimed — the team's lab decides.</p>
 <h2 id="phases">Phases</h2>
 <h3 id="phase-0-setup">Phase 0 — Setup</h3>
 <p>Clone <code>template/</code> to <code>materials/&lt;slug&gt;/</code>; fill <code>material.yaml</code>; initialize STATE.md and LOG.md.</p>
@@ -94,7 +94,7 @@ Output: <code>sources/&lt;source-id&gt;/</code> per source — <code>document.pd
 <p><strong>Prompt:</strong> "Phase 3: write full action plans for the priority methods, one file per method, using METHOD-TEMPLATE.md. Every gap gets a labeled estimate with reasoning and a falsifier. Then write summary cards for the rest."</p>
 </blockquote>
 <h3 id="phase-4-invention">Phase 4 — Invention</h3>
-<p>The AI designs its own method from the accumulated knowledge: <code>inventions/INV-XX-&lt;slug&gt;.md</code> — full recipe with numbers, every assumption <span class="chip chip-ai_proposal">ai proposal</span>, explicit relation to the sources it builds on, falsifiers, safety notes. An invention is not a claim of novelty or patentability.</p>
+<p>The AI designs its own method from the accumulated knowledge: <code>inventions/INV-XX-&lt;slug&gt;.md</code> — full recipe with numbers, every assumption <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>, explicit relation to the sources it builds on, falsifiers, safety notes. An invention is not a claim of novelty or patentability.</p>
 <blockquote>
 <p><strong>Prompt:</strong> "Phase 4: design one invented method for <X>, built from the gathered knowledge. Full recipe with numbers; every assumption labeled ai_proposal; falsifiers for the load-bearing claims; safety notes."</p>
 </blockquote>
@@ -113,7 +113,7 @@ Honest limits: paywalled papers give abstracts only until the operator supplies 
 <h2 id="safety-charter-condensed-binds-every-material">Safety charter (condensed; binds every material)</h2>
 <p>Desk research authorizes no physical trial. Contaminated waste, chemicals, pressure, and emissions require qualified facilities, a risk assessment, lawful disposal, and a named human actor. No DIY pressure vessels. No clearance based on odor, appearance, or a single assay. Material-specific stop-conditions (cigarette butts: Cd/Pb/As/Hg uncharacterised means the route is on hold) live in the material's STATE.md and bind all work.</p>
 <h2 id="file-conventions">File conventions</h2>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Thing</th>
@@ -158,7 +158,7 @@ Honest limits: paywalled papers give abstracts only until the operator supplies 
 <td>STATE.md <code>version:</code> field; v0.x while building, v1.0 = first complete reviewed version</td>
 </tr>
 </tbody>
-</table>
+</table></div>
   
 </article>
 <nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#recycling-empire-playbook">Recycling Empire — Playbook</a>
@@ -171,10 +171,10 @@ Honest limits: paywalled papers give abstracts only until the operator supplies 
 </main>
 <footer>
   <div class="legend">
-    <span class="chip chip-source_supported">source supported</span>
-    <span class="chip chip-ai_inference">ai inference</span>
-    <span class="chip chip-ai_proposal">ai proposal</span>
-    <span class="chip chip-parameter_not_located">parameter not located</span>
+    <span class="tag tag-source_supported" tabindex="0" data-tip="source supported — stated by a cited primary source (URL/section, units, mass basis)">source supported</span>
+    <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>
+    <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>
+    <span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>
   </div>
   <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="./playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
   <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="./site-design.html">Design</a></p>

@@ -35,24 +35,34 @@ markdown stays the source of truth; the builder only presents it.</p>
 <hr />
 <h2 id="1-design-goals">1. Design goals</h2>
 <ol>
-<li><strong>Read first.</strong> The content is long-form, citation-heavy research. The UI exists to make a
+<li>
+<p><strong>Read first.</strong> The content is long-form, citation-heavy research. The UI exists to make a
    non-expert (the team, a reviewer, a funder) <em>finish</em> reading a method page — calm colors,
-   one readable measure, no visual noise.</li>
-<li><strong>Trust through labeling.</strong> The four evidence labels are the project's identity. They get a
-   permanent color system, a legend in the footer, and inline chips in text.</li>
-<li><strong>The stop-condition is never hidden.</strong> The metals gate (Cd/Pb/As/Hg) banner appears on the
+   one readable measure, no visual noise.</p>
+</li>
+<li>
+<p><strong>Trust through labeling.</strong> The four evidence labels are the project's identity. They get a
+   permanent color system, a legend in the footer, and inline chips in text.</p>
+</li>
+<li>
+<p><strong>The stop-condition is never hidden.</strong> The metals gate (Cd/Pb/As/Hg) banner appears on the
    home page, every material dashboard, and the ranking page. It is part of the design, not a
-   footnote.</li>
-<li><strong>Zero-JavaScript-by-default.</strong> The only JS is the search overlay and the table-of-contents
+   footnote.</p>
+</li>
+<li>
+<p><strong>Zero-JavaScript-by-default.</strong> The only JS is the search overlay and the table-of-contents
    highlight; every page works without it. No frameworks, no build dependencies beyond Python
-   <code>markdown</code> + <code>PyYAML</code>.</li>
-<li><strong>No monospace anywhere.</strong> The user's explicit rule: mono fonts read as "developer tool",
+   <code>markdown</code> + <code>PyYAML</code>.</p>
+</li>
+<li>
+<p><strong>No monospace anywhere.</strong> The user's explicit rule: mono fonts read as "developer tool",
    not research. Code spans, IDs, temperatures and numbers are set in Inter (tabular figures
-   where alignment matters).</li>
+   where alignment matters).</p>
+</li>
 </ol>
 <hr />
 <h2 id="2-typography">2. Typography</h2>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Role</th>
@@ -77,16 +87,65 @@ markdown stays the source of truth; the builder only presents it.</p>
 <td>Code spans get a subtle paper-shade background instead of a font change</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <ul>
 <li>Load: one <code>display=swap</code> stylesheet, weights 400/500/600/700 only (fast).</li>
-<li>Fallbacks: <code>Inter, system-ui, -apple-system, "Segoe UI", sans-serif</code> and
-  <code>"Fraunces", Georgia, "Times New Roman", serif</code>.</li>
-<li>Scale: H1 clamp(1.9rem→2.4rem) in Fraunces 600; H2 1.35rem Fraunces 600; body 1rem/1.7;
-  long-form measure max 68ch; table text 0.92rem.</li>
+<li>
+<p>Fallbacks: <code>Inter, system-ui, -apple-system, "Segoe UI", sans-serif</code> and
+  <code>"Fraunces", Georgia, "Times New Roman", serif</code>.</p>
+</li>
+<li>
+<p>Scale: H1 clamp(1.9rem→2.4rem) in Fraunces 600; H2 1.35rem Fraunces 600; body 1rem/1.7;
+  long-form measure max 68ch; table text 0.85-0.9rem.</p>
+</li>
 </ul>
-<h2 id="3-color-system">3. Color system</h2>
-<table>
+<h2 id="3-the-writing-system-readability-contract">3. The writing system (readability contract)</h2>
+<p>The prose framework every page follows, so a reader with no or moderate domain expertise can
+scan a page before committing to reading it. It is plain-language writing with BLUF ("bottom
+line up front"), applied to research pages:</p>
+<ol>
+<li>
+<p><strong>Answer first.</strong> Every section opens with its conclusion — a bolded lead ("<strong>The route in
+   one paragraph.</strong> …") or a short lede. Background never comes before the answer.</p>
+</li>
+<li>
+<p><strong>One idea per paragraph.</strong> At most ~3 sentences; a paragraph carrying two ideas is split,
+   and a paragraph longer than ~5 sentences becomes a list or a table.</p>
+</li>
+<li>
+<p><strong>Parallel facts become bullet lists</strong>, each bullet opened by a <strong>bold lead-in</strong>
+   ("<strong>Tar/PAH/semi-polars — polarity-graded extraction.</strong> …"); <strong>sequences become numbered
+   lists</strong>; <strong>comparisons become tables</strong> (e.g. INV-01 § 1: registry entries vs. what the
+   invention does instead).</p>
+</li>
+<li>
+<p><strong>Claim, then evidence, in the same block.</strong> The first sentence carries the claim; the
+   numbers, source anchors and caveats follow immediately — never a paragraph later.</p>
+</li>
+<li>
+<p><strong>Labels ride with the claim they qualify.</strong> An evidence tag sits directly after the
+   sentence it grades (hover/focus shows the canonical charter definition); never clustered
+   at the end of a paragraph.</p>
+</li>
+<li>
+<p><strong>Units and anchors every time.</strong> Every number carries its unit and its source anchor
+   ("35.4 g/L measured in dark liquor (M-03)").</p>
+</li>
+<li>
+<p><strong>One concept, one name.</strong> Terms are used consistently and point to the glossary on first
+   use; synonyms are avoided.</p>
+</li>
+<li>
+<p><strong>Falsifiers are explicit.</strong> Where a claim could be killed, the page names the test that
+   would kill it.</p>
+</li>
+</ol>
+<p>The builder enforces the structural half mechanically: lists that directly follow a paragraph
+line are re-spaced so they render as lists (<code>normalize_lists</code>), generated tables get the
+data-table style with bare-number cells centered (<code>enhance_tables</code>), and long measures stay
+capped at 68ch.</p>
+<h2 id="4-color-system">4. Color system</h2>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Token</th>
@@ -136,41 +195,45 @@ markdown stays the source of truth; the builder only presents it.</p>
 <td>stop-condition banner (calm amber, not alarm red)</td>
 </tr>
 </tbody>
-</table>
-<h3 id="evidence-label-chips-the-identity-colors">Evidence-label chips (the identity colors)</h3>
-<table>
+</table></div>
+<h3 id="evidence-labels-the-identity-colors">Evidence labels (the identity colors)</h3>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Label</th>
-<th>Chip</th>
+<th>Color</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><span class="chip chip-source_supported">source supported</span></td>
-<td>green — <code>#E3F2EA</code> bg, <code>#0E7C4A</code> text</td>
+<td><span class="tag tag-source_supported" tabindex="0" data-tip="source supported — stated by a cited primary source (URL/section, units, mass basis)" title="source supported — stated by a cited primary source (URL/section, units, mass basis)">source supported</span></td>
+<td>green text <code>#0E7C4A</code></td>
 </tr>
 <tr>
-<td><span class="chip chip-ai_inference">ai inference</span></td>
-<td>blue — <code>#E4EEFB</code> bg, <code>#1D5FBF</code> text</td>
+<td><span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" title="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span></td>
+<td>blue text <code>#1D5FBF</code></td>
 </tr>
 <tr>
-<td><span class="chip chip-ai_proposal">ai proposal</span></td>
-<td>amber — <code>#FCF1DF</code> bg, <code>#9A5B14</code> text</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span></td>
+<td>amber text <code>#9A5B14</code></td>
 </tr>
 <tr>
-<td><span class="chip chip-parameter_not_located">parameter not located</span></td>
-<td>slate — <code>#ECEFF1</code> bg, <code>#546E7A</code> text</td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span></td>
+<td>slate text <code>#546E7A</code></td>
 </tr>
 </tbody>
-</table>
-<p>Chips are pill-shaped, 0.78rem Inter 600, applied automatically by the builder wherever the
-backticked label token appears in body text, and listed as a legend in every footer.</p>
+</table></div>
+<p>In body text labels render as <strong>inline colored text with a dashed underline</strong> — not pill
+chips — applied automatically by the builder wherever the backticked label token appears.
+Hovering (or keyboard-focusing) a label shows a tooltip with the canonical charter wording
+for that label; a <code>title</code> attribute carries the same text natively. The footer legend uses
+the same treatment, so the legend doubles as an explainer. The tinted backgrounds stay in
+the system for status badges and the phase strip.</p>
 <h3 id="status-badges">Status badges</h3>
 <p>Method status (<code>draft</code>, <code>proposed</code>, <code>pending_deep_dive</code>, <code>primary-source-read</code>,
 <code>experimentally-supported-in-source</code>) render as small bordered badges tinted from neutral to
 green as evidence strength rises.</p>
-<h2 id="4-information-architecture">4. Information architecture</h2>
+<h2 id="5-information-architecture">5. Information architecture</h2>
 <pre><code>docs/
   index.html                          home: hero + material cards
   materials/cigarette-butts/
@@ -187,111 +250,157 @@ green as evidence strength rises.</p>
 </code></pre>
 <p>URLs are stable and derived from file paths — a GitHub page and a site page share their slug,
 so cross-links never rot.</p>
-<h2 id="5-navigation-model-easy-navigation">5. Navigation model (easy navigation)</h2>
+<h2 id="6-navigation-model-easy-navigation">6. Navigation model (easy navigation)</h2>
 <p>Three persistent layers + one overlay:</p>
 <ol>
-<li><strong>Top bar</strong> (sticky, every page): wordmark "Recycling Empire" → home; links <strong>Materials</strong>,
-   <strong>Charter &amp; Playbook</strong>, <strong>About</strong>; search button (<code>Ctrl/⌘-K</code>, also plain <code>/</code>).</li>
-<li><strong>Material sidebar</strong> (left, sticky on all <code>materials/&lt;slug&gt;/</code> pages, collapsed to a
+<li>
+<p><strong>Top bar</strong> (sticky, every page): wordmark "Recycling Empire" → home; links <strong>Materials</strong>,
+   <strong>Charter &amp; Playbook</strong>, <strong>About</strong>; search button (<code>Ctrl/⌘-K</code>, also plain <code>/</code>).</p>
+</li>
+<li>
+<p><strong>Material sidebar</strong> (left, sticky on all <code>materials/&lt;slug&gt;/</code> pages, collapsed to a
    horizontal chip-row under the top bar on mobile):
    <em>Overview · Ranking · Methods (8) · Registry · Invention · Reports · Sources (81) ·
-   Research · Charter · Glossary · State &amp; log</em> — the full map is always one click away.</li>
-<li><strong>"On this page"</strong> (right rail on wide screens, only on long pages): H2-level TOC from the
-   markdown, with scroll-spy highlighting; collapses under the content on narrow screens.</li>
-<li><strong>Search overlay</strong>: client-side, index prebuilt at generation time (<code>search-index.json</code>,
+   Research · Charter · Glossary · State &amp; log</em> — the full map is always one click away.</p>
+</li>
+<li>
+<p><strong>"On this page"</strong> (right rail on wide screens, only on long pages): H2-level TOC from the
+   markdown, with scroll-spy highlighting; collapses under the content on narrow screens.</p>
+</li>
+<li>
+<p><strong>Search overlay</strong>: client-side, index prebuilt at generation time (<code>search-index.json</code>,
    page titles + headings + text, sources included). Scores title &gt; heading &gt; body; results
-   grouped by section; Esc closes; fully keyboard-navigable.</li>
+   grouped by section; Esc closes; fully keyboard-navigable.</p>
+</li>
 </ol>
 <p>Every page also carries: <strong>breadcrumbs</strong> (Home › Cigarette butts › Methods › M-01), and
 <strong>prev/next pagers</strong> inside sequential groups (methods in registry order, sources alphabetical).</p>
-<h2 id="6-the-reading-journey-designed-path">6. The reading journey (designed path)</h2>
+<h2 id="7-the-reading-journey-designed-path">7. The reading journey (designed path)</h2>
 <p>The material dashboard is the journey's hub. Its "Start here" block prescribes one order:</p>
 <ol>
 <li><strong>Overview</strong> (dashboard) — what this material is, its version, phase, stop-condition.</li>
-<li><strong>Ranking</strong> — the verdict: Table A top routes, why M-08 leads (the only published metals-gate
-   pass), the test-first list. <em>If you read one page, read this.</em></li>
-<li><strong>Final reports</strong> — the evidence boundary in full prose (batch-01 synthesis; validation &amp;
-   open questions).</li>
-<li><strong>Methods M-01…M-08</strong> — the action plans, in ranking order, each with its status badge and
-   gap-fill chips.</li>
-<li><strong>INV-01</strong> — the invented route that turns the field's missing mass balances into the
-   deliverable; its falsifier ledger and red-team placeholder (Phase 7).</li>
-<li><strong>Sources</strong> — the 81-document shelf, each with metadata and archive links.</li>
+<li>
+<p><strong>Ranking</strong> — the verdict: Table A top routes, why M-08 leads (the only published metals-gate
+   pass), the test-first list. <em>If you read one page, read this.</em></p>
+</li>
+<li>
+<p><strong>Final reports</strong> — the evidence boundary in full prose (batch-01 synthesis; validation &amp;
+   open questions).</p>
+</li>
+<li>
+<p><strong>Methods M-01…M-08</strong> — the action plans, in ranking order, each with its status badge and
+   gap-fill chips.</p>
+</li>
+<li>
+<p><strong>INV-01</strong> — the invented route that turns the field's missing mass balances into the
+   deliverable; its falsifier ledger and red-team placeholder (Phase 7).</p>
+</li>
+<li>
+<p><strong>Sources</strong> — the 81-document shelf, each with metadata and archive links.</p>
+</li>
 <li><strong>Charter, glossary, state &amp; log</strong> — the rules and the record.</li>
 </ol>
 <p>Each step's card states what you will learn and how long it takes ("short read", "deep read"),
 so the reader can enter anywhere without losing the thread.</p>
-<h2 id="7-page-templates">7. Page templates</h2>
+<h2 id="8-page-templates">8. Page templates</h2>
 <ul>
-<li><strong>Home</strong>: hero (one sentence + two buttons: <em>Browse materials</em>, <em>Read the playbook</em>), material
-  cards (name, one-line blurb, version/phase badge, counts), footer legend.</li>
-<li><strong>Material dashboard</strong>: identity card (name, version, status, site URL, priority methods),
+<li>
+<p><strong>Home</strong>: hero (one sentence + two buttons: <em>Browse materials</em>, <em>Read the playbook</em>), material
+  cards (name, one-line blurb, version/phase badge, counts), footer legend.</p>
+</li>
+<li>
+<p><strong>Material dashboard</strong>: identity card (name, version, status, site URL, priority methods),
   stop-condition banner, "Start here" journey cards, shelf counters (sources / methods /
   inventions / cards), ranking snapshot (top 3 rows of Table A), test-first preview,
-  phase-progress strip, migration note link.</li>
-<li><strong>Method page</strong>: spec-sheet grid rendered from the fenced metadata block (id, name, family,
+  phase-progress strip, migration note link.</p>
+</li>
+<li>
+<p><strong>Method page</strong>: spec-sheet grid rendered from the fenced metadata block (id, name, family,
   status, version, sources), body with H2 sections + right-rail TOC, prev/next among methods,
-  label chips inline, archive links rewritten automatically.</li>
-<li><strong>Ranking page</strong>: the three tables verbatim with sticky first column, zebra rows, tabular
-  numerals; gates explained above the tables; test-first list as numbered cards.</li>
-<li><strong>Sources index</strong>: 81-row table (id, figures, original → archive, AI text → archive raw,
-  detail page) with a filter box and type-filter chips, client-side only.</li>
-<li><strong>Source detail</strong>: SOURCE.md content (or, for the 49 sources without SOURCE.md, an honest
+  evidence labels inline (colored text + tooltip), archive links rewritten automatically.</p>
+</li>
+<li>
+<p><strong>Ranking page</strong>: the three tables verbatim with the data-table style (borders, zebra rows,
+  tinted header, tabular numerals, centered score columns); the 8+-column score tables get a
+  960px minimum width, scroll horizontally inside a rounded frame with the identity column
+  pinned and a guaranteed 250px note column; gates explained above the tables; test-first
+  list as numbered cards.</p>
+</li>
+<li>
+<p><strong>Sources index</strong>: 81-row table (id, figures, original → archive, AI text → archive raw,
+  detail page) with a filter box and type-filter chips, client-side only.</p>
+</li>
+<li>
+<p><strong>Source detail</strong>: SOURCE.md content (or, for the 49 sources without SOURCE.md, an honest
   auto-stub: id, figures count, links to the archive folder and text.md) + callout
-  "Full document lives in the butt-lab archive".</li>
-<li><strong>Reports / research / charter / glossary / state / log</strong>: plain article template with TOC.</li>
+  "Full document lives in the butt-lab archive".</p>
+</li>
+<li>
+<p><strong>Reports / research / charter / glossary / state / log</strong>: plain article template with TOC.</p>
+</li>
 </ul>
-<h2 id="8-components-inventory">8. Components inventory</h2>
-<p>cards (material, journey, stat), chips (evidence labels), badges (status), banners
-(stop-condition), spec-sheet grid, tables (sticky header, zebra, tabular figures), callouts
-(archive links, caveat notes), breadcrumbs, TOC rail, pagers, search overlay, footer legend,
-404 page with the material map.</p>
-<h2 id="9-accessibility-responsiveness">9. Accessibility &amp; responsiveness</h2>
+<h2 id="9-components-inventory">9. Components inventory</h2>
+<p>cards (material, journey, stat), evidence-label tags with tooltips, badges (status), banners
+(stop-condition), spec-sheet grid, data tables (bordered frame, zebra, tinted header, pinned
+identity column, tabular figures), callouts (archive links, caveat notes), breadcrumbs, TOC
+rail, pagers, search overlay, footer legend, 404 page with the material map.</p>
+<h2 id="10-accessibility-responsiveness">10. Accessibility &amp; responsiveness</h2>
 <ul>
-<li>WCAG AA contrast on every token pair (paper/ink 13.9:1; chips ≥ 4.6:1).</li>
+<li>WCAG AA contrast on every token pair (paper/ink 13.9:1; label and badge colors ≥ 4.5:1).</li>
 <li>Keyboard: visible focus rings (2px accent offset), search fully operable, skip-to-content link.</li>
-<li>Breakpoints: ≥1200px full three-column; 800-1200px two-column (TOC hides); &lt;800px single
-  column (sidebar → horizontal chips; tables scroll horizontally with sticky first column).</li>
-<li><code>prefers-reduced-motion</code> disables all transitions; no animation elsewhere.</li>
+<li>
+<p>Breakpoints: ≥1200px full three-column; 800-1200px two-column (TOC hides); &lt;800px single
+  column (sidebar → horizontal chips; tables scroll horizontally with sticky first column).</p>
+</li>
+<li>
+<p><code>prefers-reduced-motion</code> disables all transitions; no animation elsewhere.</p>
+</li>
 <li>Semantic HTML throughout (<code>nav</code>, <code>main</code>, <code>article</code>, <code>aside</code>); one H1 per page; descriptive
   link text (never "here").</li>
 </ul>
-<h2 id="10-performance">10. Performance</h2>
+<h2 id="11-performance">11. Performance</h2>
 <p>Single CSS file (~15 KB), single JS file (~8 KB), fonts via Google Fonts with <code>display=swap</code>
 and system fallbacks, search index ≤ 500 KB, no framework, no images required for pages (the
 archive holds the figures). Every page renders instantly from the CDN.</p>
-<h2 id="11-build-deploy">11. Build &amp; deploy</h2>
+<h2 id="12-build-deploy">12. Build &amp; deploy</h2>
 <pre><code>python3 tools/site-builder/build.py        # renders materials/ → docs/ (deterministic; safe to re-run)
 </code></pre>
 <ul>
-<li><strong>GitHub Pages (chosen default)</strong>: Settings → Pages → Source: <em>Deploy from a branch</em>, branch
-  <code>main</code>, folder <code>/docs</code>. Site: <code>https://abdo2048.github.io/recycling-empire/</code>.</li>
-<li><strong>Cloudflare Pages (equivalent alternative)</strong>: connect the repo, build command none, output
-  dir <code>docs</code>. Private access later: Cloudflare Access in front of the domain (PLAYBOOK Phase 6).</li>
-<li>After the build, commit both <code>materials/</code> (source of truth) and <code>docs/</code> (rendered output);
-  MATERIALS.md and the material's <code>material.yaml</code> hold the live URL.</li>
+<li>
+<p><strong>GitHub Pages (chosen default)</strong>: Settings → Pages → Source: <em>Deploy from a branch</em>, branch
+  <code>main</code>, folder <code>/docs</code>. Site: <code>https://abdo2048.github.io/recycling-empire/</code>.</p>
+</li>
+<li>
+<p><strong>Cloudflare Pages (equivalent alternative)</strong>: connect the repo, build command none, output
+  dir <code>docs</code>. Private access later: Cloudflare Access in front of the domain (PLAYBOOK Phase 6).</p>
+</li>
+<li>
+<p>After the build, commit both <code>materials/</code> (source of truth) and <code>docs/</code> (rendered output);
+  MATERIALS.md and the material's <code>material.yaml</code> hold the live URL.</p>
+</li>
 </ul>
   
 </article>
 <nav class="toc" aria-label="On this page"><h2>On this page</h2><a href="#site-design-the-unified-recycling-empire-site-phase-6">Site design — the unified Recycling Empire site (Phase 6)</a>
 <a class="lvl3" href="#1-design-goals">1. Design goals</a>
 <a class="lvl3" href="#2-typography">2. Typography</a>
-<a class="lvl3" href="#3-color-system">3. Color system</a>
-<a class="lvl3" href="#4-information-architecture">4. Information architecture</a>
-<a class="lvl3" href="#5-navigation-model-easy-navigation">5. Navigation model (easy navigation)</a>
-<a class="lvl3" href="#6-the-reading-journey-designed-path">6. The reading journey (designed path)</a>
-<a class="lvl3" href="#7-page-templates">7. Page templates</a>
-<a class="lvl3" href="#8-components-inventory">8. Components inventory</a>
-<a class="lvl3" href="#9-accessibility-responsiveness">9. Accessibility &amp;amp; responsiveness</a>
-<a class="lvl3" href="#10-performance">10. Performance</a>
-<a class="lvl3" href="#11-build-deploy">11. Build &amp;amp; deploy</a></nav>
+<a class="lvl3" href="#3-the-writing-system-readability-contract">3. The writing system (readability contract)</a>
+<a class="lvl3" href="#4-color-system">4. Color system</a>
+<a class="lvl3" href="#5-information-architecture">5. Information architecture</a>
+<a class="lvl3" href="#6-navigation-model-easy-navigation">6. Navigation model (easy navigation)</a>
+<a class="lvl3" href="#7-the-reading-journey-designed-path">7. The reading journey (designed path)</a>
+<a class="lvl3" href="#8-page-templates">8. Page templates</a>
+<a class="lvl3" href="#9-components-inventory">9. Components inventory</a>
+<a class="lvl3" href="#10-accessibility-responsiveness">10. Accessibility &amp;amp; responsiveness</a>
+<a class="lvl3" href="#11-performance">11. Performance</a>
+<a class="lvl3" href="#12-build-deploy">12. Build &amp;amp; deploy</a></nav>
 </main>
 <footer>
   <div class="legend">
-    <span class="chip chip-source_supported">source supported</span>
-    <span class="chip chip-ai_inference">ai inference</span>
-    <span class="chip chip-ai_proposal">ai proposal</span>
-    <span class="chip chip-parameter_not_located">parameter not located</span>
+    <span class="tag tag-source_supported" tabindex="0" data-tip="source supported — stated by a cited primary source (URL/section, units, mass basis)">source supported</span>
+    <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>
+    <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>
+    <span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>
   </div>
   <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="./playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
   <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="./site-design.html">Design</a></p>

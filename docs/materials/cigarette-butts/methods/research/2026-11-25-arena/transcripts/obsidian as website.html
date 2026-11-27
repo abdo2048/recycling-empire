@@ -61,7 +61,7 @@ what you think?</p>
 </code></pre>
 <p><code>index.md</code> uses wikilinks (or HTML <code>&lt;a href&gt;</code> styled as cards) to link to each sub-page. Clicking navigates within Obsidian just like clicking a link on a website.</p>
 <p><strong>If you want a real published website</strong> (not just local):</p>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Tool</th>
@@ -86,7 +86,7 @@ what you think?</p>
 <td>Free</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p><strong>My take:</strong> For a personal knowledge base you navigate daily, stay in Obsidian with MOC + wikilinks + a CSS snippet for card styling. It's low-friction and the navigation feels very "website-like" once you build a few index notes. Only reach for Quartz/Publish if you need to share it externally or want a real URL structure.</p>
 <p><strong>Sources</strong></p>
 <ol>
@@ -235,7 +235,7 @@ however the back to index link is working</p>
 <p><strong>Caveat:</strong> this uses Obsidian's URI scheme, so it opens via the app's URL handler. Some users report a slight delay compared to native wikilinks. Also, these links won't show up in Graph View or backlinks.</p>
 <hr />
 <h2 id="tldr">TL;DR</h2>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Approach</th>
@@ -264,7 +264,7 @@ however the back to index link is working</p>
 <td>❌</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>For a personal navigation hub that looks good, <strong>Fix 2</strong> is the closest to what you described. For a knowledge base where graph connectivity matters, <strong>Fix 1</strong> (or just plain wikilinks with a CSS snippet) is more robust.</p>
 <p><strong>Sources</strong></p>
 <ol>
@@ -372,7 +372,7 @@ views:
 <p><strong>Caveat:</strong> the <code>html()</code> function in Bases formulas also can't render internal wikilinks (confirmed Nov 2025), but the default card link works fine.</p>
 <hr />
 <h2 id="tldr_1">TL;DR</h2>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Approach</th>
@@ -392,22 +392,22 @@ views:
 <td>Table + CSS snippet</td>
 <td>✅</td>
 <td>✅</td>
-<td>5 min</td>
+<td class="n">5 min</td>
 </tr>
 <tr>
 <td>Bases card view</td>
 <td>✅</td>
 <td>✅</td>
-<td>2 min</td>
+<td class="n">2 min</td>
 </tr>
 <tr>
 <td><code>obsidian://</code> URI in HTML</td>
 <td>✅</td>
 <td>✅</td>
-<td>5 min</td>
+<td class="n">5 min</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <p>For your use case, <strong>the CSS snippet on a table</strong> is the fastest "paste and it works" solution. Bases is cleaner long-term if you want the card grid to auto-update as you add notes.</p>
 <p><strong>Sources</strong></p>
 <ol>
@@ -440,6 +440,7 @@ columns: 3
 gap: 20
 
 cards:
+
   - type: iconCard
     title: Mechanical
     icon: recycle
@@ -465,7 +466,7 @@ cards:
 <p>Turns a single markdown note into a <strong>start page</strong> by splitting it on headings and rendering each section as a card. Each card can carry its own CSS snippet for styling. The cards are rendered through Obsidian's own renderer, so wikilinks inside them work.</p>
 <hr />
 <h2 id="other-options-more-dashboard-than-website-nav">Other options (more "dashboard" than "website nav")</h2>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Plugin</th>
@@ -490,7 +491,7 @@ cards:
 <td>Card grid for Bases data, clickable headers link to the file.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <hr />
 <h2 id="my-recommendation-for-your-textile-example">My recommendation for your textile example</h2>
 <p><strong><code>obsidian-card-grid</code></strong> is the most direct answer to "I want a markdown file with clickable cards that go to other files." It's literally a code fence in your <code>index.md</code> that renders as a card grid with working internal links. No CSS snippets, no HTML hacks, no <code>obsidian://</code> URIs.</p>
@@ -524,10 +525,10 @@ cards:
 </main>
 <footer>
   <div class="legend">
-    <span class="chip chip-source_supported">source supported</span>
-    <span class="chip chip-ai_inference">ai inference</span>
-    <span class="chip chip-ai_proposal">ai proposal</span>
-    <span class="chip chip-parameter_not_located">parameter not located</span>
+    <span class="tag tag-source_supported" tabindex="0" data-tip="source supported — stated by a cited primary source (URL/section, units, mass basis)">source supported</span>
+    <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>
+    <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>
+    <span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>
   </div>
   <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="../../../../../../playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
   <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="../../../../../../site-design.html">Design</a></p>

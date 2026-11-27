@@ -89,7 +89,7 @@ u_i=m_{i,\mathrm{external\ inputs}}+I_{i,0}
 <h2 id="open-questions-after-both-accepted-panels">Open questions after both accepted panels</h2>
 <h3 id="document-retrieval-and-primary-text-gaps">Document retrieval and primary-text gaps</h3>
 <p>These are outstanding retrieval questions, not claims that a full document contains no answer. This session did not close them through new primary-source research.</p>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Document or evidence object</th>
@@ -139,10 +139,10 @@ u_i=m_{i,\mathrm{external\ inputs}}+I_{i,0}
 <td>Which actual material, analytes, use, limits, recipient and residual routes are covered?</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="measurement-gaps-analytestream-pairs">Measurement gaps: analyte–stream pairs</h3>
 <p>The accepted record lacks a complete comparable target-panel dataset for any route; partial polymer characterization, a limited metal observation or an abstract-level bulk-liquor result does not close these pairs (<a href="https://raw.githubusercontent.com/abdo2048/butt-lab/4bf6bd8/panels/batch-01/stage-3/round-01/judge.md">Stage-3 evidence boundary</a>). In this table, “missing” means <code>parameter-not-located</code> at the required basis and boundary, not proven absence of all measurements everywhere.</p>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Boundary</th>
@@ -183,7 +183,7 @@ u_i=m_{i,\mathrm{external\ inputs}}+I_{i,0}
 <td>Product-specific analyte content, exposure-relevant leaching/emissions, ecotoxicity where required, and mechanical/function evidence; no safety inference from matrix or certificate (<a href="https://raw.githubusercontent.com/abdo2048/butt-lab/5f484b585ca16dbd2ce93b56c61c962f5f14c774/specs/company-workflow-dossiers-batch01.md">company product limits</a>).</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h3 id="jurisdiction-and-regulatory-acceptance-gaps">Jurisdiction and regulatory acceptance gaps</h3>
 <ul>
 <li><strong>Selected jurisdiction and material status:</strong> The project has not resolved the governing feed/output waste classification, transport, storage, treatment permissions or End-of-Waste basis for a selected plant and product; French feed-classification leads cannot simply be exported to every country or output (<a href="https://raw.githubusercontent.com/abdo2048/butt-lab/5f484b585ca16dbd2ce93b56c61c962f5f14c774/reports/stage2/assumption-and-gap-ledger.md">gap G-19</a>; <a href="https://raw.githubusercontent.com/abdo2048/butt-lab/4bf6bd8/panels/batch-01/stage-4/round-01/judge.md">judge's classification distinction</a>).</li>
@@ -193,7 +193,7 @@ u_i=m_{i,\mathrm{external\ inputs}}+I_{i,0}
 <li><strong>Equipment, exposure and intellectual-property review:</strong> Solvent, chemical, pressure, air-emission and occupational obligations remain qualified-engineering/legal questions; patent-status shorthand, term arithmetic and public disclosure are not novelty, patentability or freedom-to-operate determinations (<a href="https://raw.githubusercontent.com/abdo2048/butt-lab/4bf6bd8/panels/batch-01/stage-4/round-01/judge.md">charter-aligned limits in the accepted judge report</a>).</li>
 </ul>
 <h3 id="scale-cost-and-energy-gaps">Scale, cost and energy gaps</h3>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>Missing denominator or inventory</th>
@@ -226,7 +226,7 @@ u_i=m_{i,\mathrm{external\ inputs}}+I_{i,0}
 <td>Collection, transport, energy source, additives, treatment, emissions, residual disposal, end-of-life and justified displaced function remain unresolved; the reported Keenat retreat is not an audit-ready cross-family LCA (<a href="https://raw.githubusercontent.com/abdo2048/butt-lab/4bf6bd8/panels/batch-01/stage-3/round-01/judge.md">accepted LCA limitation</a>).</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="preserved-dissent-metadata-concern-and-stop-conditions">Preserved dissent, metadata concern, and stop conditions</h2>
 <p>F3 remains an explicit minority comparator, not a settled loser; a change in the controlling objective from sink testability to polymer quality can change which hypothesis merits attention (<a href="https://raw.githubusercontent.com/abdo2048/butt-lab/4bf6bd8/panels/batch-01/stage-4/round-01/judge.md">Stage-4 dissent</a>). The wrong-stream/dilute-purge objection, unsolved metals, F2 dilution/off-gas warning and absence of comparable scale evidence all survive into this agenda (<a href="https://raw.githubusercontent.com/abdo2048/butt-lab/4bf6bd8/panels/batch-01/stage-4/round-01/judge.md">preserved objections</a>).</p>
 <p>The hash-normalization concern is also not silently closed: the repaired manifest calls the hashes raw committed-byte hashes, but the local Stage-5 <code>git show</code> audit matches 6/8 Stage-4 entries as raw blobs and matches the remaining two only after LF-to-CRLF conversion preserving their BOM (<a href="https://raw.githubusercontent.com/abdo2048/butt-lab/4bf6bd8/packets/batch-01/stage-4/manifest.yaml">repaired manifest assertion being tested</a>; <a href="https://raw.githubusercontent.com/abdo2048/butt-lab/4bf6bd8/panels/batch-01/stage-4/round-01/worker-b.md">Worker B's original concern</a>). Audit denominator: matching file entries / hashed Stage-4 payload entries; the exceptions are preserved Stage-3 <code>worker-a.md</code> and <code>worker-b_Tencent-Hy4.md</code>, and this is a provenance check rather than process evidence.</p>
@@ -247,10 +247,10 @@ u_i=m_{i,\mathrm{external\ inputs}}+I_{i,0}
 </main>
 <footer>
   <div class="legend">
-    <span class="chip chip-source_supported">source supported</span>
-    <span class="chip chip-ai_inference">ai inference</span>
-    <span class="chip chip-ai_proposal">ai proposal</span>
-    <span class="chip chip-parameter_not_located">parameter not located</span>
+    <span class="tag tag-source_supported" tabindex="0" data-tip="source supported — stated by a cited primary source (URL/section, units, mass basis)">source supported</span>
+    <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>
+    <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>
+    <span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>
   </div>
   <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="../../../playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
   <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="../../../site-design.html">Design</a></p>

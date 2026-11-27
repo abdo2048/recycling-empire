@@ -57,7 +57,7 @@
 </ul>
 <p>Scale note: the spec describes an industrial pilot line (kg/min). A student-lab replication needs miniaturised equivalents (bench grinder or knife mill, laboratory sieve shaker, 20-50 L tanks, small clarifloculation unit or batch water replacement, forced-air oven, bench mill). The 314 t press is not a student-lab item; a 10-30 t lab press at 350 degC is the closest faithful analogue.</p>
 <h2 id="3-gap-fill-table-labeled-expert-estimates">3. Gap-fill table — labeled expert estimates</h2>
-<table>
+<div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
 <th>#</th>
@@ -69,84 +69,84 @@
 </thead>
 <tbody>
 <tr>
-<td>1</td>
+<td class="n">1</td>
 <td>Wash / decontamination water temperature</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: wash tank 40-50 degC; decontamination tanks ambient 20-25 degC</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: wash tank 40-50 degC; decontamination tanks ambient 20-25 degC</td>
 <td>Wash temperature is nowhere disclosed. De Fenzo's experimentally supported hot-water stage is 50 degC for 60 min [S3], so 40-50 degC is a validated leaching temperature for water-soluble toxins; ambient decontamination tanks save energy and the 3x repetition compensates.</td>
 <td>Run 1 kg test batches: 20 min ambient vs 40 degC vs 50 degC wash; measure nicotine in spent wash water (HPLC). If ambient removes as much as 50 degC, drop the heating cost.</td>
 </tr>
 <tr>
-<td>2</td>
+<td class="n">2</td>
 <td>Water volume per kg of butts</td>
-<td><span class="chip chip-ai_inference">ai inference</span>: ~8.3 L per kg of butts processed (computed)</td>
+<td><span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" title="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>: ~8.3 L per kg of butts processed (computed)</td>
 <td>Computed from disclosed numbers: recycler treats 1000 L per ~2 h cycle [S1 p.7]; line feeds 1 kg/min [S1 p.6] = 60 kg/h, so 120 kg per cycle; 1000/120 = 8.33 L/kg. A 10 kg lab batch needs ~83 L total wash water.</td>
 <td>Mass-flow the pilot: log make-up water per kg processed. If the recycler cannot keep up at 1 kg/min, the patent's own throughput is inconsistent — kill this estimate and downrate the patent's feasibility.</td>
 </tr>
 <tr>
-<td>3</td>
+<td class="n">3</td>
 <td>Paper-to-CA separation efficiency (single 30-min wash)</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: &gt;=90% of paper mass sinks and is removed in one pass; &gt;=98% after a second pass</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: &gt;=90% of paper mass sinks and is removed in one pass; &gt;=98% after a second pass</td>
 <td>Physics: water-soaked paper (bulk density ~1.2 g/cm3 wet) sinks; CA tow traps air and floats. No efficiency is disclosed [S1].</td>
 <td>Weigh the sunken paper fraction vs residual paper visible in the floated CA (30x magnification image analysis) on a 1 kg batch; acceptance: &lt;10% residual paper mass fraction in floated CA after pass 1.</td>
 </tr>
 <tr>
-<td>4</td>
+<td class="n">4</td>
 <td>CA yield (dried fine particles per kg of butts)</td>
-<td><span class="chip chip-ai_inference">ai inference</span>: 45-60% of input butt mass ends as dried CA particles</td>
+<td><span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable" title="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>: 45-60% of input butt mass ends as dried CA particles</td>
 <td>Reasoning chain: the product is the filter's CA only [S1 p.2-3]; organic material is removed upstream (step 3-4); paper is removed by sinking (step 5); filter tow dominates butt mass and CA dominates the tow. Cross-check: De Fenzo's recovered CA shows ~10% residue at TGA end [S3], consistent with mostly-polymer product.</td>
 <td>Weigh dried product from a 1 kg pilot run. Acceptance band 40-70%; outside the band, re-derive from the measured filter/organic split at step 4 instead of this estimate.</td>
 </tr>
 <tr>
-<td>5</td>
+<td class="n">5</td>
 <td>Nicotine removal across 3 tanks</td>
-<td><span class="chip chip-parameter_not_located">parameter not located</span> in [S1] (only "decrease drastically"); working estimate <span class="chip chip-ai_proposal">ai proposal</span>: 3 tanks x 30 min remove &gt;=90% of extractable nicotine</td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span> in [S1] (only "decrease drastically"); working estimate <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: 3 tanks x 30 min remove &gt;=90% of extractable nicotine</td>
 <td>Nicotine is highly water-soluble; successive tanks keep a concentration gradient if tank water is partially refreshed.</td>
 <td>Nicotine assay (GC-FID or HPLC) of spent liquor from tank 1, 2, 3 and of a methanol extract of the final CA. Decision rule: &lt;90% removal -&gt; add a 4th tank or a fresh-water final rinse.</td>
 </tr>
 <tr>
-<td>6</td>
+<td class="n">6</td>
 <td>Tar / PAH removal</td>
-<td>[S1] admits water does not remove tar ("another type of solvent" needed) [S1 p.8]; <span class="chip chip-ai_proposal">ai proposal</span>: insert a final ethanol 99% w/w stage, 30 min, ambient, after tank 3</td>
+<td>[S1] admits water does not remove tar ("another type of solvent" needed) [S1 p.8]; <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: insert a final ethanol 99% w/w stage, 30 min, ambient, after tank 3</td>
 <td>Transplanted from [S3], where ethanol stages are part of an experimentally validated wash sequence on the same feedstock.</td>
 <td>PAH screen (16 US-EPA PAHs) on product before and after the ethanol stage. Acceptance: &gt;=50% reduction; else the ethanol stage is not earning its solvent cost.</td>
 </tr>
 <tr>
-<td>7</td>
+<td class="n">7</td>
 <td>Recycled-water quality drift</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: cap nicotine in the recycled-water tank at 50 mg/L; above it, bleed 20% to waste and add fresh make-up</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: cap nicotine in the recycled-water tank at 50 mg/L; above it, bleed 20% to waste and add fresh make-up</td>
 <td>Closed loop [S1 p.7] concentrates dissolved toxins over cycles, which weakens the leaching gradient the process relies on. The patent does not discuss this.</td>
 <td>Measure COD + nicotine in tank (36) every cycle for 5 cycles. Acceptance: values plateau; monotonic rise past the cap proves the closed loop degrades wash performance.</td>
 </tr>
 <tr>
-<td>8</td>
+<td class="n">8</td>
 <td>Drying endpoint (residual moisture)</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: &lt;=5% w/w residual moisture</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: &lt;=5% w/w residual moisture</td>
 <td>Disclosed endpoint is qualitative (no more steam at exhaust) [S1 p.8]; 5% is a conventional storage-safe moisture for polymer fluff.</td>
 <td>Gravimetric moisture test (105 degC to constant mass) per batch; acceptance &lt;=5%, else extend drying.</td>
 </tr>
 <tr>
-<td>9</td>
+<td class="n">9</td>
 <td>Particle size distribution after second milling</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: D90 &lt;=1000 um with &lt;10% mass below 100 um (fines)</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: D90 &lt;=1000 um with &lt;10% mass below 100 um (fines)</td>
 <td>Spec targets &lt;1500 um, pref. ~1000 um [S1 p.8]; the fines bound is added for dust-explosion and handling safety, not from the source.</td>
 <td>Sieve analysis (or laser diffraction) per batch; acceptance as stated; excess fines -&gt; adjust mill screen.</td>
 </tr>
 <tr>
-<td>10</td>
+<td class="n">10</td>
 <td>Thermo-compression dwell</td>
-<td><span class="chip chip-ai_proposal">ai proposal</span>: 5-10 min at 350 degC for 3-5 mm plates</td>
+<td><span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier" title="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>: 5-10 min at 350 degC for 3-5 mm plates</td>
 <td>Press force, platen size and heating temperature are disclosed [S1 p.9]; dwell is not. Range from ordinary hydraulic hot-pressing practice for acetate/polymer fluff.</td>
 <td>Press plates at 3, 7, 10 min; inspect cross-sections for voids/ unmelted particles; acceptance: void-free at the shortest dwell.</td>
 </tr>
 <tr>
-<td>11</td>
+<td class="n">11</td>
 <td>Metals in product (Cd, Pb, As, Hg)</td>
-<td><span class="chip chip-parameter_not_located">parameter not located</span> — the patent never measures metals; <strong>stop-condition: route on hold for product-facing work until the team characterises feedstock metals</strong></td>
+<td><span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead" title="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span> — the patent never measures metals; <strong>stop-condition: route on hold for product-facing work until the team characterises feedstock metals</strong></td>
 <td>Metals class is documented in butts [S2]; a water wash does not remove bound metals.</td>
 <td>ICP-MS on dried product + spent washes + recycler sludge. Until passed, no food-contact, no construction-material claims, no product distribution.</td>
 </tr>
 </tbody>
-</table>
+</table></div>
 <h2 id="4-safety-notes">4. Safety notes</h2>
 <ul>
 <li><strong>Grinding / sieving (steps 3-4):</strong> dust carries nicotine and combustion residues; enclose the mill, local exhaust, nitrile gloves + FFP3 mask. [S1 steps; toxin classes S2]</li>
@@ -159,14 +159,16 @@
 <li>Desk research authorises no physical trial: every step above needs a qualified facility, a risk assessment, lawful waste handling, and a named human actor before it runs.</li>
 </ul>
 <h2 id="5-what-the-team-must-verify-in-lab">5. What the team must verify in lab</h2>
-<p>Ordered by information value:
-1. <strong>1 kg mass-balance pilot</strong> (steps 3-9 miniaturised): throughput per step, dried-product mass. Acceptance: yield lands in the 40-70% band. Confirms/kills row 4; feeds row 2 with real water use.
-2. <strong>Nicotine removal assay</strong> across the three tanks (spent liquors + final CA extract). Acceptance: &gt;=90% removal. Confirms/kills row 5; if it fails, the patent's core decontamination claim is materially weaker than stated.
-3. <strong>Water-recycle drift test</strong> (5 recycler cycles, COD + nicotine in tank 36). Acceptance: plateau below the 50 mg/L cap. Confirms/kills row 7 — and with it the patent's closed-loop economy.
-4. <strong>Paper-separation efficiency</strong> (1 kg batch, weigh sunken fraction, image-analysis of floated CA). Acceptance: &lt;10% residual paper after one pass. Confirms/kills row 3.
-5. <strong>PAH screen</strong> before/after the proposed ethanol stage. Acceptance: &gt;=50% reduction. Confirms/kills row 6.
-6. <strong>Product QC:</strong> moisture (row 8) + particle size distribution (row 9) + ICP-MS metals (row 11, gate).
-7. Only after 1-6: <strong>lab-press plates</strong> at 350 degC, 3/7/10 min dwell (row 10).</p>
+<p>Ordered by information value:</p>
+<ol>
+<li><strong>1 kg mass-balance pilot</strong> (steps 3-9 miniaturised): throughput per step, dried-product mass. Acceptance: yield lands in the 40-70% band. Confirms/kills row 4; feeds row 2 with real water use.</li>
+<li><strong>Nicotine removal assay</strong> across the three tanks (spent liquors + final CA extract). Acceptance: &gt;=90% removal. Confirms/kills row 5; if it fails, the patent's core decontamination claim is materially weaker than stated.</li>
+<li><strong>Water-recycle drift test</strong> (5 recycler cycles, COD + nicotine in tank 36). Acceptance: plateau below the 50 mg/L cap. Confirms/kills row 7 — and with it the patent's closed-loop economy.</li>
+<li><strong>Paper-separation efficiency</strong> (1 kg batch, weigh sunken fraction, image-analysis of floated CA). Acceptance: &lt;10% residual paper after one pass. Confirms/kills row 3.</li>
+<li><strong>PAH screen</strong> before/after the proposed ethanol stage. Acceptance: &gt;=50% reduction. Confirms/kills row 6.</li>
+<li><strong>Product QC:</strong> moisture (row 8) + particle size distribution (row 9) + ICP-MS metals (row 11, gate).</li>
+<li>Only after 1-6: <strong>lab-press plates</strong> at 350 degC, 3/7/10 min dwell (row 10).</li>
+</ol>
 <h2 id="6-sources">6. Sources</h2>
 <ul>
 <li>[S1] FR3066128B1 — "Procede de valorisation des megots de cigarette", Mego! SARL; inventors Lucas B., Lucas A., Andre G., Monteiro T.; filed 2017-05-15 (FR1754267), granted 2019-07-19, Bulletin 19/29. Full French spec on shelf: <code>sources/fr3066128a1-granted/</code> (text.md + document.pdf); also https://patents.google.com/patent/FR3066128B1/en and https://patents.google.com/patent/FR3066128A1/en. Page refs above follow the B1 text.md pagination. Legal status: active per Google Patents legal events (annuities paid through 2026-04-16), expected expiry 2037-05-15 — verify on INPI before commercial decisions. Prior art cited in the search report: US5504119A, EP2520184A1.</li>
@@ -185,10 +187,10 @@
 </main>
 <footer>
   <div class="legend">
-    <span class="chip chip-source_supported">source supported</span>
-    <span class="chip chip-ai_inference">ai inference</span>
-    <span class="chip chip-ai_proposal">ai proposal</span>
-    <span class="chip chip-parameter_not_located">parameter not located</span>
+    <span class="tag tag-source_supported" tabindex="0" data-tip="source supported — stated by a cited primary source (URL/section, units, mass basis)">source supported</span>
+    <span class="tag tag-ai_inference" tabindex="0" data-tip="ai inference — reasoned from sources; the chain is shown and the claim is falsifiable">ai inference</span>
+    <span class="tag tag-ai_proposal" tabindex="0" data-tip="ai proposal — invented or estimated by the AI; testable assumption; needs reasoning + falsifier">ai proposal</span>
+    <span class="tag tag-parameter_not_located" tabindex="0" data-tip="parameter not located — no number exists at the required basis; what to measure is stated instead">parameter not located</span>
   </div>
   <p>Desk research only — no physical trials, no clean/safe/validated claims. Stop-conditions bind all product-facing work. Built by the <a href="../../../playbook.html">Recycling Empire playbook</a>; markdown is the source of truth.</p>
   <p><a href="https://github.com/abdo2048/recycling-empire" rel="noopener">GitHub</a> · <a href="https://github.com/abdo2048/butt-lab" rel="noopener">butt-lab archive</a> · <a href="../../../site-design.html">Design</a></p>
