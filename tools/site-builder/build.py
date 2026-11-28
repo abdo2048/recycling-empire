@@ -1260,7 +1260,7 @@ BASE_T = Template("""<!DOCTYPE html>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="$root/assets/style.css">
+<link rel="stylesheet" href="${root}assets/style.css">
 </head>
 <body data-root="$root">
 <a class="skip" href="#main">Skip to content</a>
@@ -1302,7 +1302,7 @@ $toc
     <p class="shint">Esc to close · results come from the built index</p>
   </div>
 </div>
-<script src="$root/assets/site.js" defer></script>
+<script src="${root}assets/site.js" defer></script>
 </body>
 </html>
 """)
@@ -1441,12 +1441,17 @@ def main():
         write_page(docpath, data, mat)
     build_home()
 
+    # The 404 document is served at the URL of the MISSING path (the browser
+    # never sees /404.html), so document-relative links resolve against the
+    # wrong directory at any depth. Root-absolute links with the project Pages
+    # base are the only depth-proof form; update SITE_BASE if the site moves.
+    site_base = "/recycling-empire"
     with open(os.path.join(DOCS, "404.html"), "w", encoding="utf-8") as f:
         f.write(BASE_T.substitute(title="Page not found", titletag="Page not found — Recycling Empire", docsub="",
-                                  root="./", crumbs="", sidebar="", maincls="single", kicker="",
+                                  root=site_base + "/", crumbs="", sidebar="", maincls="single", kicker="",
                                   h1block="<h1>Page not found</h1>", meta_html="",
                                   body='<p>That page is not on the site. The material map:</p>' +
-                                       "".join(f'<p><a href="{m.folder}/index.html">{esc(m.name)}</a></p>' for m in MATS),
+                                       "".join(f'<p><a href="{site_base}/{m.folder}/index.html">{esc(m.name)}</a></p>' for m in MATS),
                                   toc="", pager=""))
 
     adir = os.path.join(DOCS, "assets")
