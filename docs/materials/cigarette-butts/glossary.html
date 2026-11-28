@@ -25,9 +25,7 @@
 <main id="main" class="">
 <aside class="side" aria-label="Material sections"><h2>Cigarette butts</h2><nav><a href="index.html">Overview</a><a href="ranking.html">Ranking</a><a href="methods/index.html">Action plans</a><a href="methods/cards.html">Summary cards</a><a href="registry.html">Registry</a><a href="inventions/index.html">Inventions</a><a href="reports/index.html">Final reports</a><a href="sources/index.html">Sources</a><a href="research/index.html">Research shelf</a><a href="charter.html">Charter</a><a class="on" href="glossary.html">Glossary</a><a href="state.html">State</a><a href="log.html">Log</a><a href="migration-note.html">Migration note</a></nav></aside>
 <article class="content">
-  <p class="kicker">Vocabulary</p><h1>Glossary</h1>
-  
-  <h1 id="glossary">Glossary</h1>
+  <p class="kicker">Vocabulary</p><h1 id="glossary">Glossary</h1>
 <p>This file exists so that a person or an AI opening this repository can understand the words it
 uses without reading three months of research history.</p>
 <p>It is deliberately short and plain. If a term here disagrees with a research file, the research
@@ -137,9 +135,8 @@ position argued by one panel worker. In the batch-02 method files, <code>F3</cod
 Both uses are real and neither has been rewritten, so when you meet a bare <code>F3</code>, check which file
 you are in. The reader site refers to families by name, not by number.</p>
 <hr />
-<h2 id="the-codes-for-open-questions">The codes for open questions</h2>
-<p>Batch-02 left a numbered list of evidence gaps, still open. <code>reports/batch-02/evidence-gaps/</code>
-holds the work on them.</p>
+<h2 id="the-codes-for-open-questions">Batch-02 gap codes (archive)</h2>
+<p><strong>Historical numbering — do not confuse it with the site codes below.</strong> Batch-02 left a numbered list of evidence gaps, still open; <code>reports/batch-02/evidence-gaps/</code> holds the work on them. These <code>M01–M08 / R01–R05 / S01–S06</code> codes are batch-02 archive numbering and are not used elsewhere on the site — in particular they are NOT the M-01…M-08 action plans.</p>
 <div class="tblwrap"><table class="tbl">
 <thead>
 <tr>
@@ -169,6 +166,54 @@ holds the work on them.</p>
 <p>The central finding that governs all of them: across every family there is no dry-mass basis, no
 analyte-resolved contaminant fate, no leaching data and no use-specific performance evidence.
 "Missing" means <code>parameter-not-located</code> at the required basis — never proven absence.</p>
+<hr />
+<h2 id="codes-on-this-site">Codes on this site (quick reference)</h2>
+<p>Every dotted-underlined code on this site is hoverable: the tooltip shows the item's full name, clicking opens its
+page. The numbering systems:</p>
+<div class="tblwrap"><table class="tbl">
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>M-01 … M-08</strong></td>
+<td><strong>Action plans</strong> (the Methods section) — one per published recycling route, written as a plan a lab could follow. Example: M-01 is the MéGo! water-wash cellulose-acetate recovery (patent FR3066128B1); M-08 is the RMIT fired-clay-bricks route.</td>
+</tr>
+<tr>
+<td><strong>INV-01</strong></td>
+<td><strong>Inventions</strong> — the project's own engineered designs, built by combining the published routes. INV-01, "Split-loop butt refinery", is the first one.</td>
+</tr>
+<tr>
+<td><strong>C-01 … C-22</strong></td>
+<td><strong>Registry summary cards</strong> — one-paragraph summaries of patents and papers in the registry (C-14 is the Matteri process, for example).</td>
+</tr>
+<tr>
+<td><strong>P1 … P5</strong></td>
+<td><strong>Batch-02 scientist-inventor proposals</strong>, scored for comparison only (they are components, not complete routes): P1 M01-Gate, P2 J-H-01-M, P3 F3-SC, P4 F2-VSC, P5 F5-ED.</td>
+</tr>
+<tr>
+<td><strong>S1 … S5</strong> (on INV-01 pages)</td>
+<td>The five <strong>output streams</strong> of INV-01's split-loop design: S1 CA float product, S2 sink-stream pulp, S3 unified liquor loop, S4 toxin concentrate, S5 pyrolytic end-of-life. Written inline (not as superscript) — different from the S-numbers of source lists.</td>
+</tr>
+<tr>
+<td><strong>F0 … F6</strong></td>
+<td><strong>Method families</strong> (table above: F0 staged washing, F1 mechanical, F2 thermal, F3 chemical, F4 biological, F5 material incorporation, F6 product routes). Note the batch-01 report uses its own F0–F5 sub-numbering for the six synthesis families it compares — the batch-01 report lists them at its top.</td>
+</tr>
+<tr>
+<td><strong>Source slugs</strong></td>
+<td>Folder names on the <a href="sources/index.html">source shelf</a>, usually author-year-journal (<code>yousef-2023-jaap</code>) or a patent number (<code>fr3066128a1-granted</code>).</td>
+</tr>
+<tr>
+<td><strong>Superscript numbers</strong> (e.g. <sup class="cite"><a href="#" onclick="return false" tabindex="-1">S3</a></sup>)</td>
+<td>Numbered entries of the <strong>source list on that page</strong> — click to open the source document. Each action-plan page has its own numbered list.</td>
+</tr>
+</tbody>
+</table></div>
+<p>Evidence labels (source supported / ai inference / ai proposal / parameter not located) are explained in the
+<a href="#evidence-words">evidence words section</a> and in the legend at the foot of every page.</p>
 <hr />
 <h2 id="evidence-words">Evidence words</h2>
 <div class="tblwrap"><table class="tbl">
@@ -276,7 +321,8 @@ analyte-resolved contaminant fate, no leaching data and no use-specific performa
 <a class="lvl3" href="#what-the-project-is">What the project is</a>
 <a class="lvl3" href="#the-runs">The runs</a>
 <a class="lvl3" href="#the-seven-method-families">The seven method families</a>
-<a class="lvl3" href="#the-codes-for-open-questions">The codes for open questions</a>
+<a class="lvl3" href="#the-codes-for-open-questions">Batch-02 gap codes (archive)</a>
+<a class="lvl3" href="#codes-on-this-site">Codes on this site (quick reference)</a>
 <a class="lvl3" href="#evidence-words">Evidence words</a>
 <a class="lvl3" href="#where-things-live">Where things live</a>
 <a class="lvl3" href="#if-you-are-an-ai-starting-work-here">If you are an AI starting work here</a></nav>
