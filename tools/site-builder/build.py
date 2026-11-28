@@ -461,7 +461,10 @@ def annotate_codes(html, mat, from_doc, streams=None):
                     if cname.startswith(code + " \u2014 "):
                         cname = cname[len(code) + 3:]  # doc H1 already leads with the code
                     tip = f"{code} \u2014 {cname} \u00b7 {info[1]}"
-                    payload = (f'<a class="cref" href="{esc(info[2])}" '
+                    # codemap page paths are docs-root-relative; cref links may be
+                    # emitted from ANY page depth, so convert to page-relative here
+                    # (same conversion rewrite_links applies to markdown links)
+                    payload = (f'<a class="cref" href="{esc(url_for(from_doc, info[2]))}" '
                                f'data-tip="{esc(tip)}">{code}</a>')
             if payload:
                 pieces.append(t[1][last:m.start()])
