@@ -47,7 +47,7 @@ Why it is different from every registry entry:
 
 ## 2. Full process spec (10 kg dried whole-butt pilot cycle; every number labeled)
 
-**Feed basis.** Composition 62/20/18 wt% filter/paper/tobacco is `source_supported` for Keenat-style feed (M-07 measured) and MUST be re-measured on the team's local feed before any yield band is trusted (`ai_inference`: feedstock heterogeneity shifts decomposition windows ~40-50 degC and leachate COD up to 314% per Chemosphere 2026 — publish the feed boundary with every run).
+**Feed basis.** Composition 62/20/18 wt% filter/paper/tobacco — `source_supported: measured on the Keenat-style feed (M-07)`. The team's local feed MUST be re-measured before any yield band is trusted — `ai_inference: feedstock heterogeneity shifts decomposition windows ~40-50 degC and leachate COD up to 314% per Chemosphere 2026`. Publish the feed boundary with every run.
 
 - **Stage A — dry prep** (M-01 steps 3-4): manual triage, mill ~1 kg/min-class (bench equivalent fine at 10 kg/day), three-level sieve. `ai_proposal`: collect the fines (<500 um) sub-stream separately — ash-heavy, predicted metals-rich, direct to S4. Optional variant (prior project proposal, inherited): dry air-classification of fines before wetting, falsified if >25% of any metal stays on the CA tow (ICP-MS).
 - **Stage B — float/sink split** (M-01 step 5): water, density separation, >=20-30 min, first tank at 40-50 degC (`ai_proposal`, M-01 row 1), paper sinks, CA floats. Water 8.3 L/kg first pass = 83 L for 10 kg (`ai_inference`, computed from M-01's disclosed 1000 L / 120 kg cycle). Paper-wet sink drained (not dried) straight into Stage D.
