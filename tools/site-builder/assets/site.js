@@ -21,15 +21,18 @@
     tipEl = el;
     tip.textContent = el.getAttribute("data-tip") || "";
     tip.classList.add("on");
-    tip.classList.remove("below");
+    tip.classList.remove("above");
     tip.style.left = "0px";
     tip.style.top = "0px";
     var r = el.getBoundingClientRect();
     var tw = tip.offsetWidth, th = tip.offsetHeight;
     var cx = r.left + Math.min(r.width / 2, tw / 2 + 10);
     var x = Math.max(8, Math.min(cx - tw / 2, window.innerWidth - tw - 8));
-    var y = r.top - th - 9;
-    if (y < 46) { y = r.bottom + 9; tip.classList.add("below"); }
+    var y = r.bottom + 9;                        /* default: BELOW the target */
+    if (y + th > window.innerHeight - 8) {       /* no room below -> flip above */
+      y = Math.max(46, r.top - th - 9);
+      tip.classList.add("above");
+    }
     tip.style.left = x + "px";
     tip.style.top = y + "px";
     tip.style.setProperty("--arrowx", Math.max(10, Math.min(cx - x, tw - 10)) + "px");
@@ -58,6 +61,17 @@
   Array.prototype.forEach.call(document.querySelectorAll("[data-tip][title]"), function (el) {
     el.removeAttribute("title");
   });
+
+  /* ---------- footer codes chip: what M-01 / INV-01 / C-14 / P2 mean ---------- */
+  var legend = document.querySelector("footer .legend");
+  if (legend && !legend.querySelector("a.codes-chip")) {
+    var chip = document.createElement("a");
+    chip.className = "chip chip-slate codes-chip";
+    chip.href = ROOT + "materials/cigarette-butts/glossary.html#codes-on-this-site";
+    chip.setAttribute("data-tip", "M-01..M-08 action plans · INV-01 inventions · C-01..C-22 registry cards · P1..P5 batch-02 proposals · S1-S5 INV-01 output streams · F0-F5 process families · superscript numbers = that page's sources — full table on the Glossary page");
+    chip.textContent = "Codes: what M-01, INV-01, C-14, P2 mean";
+    legend.appendChild(chip);
+  }
 
   /* ---------- wide tables: pin the second (identity) column too ----------
      CSS pins column 1; JS measures column 1's real width and pins column 2

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Site design — the unified Recycling Empire site (Phase 6) — Recycling Empire</title>
+<title>Site design — the unified Recycling Empire site (Phase 6)</title>
 <meta name="doc-root" content="./">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +26,7 @@
 
 <article class="content">
   <p class="kicker">System</p><h1>Site design — the unified Recycling Empire site (Phase 6)</h1>
+  
   
   <p>This document is the UI/UX contract for the static site that
 <a href="https://github.com/abdo2048/recycling-empire/blob/main/tools/site-builder/build.py"><code>tools/site-builder/build.py</code></a> renders from <code>materials/</code> into
@@ -397,7 +398,21 @@ refs with "what this code means" tooltips; (7) root pages no longer render their
 (8) the CSS pseudo-element tooltip was replaced by one JS-positioned bubble clamped to the
 viewport (same dark style), also shown on focus and touch.</p>
 <h2 id="12b-review-round-3-2026-11-28-v083-reading-pass">12b. Review round 3 (2026-11-28, v0.8.3) — reading pass</h2>
-<p>Second feedback round, focused on how the site reads (no research content changed): (1) the JS tooltip bubble now opens <strong>below</strong> the hovered target by default and flips above only when the viewport bottom would clip it — and the bubble's arrow sits on the side that actually points at the target (round 2 had it inverted); (2) 67 tooltips carried a doubled code ("INV-01 — INV-01 — …") — fixed site-wide; (3) dense enumerating paragraphs restructured: the ranking page's "What was scored" is a list now, and the Test-first items carry real nested Ties / Expected measurement / Decision rule bullets; (4) thirteen pages rendered their title twice — duplicates dropped, informative ones demoted to a muted <code>.doc-sub</code> subtitle, anchor ids preserved; (5) the Belmont capture's raw "[S21]" became a clickable superscript to the fact-sheet source; (6) the Glossary gained a "Codes on this site" quick-reference (the numbering systems: M-xx, INV-xx, C-xx, P-x, S1–S5 streams, F0–F6 families, source slugs, superscript source numbers) and every page footer now links to it via a codes chip; the stale batch-02 gap-code table is marked as archive numbering; (7) the four arena transcripts' one unrendered "<strong>" marker fixed (code-block asterisks stay verbatim); (8) the home page title no longer doubles the brand.</p>
+<p>Second feedback round, focused on how the site reads (no research content changed; every fix landed at
+builder or markdown-source level so CI rebuilds keep it): (1) the JS tooltip bubble now opens <strong>below</strong> the
+hovered target by default and flips above only when the viewport bottom would clip it — and the arrow sits
+on the side that actually points at the target (round 2 had it inverted); (2) 67 tooltips carried a doubled
+code (<code>"INV-01 — INV-01 — …"</code>) — fixed in the codemap (a name already leading with its code is not prefixed
+again); (3) dense enumerating paragraphs restructured in the sources — the ranking's "What was scored" is a
+list, and Test-first items carry real nested Ties / Expected measurement / Decision rule bullets; (4) the
+builder consumes every document's own leading H1 (material pages included, not just root pages) — identical
+titles are dropped with the anchor id preserved, informative ones become a muted <code>.doc-sub</code> subtitle, and
+source detail pages take the readable title from the document itself; (5) the Belmont capture's raw
+"[S21]" names its source list explicitly instead of showing an unresolvable number; (6) the Glossary gained
+"Codes on this site (quick reference)" — the numbering systems M-xx / INV-xx / C-xx / P-x / S1–S5 streams /
+F0–F6 families / source slugs / superscript source numbers — and every page footer links to it via a codes
+chip, while the stale batch-02 gap-code table is marked as archive numbering; (7) the four arena transcripts'
+one unrendered <code>**bold**</code> marker closed in the markdown; (8) the home page title no longer doubles the brand.</p>
 <h2 id="12-build-deploy">12. Build &amp; deploy</h2>
 <pre><code>python3 tools/site-builder/build.py        # renders materials/ → docs/ (deterministic; safe to re-run)
 </code></pre>
@@ -431,6 +446,7 @@ viewport (same dark style), also shown on focus and touch.</p>
 <a href="#10-accessibility-responsiveness">10. Accessibility &amp;amp; responsiveness</a>
 <a href="#11-performance">11. Performance</a>
 <a href="#12a-review-round-2-2026-11-28-v082-feedback-fixes">12a. Review round 2 (2026-11-28, v0.8.2) — feedback fixes</a>
+<a href="#12b-review-round-3-2026-11-28-v083-reading-pass">12b. Review round 3 (2026-11-28, v0.8.3) — reading pass</a>
 <a href="#12-build-deploy">12. Build &amp;amp; deploy</a></nav>
 </main>
 <footer>

@@ -246,6 +246,24 @@ refs with "what this code means" tooltips; (7) root pages no longer render their
 (8) the CSS pseudo-element tooltip was replaced by one JS-positioned bubble clamped to the
 viewport (same dark style), also shown on focus and touch.
 
+## 12b. Review round 3 (2026-11-28, v0.8.3) — reading pass
+
+Second feedback round, focused on how the site reads (no research content changed; every fix landed at
+builder or markdown-source level so CI rebuilds keep it): (1) the JS tooltip bubble now opens **below** the
+hovered target by default and flips above only when the viewport bottom would clip it — and the arrow sits
+on the side that actually points at the target (round 2 had it inverted); (2) 67 tooltips carried a doubled
+code (`"INV-01 — INV-01 — …"`) — fixed in the codemap (a name already leading with its code is not prefixed
+again); (3) dense enumerating paragraphs restructured in the sources — the ranking's "What was scored" is a
+list, and Test-first items carry real nested Ties / Expected measurement / Decision rule bullets; (4) the
+builder consumes every document's own leading H1 (material pages included, not just root pages) — identical
+titles are dropped with the anchor id preserved, informative ones become a muted `.doc-sub` subtitle, and
+source detail pages take the readable title from the document itself; (5) the Belmont capture's raw
+"[S21]" names its source list explicitly instead of showing an unresolvable number; (6) the Glossary gained
+"Codes on this site (quick reference)" — the numbering systems M-xx / INV-xx / C-xx / P-x / S1–S5 streams /
+F0–F6 families / source slugs / superscript source numbers — and every page footer links to it via a codes
+chip, while the stale batch-02 gap-code table is marked as archive numbering; (7) the four arena transcripts'
+one unrendered `**bold**` marker closed in the markdown; (8) the home page title no longer doubles the brand.
+
 ## 12. Build & deploy
 
 ```

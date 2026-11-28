@@ -457,7 +457,10 @@ def annotate_codes(html, mat, from_doc, streams=None):
             else:
                 info = cmap.get(code)
                 if info:
-                    tip = f"{code} \u2014 {info[0]} \u00b7 {info[1]}"
+                    cname = info[0]
+                    if cname.startswith(code + " \u2014 "):
+                        cname = cname[len(code) + 3:]  # doc H1 already leads with the code
+                    tip = f"{code} \u2014 {cname} \u00b7 {info[1]}"
                     payload = (f'<a class="cref" href="{esc(info[2])}" '
                                f'data-tip="{esc(tip)}">{code}</a>')
             if payload:
@@ -845,12 +848,34 @@ def article(out_rel, mat, src_rel, title=None, kicker=None, pager=None, sub=None
     meta = {}
     if mat:
         meta, body_md = parse_meta_block(body_md)
-    title = title or h1_of(body_md, posixpath.basename(src_rel))
-    if mat is None:
+    doc_sub = None
+    norm = lambda s: re.sub(r"\s+", " ", s).strip().lower()
+    m_h1 = re.match(r"^# (.+?)\s*\n+", body_md)
+    emb_h1 = m_h1.group(1).strip() if m_h1 else None
+    if m_h1:
+        body_md = body_md[m_h1.end():]
+    title = title or (emb_h1 or posixpath.basename(src_rel))
+    if mat is None and emb_h1 is not None:
         # root pages have no meta block to consume the leading H1; drop it so
         # the template's h1 block doesn't render the title twice
-        body_md = re.sub(r"^# .+?\n+", "", body_md, count=1)
-    title = title or h1_of(body_md, posixpath.basename(src_rel))
+        pass  # already consumed above
+    if mat is not None and emb_h1 is not None:
+        # material pages: the template renders the chrome h1; if the document's
+        # own H1 says something different, keep it as a muted subtitle
+        if norm(emb_h1) != norm(title):
+            doc_sub = emb_h1
+    elif mat is not None and emb_h1 is None and str(title).endswith(".md"):
+        # filename-titled page (e.g. arena transcripts that open with a chat
+        # marker line) whose real document H1 sits within the first few lines:
+        # consume it so the title never renders twice, keep it as a subtitle
+        lines = body_md.split("\n")
+        idx = next((i for i, ln in enumerate(lines[:6]) if ln.startswith("# ")), None)
+        if idx is not None:
+            emb2 = lines[idx][2:].strip()
+            lines[idx] = None
+            body_md = "\n".join(l for l in lines if l is not None)
+            if norm(emb2) != norm(title):
+                doc_sub = emb2
     body_html, toks = render_md(strip_angle_links(body_md))
     if mat:
         body_html = mat.rewrite_links(body_html, src_rel, out_rel)
@@ -860,7 +885,7 @@ def article(out_rel, mat, src_rel, title=None, kicker=None, pager=None, sub=None
         streams = mat.streams.get(src_rel) if src_rel.startswith("inventions/") else None
         body_html = annotate_codes(body_html, mat, out_rel, streams=streams)
     SEARCH.append({"u": out_rel, "t": title, "s": sub or "", "x": strip_tags(body_html)[:1500]})
-    return out_rel, {"title": title, "kicker": kicker, "body": body_html,
+    return out_rel, {"title": title, "doc_sub": doc_sub, "kicker": kicker, "body": body_html,
                      "toc": toc_html(toks), "pager": pager or "", "meta_html": spec_sheet(meta)}
 
 
@@ -1189,7 +1214,7 @@ def build_material(mat):
             det = mat.pages.get(f"sources/{sid}/SOURCE.md")
             orig = f"{ARCHIVE_TREE}sources/{sid}/"
             if det:
-                d = article(det, mat, f"sources/{sid}/SOURCE.md", title=r["title"], kicker="Source", sub="sources")[1]
+                d = article(det, mat, f"sources/{sid}/SOURCE.md", title=None, kicker="Source", sub="sources")[1]
                 note = (f'<div class="callout">Full document in the butt-lab archive: <a href="{orig}" rel="noopener">sources/{esc(sid)}/ ↗</a> · '
                         f'<a href="{ARCHIVE_RAW}sources/{sid}/text.md" rel="noopener">text.md ↗</a></div>')
                 d["body"] = note + d["body"]
@@ -1202,12 +1227,19 @@ def build_material(mat):
         if mat.has(rel):
             pages.append(article(f"{base}/{out}", mat, rel, title=t, kicker=k))
     if state_md:
+        state_sub = None
+        m1 = re.match(r"^# (.+?)\s*\n+", state_md)
+        if m1:
+            emb = m1.group(1).strip()
+            state_md = state_md[m1.end():]
+            if not emb.lower().startswith("state.md"):
+                state_sub = emb
         html, toks = render_md(strip_angle_links(state_md))
         html = mat.rewrite_links(html, "STATE.md", f"{base}/state.html")
         html = wrap_evidence(html)
         html = annotate_codes(html, mat, f"{base}/state.html")
         SEARCH.append({"u": f"{base}/state.html", "t": "STATE.md — resume file", "s": "", "x": strip_tags(html)[:1500]})
-        pages.append((f"{base}/state.html", {"title": "STATE.md", "kicker": "Resume file", "body": html, "toc": toc_html(toks)}))
+        pages.append((f"{base}/state.html", {"title": "STATE.md", "doc_sub": state_sub, "kicker": "Resume file", "body": html, "toc": toc_html(toks)}))
     if mat.has("LOG.md"):
         pages.append(article(f"{base}/log.html", mat, "LOG.md", title="LOG.md — session log", kicker="Append-only record"))
     return pages
@@ -1220,7 +1252,7 @@ BASE_T = Template("""<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>$title — Recycling Empire</title>
+<title>$titletag</title>
 <meta name="doc-root" content="$root">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1243,6 +1275,7 @@ $crumbs
 $sidebar
 <article class="content">
   $h1block
+  $docsub
   $meta_html
   $body
   $pager
@@ -1324,9 +1357,13 @@ def write_page(docpath, data, mat):
         maincls = "side-rail"
     else:
         maincls = "single"
+    titletag = esc(data["title"])
+    if titletag == "Recycling Empire":
+        titletag = "Recycling Empire"  # brand alone, never "Recycling Empire — Recycling Empire"
+    docsub = ('<p class="doc-sub">' + esc(data["doc_sub"]) + "</p>") if data.get("doc_sub") else ""
     body = BASE_T.substitute(
-        title=esc(data["title"]), root=root, crumbs=cb, sidebar=sidebar, maincls=maincls,
-        h1block=h1block,
+        title=esc(data["title"]), titletag=titletag, docsub=docsub, root=root, crumbs=cb,
+        sidebar=sidebar, maincls=maincls, h1block=h1block,
         meta_html=data.get("meta_html", ""), body=data["body"], toc=data.get("toc", ""), pager=data.get("pager", ""))
     with open(full, "w", encoding="utf-8") as f:
         f.write(body)
@@ -1402,7 +1439,8 @@ def main():
     build_home()
 
     with open(os.path.join(DOCS, "404.html"), "w", encoding="utf-8") as f:
-        f.write(BASE_T.substitute(title="Page not found", root="./", crumbs="", sidebar="", maincls="single", kicker="",
+        f.write(BASE_T.substitute(title="Page not found", titletag="Page not found — Recycling Empire", docsub="",
+                                  root="./", crumbs="", sidebar="", maincls="single", kicker="",
                                   h1block="<h1>Page not found</h1>", meta_html="",
                                   body='<p>That page is not on the site. The material map:</p>' +
                                        "".join(f'<p><a href="{m.folder}/index.html">{esc(m.name)}</a></p>' for m in MATS),

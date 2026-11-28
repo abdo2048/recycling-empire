@@ -15,7 +15,7 @@
 
 ## Consequence for M-06 (row 1 / bioburden invariant)
 - The Belmont 2021 quote remains SINGLE-SOURCE indexed text: medium confidence, now formally unverifiable. It can no longer be counted as independent corroboration of bioburden testing.
-- The "gamma somewhere in the chain + bioburden/bacteria testing" invariant therefore rests on TerraCycle's own fact sheet (`terracycle-cigwaste-factsheet`, [S21]) plus the five documented gamma-order variants — mechanism unchanged, "dose/dwell withheld by design" verdict unchanged.
+- The "gamma somewhere in the chain + bioburden/bacteria testing" invariant therefore rests on TerraCycle's own fact sheet (`terracycle-cigwaste-factsheet`; S21 in butt-lab M-06 v0.5's source list) plus the five documented gamma-order variants — mechanism unchanged, "dose/dwell withheld by design" verdict unchanged.
 - Belmont's "Hamilton, NJ in-house processing site (2021)" detail inherits the same unverifiable status.
 - DO NOT re-attempt: CMS removal + 403 bot wall + empty archive sweep = triple-verified dead end. Only settlement-grade records (Last Beach Cleanup tracking obligations) remain as a possible future upgrade path.
 

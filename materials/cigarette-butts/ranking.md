@@ -9,7 +9,12 @@ basis: shelf state after session 9 (M-01..M-08 full plans, INV-01 v0.1, batch-02
 scoring: 1-5 per factor, 5 = favorable; every score carries a one-line justification; total 6-30
 ```
 
-**What was scored (36 items).** Table A: the nine route-level candidates — the eight full action plans (M-01..M-08) plus the Phase 4 invention INV-01. Table B: the five scientist-inventor batch-02 proposals (scored for comparison only — they are enablement components, not complete routes). Table C: all 22 registry summary cards. H1/H2/H3 of `inventions/candidate-hypotheses-01.md` are NOT scored separately: INV-01 explicitly inherited them (`prior_project_hypotheses_inherited` in its metadata), and scoring them twice would double-count.
+**What was scored (36 items).**
+
+- **Table A — the nine route-level candidates:** the eight full action plans (M-01..M-08) plus the Phase 4 invention INV-01.
+- **Table B — the five scientist-inventor batch-02 proposals:** scored for comparison only — they are enablement components, not complete routes.
+- **Table C — all 22 registry summary cards.**
+- **Not scored separately:** the H1/H2/H3 of `inventions/candidate-hypotheses-01.md` — INV-01 explicitly inherited them (`prior_project_hypotheses_inherited` in its metadata), and scoring them twice would double-count.
 
 **Two gates bind every product-facing score before any factor is read:**
 
@@ -180,16 +185,16 @@ Material-specific factors (if any) are listed in material.yaml and appended as e
 Ordered by information value; each tied to the gap-fill rows it confirms or kills, with the expected measurement and the decision rule. Desk research authorizes no physical trial — every item needs a qualified facility, a risk assessment, lawful waste handling and a named human actor before it runs.
 
 1. **Metals characterization gate — ICP-MS (Cd, Pb, As, Hg + Cr, Ni, Se) on the feed, then on first-run product streams.**
-   - Ties: charter stop-condition; M-01 row 11, M-02 row 9, M-03 row 8, M-04 row 10, M-05 row 6, M-06 row 10, M-07 row 4; INV-01 falsifier 4.
-   - Expected measurement: mg/kg dry basis per metal in (a) raw local feedstock, (b) whichever product stream runs first (S1 CA / washed pulp / cleaned fiber / pellets), (c) the concentrate streams (S4 sludges, pyrolysis char, recycler sludge), (d) M-08 fired vs unfired bricks if the matrix runs.
-   - Decision rule: any gate metal above the team's use-gate in a PRODUCT stream keeps the stop-condition on for that route (the route then produces characterization data, not products); concentration into S4/char confirms INV-01's routing prediction; fired-brick leach results re-verify the only published metals pass on local feedstock. Cheapest first step: characterize the raw feed — it needs no processing line.
+    - Ties: charter stop-condition; M-01 row 11, M-02 row 9, M-03 row 8, M-04 row 10, M-05 row 6, M-06 row 10, M-07 row 4; INV-01 falsifier 4.
+    - Expected measurement: mg/kg dry basis per metal in (a) raw local feedstock, (b) whichever product stream runs first (S1 CA / washed pulp / cleaned fiber / pellets), (c) the concentrate streams (S4 sludges, pyrolysis char, recycler sludge), (d) M-08 fired vs unfired bricks if the matrix runs.
+    - Decision rule: any gate metal above the team's use-gate in a PRODUCT stream keeps the stop-condition on for that route (the route then produces characterization data, not products); concentration into S4/char confirms INV-01's routing prediction; fired-brick leach results re-verify the only published metals pass on local feedstock. Cheapest first step: characterize the raw feed — it needs no processing line.
 2. **Sink-pulp sheet trial — INV-01's top falsifier, starting with a 100 g float/sink run that doubles as the split-purity test.**
-   - Ties: INV-01 falsifiers 1 and 3 (the float/sink pre-step is M-01 row 3's criterion); M-03 rows 2, 4, 10 re-based to the sink stream.
-   - Expected measurement: sunken-paper removal (<10% residual paper in the floated CA after pass 1) and hand-sheet traction index vs the Teixeira Table-4 band (5-12 kNm/kg, partner-lab tensile).
-   - Decision rule: sheet collapses after ratio adjustment (10 -> 32 L/kg) → drop Stage D; the route falls back to M-01+M-02 with a destructor tail (fallback documented in INV-01 9.1); sheet holds → the unified-loop drift test becomes the next kill shot.
+    - Ties: INV-01 falsifiers 1 and 3 (the float/sink pre-step is M-01 row 3's criterion); M-03 rows 2, 4, 10 re-based to the sink stream.
+    - Expected measurement: sunken-paper removal (<10% residual paper in the floated CA after pass 1) and hand-sheet traction index vs the Teixeira Table-4 band (5-12 kNm/kg, partner-lab tensile).
+    - Decision rule: sheet collapses after ratio adjustment (10 -> 32 L/kg) → drop Stage D; the route falls back to M-01+M-02 with a destructor tail (fallback documented in INV-01 9.1); sheet holds → the unified-loop drift test becomes the next kill shot.
 3. **M-08 replication matrix on LOCAL clay + local butts (0.5 / 1 / 1.5 / 2 wt%, 1050 degC / 3 h) with the leaching gate.**
-   - Ties: M-08 rows 1, 4, 5, 9, 10; the ranking's top route.
-   - Expected measurement: compressive strength vs the 30.8 MPa (1 wt%) band; thermal conductivity vs the -15.1% drop; furnace kWh vs the measured -8.0%; ABLP/ICP-MS leachate with per-metal margin-to-limit computed at each pH 2.5-9.2 (row 5).
-   - Decision rule: local feedstock reproduces the sweet spot AND fired bricks leach below limits with quantified margins → M-08 stays the only route through the metals gate; margins tighter than the thesis figures → the bitumen/paraffin encapsulation pre-tests (Kurmus Ch.5) enter the queue before any use claim.
+    - Ties: M-08 rows 1, 4, 5, 9, 10; the ranking's top route.
+    - Expected measurement: compressive strength vs the 30.8 MPa (1 wt%) band; thermal conductivity vs the -15.1% drop; furnace kWh vs the measured -8.0%; ABLP/ICP-MS leachate with per-metal margin-to-limit computed at each pH 2.5-9.2 (row 5).
+    - Decision rule: local feedstock reproduces the sweet spot AND fired bricks leach below limits with quantified margins → M-08 stays the only route through the metals gate; margins tighter than the thesis figures → the bitumen/paraffin encapsulation pre-tests (Kurmus Ch.5) enter the queue before any use claim.
 
 **Next queue (after the top three):** (4) unified-loop 5-cycle drift test (INV-01 falsifier 2; M-01 row 7; M-03 row 7 — plateau below the 50 mg/L nicotine cap at 20% bleed, else split trains); (5) M-02 50 g wash replication + product-equivalence QC (M-02 verify items 1-2), then film/triacetin trials (rows 5-6); (6) Stage-F condensate calibrated GC-MS — is triacetin actually in the 150-200 degC fraction? (INV-01 falsifier 5); (7) S4 mass-band weigh vs the 3-7 wt% proposal (INV-01 falsifier 6); (8) M-07 oil truth test — calibrated GC-MS + fuel-spec panel at 650 vs 750 degC (M-07 rows 2, 5, 8); (9) M-04 stage-b truth test (M-04 rows 1, 2, 4) only if the team ever takes a dry-thermal route; (10) M-05 partner-facility decontamination matrix (M-05 rows 1, 2, 4, 5) only with a certified extractor partner.

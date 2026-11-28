@@ -26,7 +26,7 @@ current TerraCycle pages.
    subsidiary; ESG reports often quantify "waste diverted" / recycling partnerships.
    Search PDFs for "TerraCycle" and "cigarette waste" (many are on
    `bat.com`, `reynoldsamerican.com` (Wayback), and responsibility reports aggregators).
-3. **TerraCycle's SEC Regulation A+ offering circular (Form C / offering memorandum, 2016–2017).
+3. **TerraCycle's SEC Regulation A+ offering circular (Form C / offering memorandum, 2016–2017).**
    SEC EDGAR full-text search: https://efts.sec.gov/LATEST/search-index?q=%22TerraCycle%22+cigarette
    (or https://www.sec.gov/cgi-bin/srqsb?text=... historic). Offering circulars state
    operational metrics — tonnages collected per stream — and would also confirm the

@@ -64,10 +64,12 @@ you are in. The reader site refers to families by name, not by number.
 
 ---
 
-## The codes for open questions
+## The codes for open questions (batch-02 archive numbering)
 
-Batch-02 left a numbered list of evidence gaps, still open. `reports/batch-02/evidence-gaps/`
-holds the work on them.
+**Historical numbering — do not confuse it with the site codes in the next section.** Batch-02 left a numbered
+list of evidence gaps, still open. `reports/batch-02/evidence-gaps/` holds the work on them. The
+`M01–M08 / R01–R05 / S01–S06` codes below are batch-02 archive numbering and are not used elsewhere on the
+site — in particular they are NOT the M-01…M-08 action plans.
 
 | Code | Covers |
 |---|---|
@@ -79,6 +81,27 @@ holds the work on them.
 The central finding that governs all of them: across every family there is no dry-mass basis, no
 analyte-resolved contaminant fate, no leaching data and no use-specific performance evidence.
 "Missing" means `parameter-not-located` at the required basis — never proven absence.
+
+---
+
+## Codes on this site (quick reference)
+
+Every dotted-underlined code on this site is hoverable: the tooltip shows the item's full name, clicking
+opens its page. The numbering systems:
+
+| Code | Meaning |
+|---|---|
+| **M-01 … M-08** | **Action plans** (the Methods section) — one per published recycling route, written as a plan a lab could follow. Example: M-01 is the MéGo! water-wash cellulose-acetate recovery (patent FR3066128B1); M-08 is the RMIT fired-clay-bricks route. |
+| **INV-01** | **Inventions** — the project's own engineered designs, built by combining the published routes. INV-01, "Split-loop butt refinery", is the first one. |
+| **C-01 … C-22** | **Registry summary cards** — one-paragraph summaries of patents and papers in the registry (C-14 is the Matteri process, for example). |
+| **P1 … P5** | **Batch-02 scientist-inventor proposals**, scored for comparison only (they are components, not complete routes): P1 M01-Gate, P2 J-H-01-M, P3 F3-SC, P4 F2-VSC, P5 F5-ED. |
+| **S1 … S5** (on INV-01 pages) | The five **output streams** of INV-01's split-loop design: S1 CA float product, S2 sink-stream pulp, S3 unified liquor loop, S4 toxin concentrate, S5 pyrolytic end-of-life. Written inline (not as superscript) — different from the S-numbers of source lists. |
+| **F0 … F6** | **Method families** (table above: F0 staged washing, F1 mechanical, F2 thermal, F3 chemical, F4 biological, F5 material incorporation, F6 product routes). Note the batch-01 report uses its own F0–F5 sub-numbering for the six synthesis families it compares — the batch-01 report lists them at its top. |
+| **Source slugs** | Folder names on the [source shelf](sources/index.html), usually author-year-journal (`yousef-2023-jaap`) or a patent number (`fr3066128a1-granted`). |
+| **Superscript numbers** (e.g. S3) | Numbered entries of the **source list on that page** — click to open the source document. Each action-plan page has its own numbered list. |
+
+Evidence labels (source supported / ai inference / ai proposal / parameter not located) are explained in the
+[evidence words](#evidence-words) below and in the legend at the foot of every page.
 
 ---
 
