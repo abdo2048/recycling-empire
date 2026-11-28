@@ -916,6 +916,7 @@ def build_material(mat):
     rp = os.path.join(A, "methods", "research")
     if os.path.isdir(rp):
         for root, dirs, files in os.walk(rp):
+            dirs.sort()  # deterministic traversal across filesystems/CI runners
             for f in sorted(files):
                 rel = os.path.relpath(os.path.join(root, f), A).replace(os.sep, "/")
                 if f.endswith(".md"):
@@ -924,7 +925,8 @@ def build_material(mat):
                     mat.pages[rel] = f"{base}/{rel[:-4]}.html"
     if os.path.isdir(os.path.join(A, "sources")):
         for root, dirs, files in os.walk(os.path.join(A, "sources")):
-            for f in files:
+            dirs.sort()  # deterministic traversal across filesystems/CI runners
+            for f in sorted(files):
                 rel = os.path.relpath(os.path.join(root, f), A).replace(os.sep, "/")
                 if f == "SOURCE.md":
                     sid = posixpath.dirname(rel).split("/")[1]
@@ -1135,6 +1137,7 @@ def build_material(mat):
     if os.path.isdir(rp):
         entries = []
         for root, dirs, files in os.walk(rp):
+            dirs.sort()  # deterministic traversal across filesystems/CI runners
             for f in sorted(files):
                 rel = os.path.relpath(os.path.join(root, f), A).replace(os.sep, "/")
                 if not f.endswith((".md", ".csv")):
